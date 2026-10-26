@@ -47,18 +47,17 @@
   <!-- Header / Navigation -->
   <header class="site-header" id="header">
     <div class="header-inner">
-      <a class="brand" href="#top" aria-label="Sikder Rakibul Islam Home">
+      <a class="brand" href="#about" aria-label="Sikder Rakibul Islam Home">
         <span class="rec-dot" aria-hidden="true"></span>
         <span class="brand-text">SIKDER<span class="brand-accent">.</span></span>
         <span class="brand-sub">STUDIO</span>
       </a>
 
       <nav class="nav-links" aria-label="Primary navigation">
-        <a class="nav-item magnetic" href="#work"><span>Work</span></a>
-        <a class="nav-item magnetic" href="#featured"><span>Featured</span></a>
-        <a class="nav-item magnetic" href="#skills"><span>Software</span></a>
-        <a class="nav-item magnetic" href="#process"><span>Process</span></a>
         <a class="nav-item magnetic" href="#about"><span>About</span></a>
+        <a class="nav-item magnetic" href="#skills"><span>Skills</span></a>
+        <a class="nav-item magnetic" href="#tools"><span>Tools</span></a>
+        <a class="nav-item magnetic" href="#work"><span>Work</span></a>
         <a class="nav-item magnetic" href="#contact"><span>Contact</span></a>
       </nav>
 
@@ -99,17 +98,16 @@
     <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
       <div class="mobile-nav-inner">
         <div class="mobile-nav-links">
-          <a class="mobile-nav-link" href="#work"><span>01</span>Selected Work</a>
-          <a class="mobile-nav-link" href="#featured"><span>02</span>Featured Film</a>
-          <a class="mobile-nav-link" href="#skills"><span>03</span>Software &amp; Tools</a>
-          <a class="mobile-nav-link" href="#process"><span>04</span>Creative Process</a>
-          <a class="mobile-nav-link" href="#about"><span>05</span>About Artist</a>
-          <a class="mobile-nav-link" href="#contact"><span>06</span>Get in Touch</a>
+          <a class="mobile-nav-link" href="#about"><span>01</span>About Me</a>
+          <a class="mobile-nav-link" href="#skills"><span>02</span>Skills</a>
+          <a class="mobile-nav-link" href="#tools"><span>03</span>Software &amp; Tools</a>
+          <a class="mobile-nav-link" href="#work"><span>04</span>My Work</a>
+          <a class="mobile-nav-link" href="#contact"><span>05</span>Get in Touch</a>
         </div>
         <div class="mobile-nav-footer">
           <a class="button button--glow" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
             <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            <span>Watch on YouTube ↗</span>
+            <span>YouTube ↗</span>
           </a>
           <a class="button button--ghost" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">
             <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -121,60 +119,62 @@
   </header>
 
   <main id="main">
-    <!-- HERO SECTION -->
-    <section class="hero-section" id="top" aria-labelledby="hero-title">
+    <!-- ============================================================
+         1. ABOUT ME (HERO / LANDING)
+         ============================================================ -->
+    <section class="hero-section" id="about" aria-labelledby="about-title">
       <div class="hero-container">
-        <!-- Hero Left Column: Typography & CTAs -->
+        <!-- Left Column: Bio & Academic Details -->
         <div class="hero-content">
-          <div class="hero-status-pill reveal-item">
-            <span class="pulse-beacon"></span>
-            <span class="status-text">AVAILABLE FOR COMMISSIONS · 2026</span>
-          </div>
-
-          <h1 class="hero-title" id="hero-title">
-            <span class="title-line reveal-item">VISUAL STORIES<span class="dot-accent">.</span></span>
-            <span class="title-line title-line--gradient reveal-item">ENGINEERED TO</span>
-            <span class="title-line title-line--accent reveal-item">CAPTIVATE<span class="dot-accent">.</span></span>
+          <h1 class="hero-title" id="about-title">
+            <span class="title-line reveal-item">Sikder Rakibul</span>
+            <span class="title-line title-line--accent reveal-item">Islam<span class="dot-accent">.</span></span>
           </h1>
 
           <p class="hero-subtitle reveal-item">
-            I’m <strong>Sikder Rakibul Islam</strong> — a video editor, graphic designer, and motion graphics artist shaping ideas into high-tension visual experiences through rhythm, kinetic typography, and documentary realism.
+            Video Editor, Graphics Designer &amp; Motion Graphics Artist — turning ideas into compelling visual experiences through editing, design, and animation.
           </p>
 
-          <div class="hero-metrics reveal-item">
-            <div class="metric-card">
-              <span class="metric-num">B.Voc</span>
-              <span class="metric-label">Multimedia &amp; Animation</span>
+          <div class="academic-sheet reveal-item">
+            <div class="sheet-row">
+              <span class="sheet-title">DEGREE</span>
+              <span class="sheet-val">B.Voc. Multimedia &amp; Animation</span>
             </div>
-            <div class="metric-separator" aria-hidden="true">/</div>
-            <div class="metric-card">
-              <span class="metric-num">Premiere · AE</span>
-              <span class="metric-label">Core Creative Pipeline</span>
+            <div class="sheet-row">
+              <span class="sheet-title">UNIVERSITY</span>
+              <span class="sheet-val">Bharathiar University</span>
             </div>
-            <div class="metric-separator" aria-hidden="true">/</div>
-            <div class="metric-card">
-              <span class="metric-num">Bharathiar</span>
-              <span class="metric-label">University Student</span>
+            <div class="sheet-row">
+              <span class="sheet-title">SEMESTER</span>
+              <span class="sheet-val">5th Semester</span>
+            </div>
+            <div class="sheet-row">
+              <span class="sheet-title">FOCUS</span>
+              <span class="sheet-val">Video Editing · Graphics Design · Motion Graphics</span>
             </div>
           </div>
 
           <div class="hero-actions reveal-item">
             <a class="button button--primary magnetic" href="#work" data-cursor="EXPLORE">
-              <span>Explore Selected Work</span>
+              <span>View My Work</span>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1V13M7 13L1 7M7 13L13 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a class="button button--glass magnetic" href="https://www.youtube.com/watch?v=mZSs4lW9-n8" target="_blank" rel="noopener noreferrer" data-cursor="PLAY">
+            <a class="button button--glass magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
               <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              <span>Watch Reel ↗</span>
+              <span>YouTube ↗</span>
+            </a>
+            <a class="button button--ghost magnetic" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">
+              <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span>Instagram ↗</span>
             </a>
           </div>
         </div>
 
-        <!-- Hero Right Column: 3D Interactive Portrait Showcase -->
+        <!-- Right Column: Portrait -->
         <div class="hero-visual reveal-item" data-tilt>
           <div class="portrait-card">
             <div class="portrait-frame">
-              <img class="portrait-img" src="assets/profile/sikder-rakibul-islam-editorial.png" alt="Sikder Rakibul Islam editorial portrait" width="700" height="900" loading="eager">
+              <img class="portrait-img" src="assets/profile/sikder-rakibul-islam-editorial.png" alt="Sikder Rakibul Islam" width="700" height="900" loading="eager">
               <div class="portrait-vignette"></div>
               
               <!-- Floating HUD Elements -->
@@ -193,151 +193,85 @@
           </div>
         </div>
       </div>
-
-      <!-- Scroll Indicator -->
-      <a class="scroll-cue magnetic" href="#featured" aria-label="Scroll to featured section">
-        <span class="scroll-cue-track"><span class="scroll-cue-wheel"></span></span>
-        <span class="scroll-cue-text">SCROLL</span>
-      </a>
     </section>
 
-    <!-- INFINITE MARQUEE TICKER -->
-    <div class="marquee-strip" aria-hidden="true">
-      <div class="marquee-content">
-        <span>DOCUMENTARY EDITING</span><span class="marquee-star">✦</span>
-        <span>MOTION GRAPHICS</span><span class="marquee-star">✦</span>
-        <span>DATA VISUALIZATION</span><span class="marquee-star">✦</span>
-        <span>ADOBE AFTER EFFECTS</span><span class="marquee-star">✦</span>
-        <span>PREMIERE PRO</span><span class="marquee-star">✦</span>
-        <span>THUMBNAIL ARCHITECTURE</span><span class="marquee-star">✦</span>
-        <span>NARRATIVE PACING</span><span class="marquee-star">✦</span>
-        <span>COLOR GRADING</span><span class="marquee-star">✦</span>
-        <!-- Duplicate for loop -->
-        <span>DOCUMENTARY EDITING</span><span class="marquee-star">✦</span>
-        <span>MOTION GRAPHICS</span><span class="marquee-star">✦</span>
-        <span>DATA VISUALIZATION</span><span class="marquee-star">✦</span>
-        <span>ADOBE AFTER EFFECTS</span><span class="marquee-star">✦</span>
-        <span>PREMIERE PRO</span><span class="marquee-star">✦</span>
-        <span>THUMBNAIL ARCHITECTURE</span><span class="marquee-star">✦</span>
-        <span>NARRATIVE PACING</span><span class="marquee-star">✦</span>
-        <span>COLOR GRADING</span><span class="marquee-star">✦</span>
-      </div>
-    </div>
-
-    <!-- FEATURED FILM CINEMA SHOWCASE -->
-    <section class="section featured-section" id="featured" aria-labelledby="featured-title">
+    <!-- ============================================================
+         2. MY SKILLS (Video Editing, Graphics Design, Motion Graphics)
+         ============================================================ -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
       <div class="section-container">
         <div class="section-badge-row">
-          <span class="section-badge">CINEMA HIGHLIGHT · 01</span>
-          <span class="section-tag">LONG-FORM DOCUMENTARY</span>
+          <span class="section-badge">WHAT I DO</span>
         </div>
-
-        <div class="featured-card" data-tilt>
-          <div class="featured-media-container" data-cursor="PLAY FILM">
-            <img class="featured-poster" src="assets/design/voyager-thumbnail-2.webp" alt="Voyager 1 documentary cover design" loading="lazy">
-            <div class="featured-overlay"></div>
-
-            <!-- Animated Waveform & Play Trigger -->
-            <button class="cinema-play-btn" type="button" data-play-project="voyager-1" aria-label="Play Voyager 1 Documentary in Theater Mode">
-              <span class="play-ring play-ring--1"></span>
-              <span class="play-ring play-ring--2"></span>
-              <span class="play-icon">▶</span>
-            </button>
-
-            <div class="cinema-hud">
-              <div class="hud-left">
-                <span class="live-rec"><span class="rec-dot"></span> 4K DCI // REC</span>
-                <span class="film-timecode">TC 00:18:42:15</span>
-              </div>
-              <div class="hud-right">
-                <span class="film-ratio">2.39:1 CINEMATIC</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="featured-details">
-            <div class="featured-info">
-              <span class="featured-category">DOCUMENTARY · MOTION DESIGN · RESEARCH</span>
-              <h2 class="featured-headline" id="featured-title">Voyager 1: Beyond Everything.</h2>
-              <p class="featured-summary">
-                A documentary dive into humanity’s most distant technological envoy. Built with rhythmic timeline pacing, space motion graphics, custom UI telemetry, and rigorous archival reconstruction.
-              </p>
-
-              <div class="featured-specs">
-                <div class="spec-item">
-                  <span class="spec-label">ROLE</span>
-                  <span class="spec-val">Lead Editor, Motion Graphics &amp; Narrative Flow</span>
-                </div>
-                <div class="spec-item">
-                  <span class="spec-label">SOFTWARE</span>
-                  <span class="spec-val">Premiere Pro · After Effects · Photoshop</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="featured-action-bar">
-              <button class="button button--primary magnetic" type="button" data-play-project="voyager-1" data-cursor="PLAY">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M3 2L12 7L3 12V2Z"/></svg>
-                <span>Watch Film</span>
-              </button>
-              <button class="button button--ghost magnetic" type="button" data-project="voyager-1" data-cursor="INFO">
-                <span>View Details &amp; Thumbnails ↗</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MY WORK SECTION (Tabs: Videos & Thumbnail) -->
-    <section class="section work-section" id="work" aria-labelledby="work-title">
-      <div class="section-container">
-        <!-- Top Title & Rail matching sketch -->
-        <div class="work-top-bar">
-          <div class="work-title-group">
-            <span class="work-badge">PORTFOLIO // 2026</span>
-            <h2 class="work-title" id="work-title">My work<span class="dot-accent">.</span></h2>
-          </div>
-
-          <!-- Tabs directly embedded on the dividing rail -->
-          <div class="sketch-tabs" role="tablist" aria-label="Work category selection">
-            <button class="sketch-tab active magnetic" id="tab-videos" type="button" role="tab" aria-selected="true" data-work-tab="videos">
-              <span class="tab-icon">▶</span>
-              <span class="tab-text">Videos</span>
-              <span class="tab-count">(6)</span>
-            </button>
-            <button class="sketch-tab magnetic" id="tab-thumbnails" type="button" role="tab" aria-selected="false" data-work-tab="thumbnails">
-              <span class="tab-icon">✦</span>
-              <span class="tab-text">Thumbnail</span>
-              <span class="tab-count">(6)</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Full-width dividing rail running across as sketched -->
-        <div class="sketch-divider-rail" aria-hidden="true"></div>
-
-        <!-- 6-Card Rounded Grid matching sketch (2 rows x 3 columns) -->
-        <div class="sketch-work-grid" id="sketch-work-grid" aria-live="polite">
-          <!-- Populated dynamically by JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <!-- SOFTWARE & CAPABILITY MATRIX -->
-    <section class="section skills-section" id="skills" aria-labelledby="skills-title">
-      <div class="section-container">
-        <div class="section-badge-row">
-          <span class="section-badge">TECHNICAL ARSENAL</span>
-          <span class="section-tag">HARDWARE &amp; CREATIVE SUITE</span>
-        </div>
-        <h2 class="section-title" id="skills-title">Mastery across every pixel<span class="dot-accent">.</span></h2>
-        <p class="section-intro">
-          A modern post-production workflow utilizing industry-standard creative applications for maximum editorial pacing, fidelity, and narrative impact.
-        </p>
+        <h2 class="section-title" id="skills-title">My Skills<span class="dot-accent">.</span></h2>
 
         <div class="skills-grid">
-          <!-- Skill Card 1: Premiere Pro -->
+          <!-- Video Editing -->
+          <div class="skill-card" data-tilt>
+            <div class="skill-top">
+              <div class="skill-icon-badge skill-icon--pr">VE</div>
+              <span class="skill-level">PRIMARY CRAFT</span>
+            </div>
+            <h3 class="skill-name">Video Editing</h3>
+            <p class="skill-desc">
+              Cinematic documentary editing, rhythmic pacing, multi-track audio design, color grading, and narrative assembly for compelling visual storytelling.
+            </p>
+            <ul class="skill-features">
+              <li>Documentary &amp; Short Film Editing</li>
+              <li>Rhythmic Pacing &amp; Narrative Flow</li>
+              <li>Sound Design &amp; Color Grading</li>
+            </ul>
+          </div>
+
+          <!-- Graphics Design -->
+          <div class="skill-card" data-tilt>
+            <div class="skill-top">
+              <div class="skill-icon-badge skill-icon--ps">GD</div>
+              <span class="skill-level">VISUAL DESIGN</span>
+            </div>
+            <h3 class="skill-name">Graphics Design</h3>
+            <p class="skill-desc">
+              High-impact YouTube thumbnail design, photo manipulation, visual identity creation, and editorial artwork for digital platforms.
+            </p>
+            <ul class="skill-features">
+              <li>YouTube Thumbnail Design</li>
+              <li>Photo Manipulation &amp; Compositing</li>
+              <li>Visual Identity &amp; Branding</li>
+            </ul>
+          </div>
+
+          <!-- Motion Graphics -->
+          <div class="skill-card" data-tilt>
+            <div class="skill-top">
+              <div class="skill-icon-badge skill-icon--ae">MG</div>
+              <span class="skill-level">ANIMATION</span>
+            </div>
+            <h3 class="skill-name">Motion Graphics</h3>
+            <p class="skill-desc">
+              Kinetic typography, animated infographics, HUD overlays, and dynamic data visualization sequences for documentaries and digital content.
+            </p>
+            <ul class="skill-features">
+              <li>Kinetic Typography &amp; HUDs</li>
+              <li>Animated Infographics &amp; Charts</li>
+              <li>Visual Effects &amp; Compositing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. MY TOOLS (Premiere Pro, After Effects, Photoshop, Illustrator)
+         ============================================================ -->
+    <section class="section skills-section" id="tools" aria-labelledby="tools-title">
+      <div class="section-container">
+        <div class="section-badge-row">
+          <span class="section-badge">SOFTWARE</span>
+        </div>
+        <h2 class="section-title" id="tools-title">My Tools<span class="dot-accent">.</span></h2>
+
+        <div class="skills-grid">
+          <!-- Premiere Pro -->
           <div class="skill-card skill-card--pr" data-tilt>
             <div class="skill-top">
               <div class="skill-icon-badge skill-icon--pr">Pr</div>
@@ -354,7 +288,7 @@
             </ul>
           </div>
 
-          <!-- Skill Card 2: After Effects -->
+          <!-- After Effects -->
           <div class="skill-card skill-card--ae" data-tilt>
             <div class="skill-top">
               <div class="skill-icon-badge skill-icon--ae">Ae</div>
@@ -371,7 +305,7 @@
             </ul>
           </div>
 
-          <!-- Skill Card 3: Photoshop -->
+          <!-- Photoshop -->
           <div class="skill-card skill-card--ps" data-tilt>
             <div class="skill-top">
               <div class="skill-icon-badge skill-icon--ps">Ps</div>
@@ -388,7 +322,7 @@
             </ul>
           </div>
 
-          <!-- Skill Card 4: Illustrator -->
+          <!-- Illustrator -->
           <div class="skill-card skill-card--ai" data-tilt>
             <div class="skill-top">
               <div class="skill-icon-badge skill-icon--ai">Ai</div>
@@ -408,129 +342,55 @@
       </div>
     </section>
 
-    <!-- CREATIVE PROCESS PIPELINE -->
-    <section class="section process-section" id="process" aria-labelledby="process-title">
+    <!-- ============================================================
+         4. MY WORK (Videos & Thumbnails Tabs)
+         ============================================================ -->
+    <section class="section work-section" id="work" aria-labelledby="work-title">
       <div class="section-container">
-        <div class="section-badge-row">
-          <span class="section-badge">WORKFLOW METHODOLOGY</span>
-          <span class="section-tag">FROM CONCEPT TO RENDER</span>
+        <!-- Top Title & Rail -->
+        <div class="work-top-bar">
+          <div class="work-title-group">
+            <span class="work-badge">PORTFOLIO // 2026</span>
+            <h2 class="work-title" id="work-title">My Work<span class="dot-accent">.</span></h2>
+          </div>
+
+          <!-- Tabs: Videos vs Thumbnails -->
+          <div class="sketch-tabs" role="tablist" aria-label="Work category selection">
+            <button class="sketch-tab active magnetic" id="tab-videos" type="button" role="tab" aria-selected="true" data-work-tab="videos">
+              <span class="tab-icon">▶</span>
+              <span class="tab-text">Videos</span>
+              <span class="tab-count">(6)</span>
+            </button>
+            <button class="sketch-tab magnetic" id="tab-thumbnails" type="button" role="tab" aria-selected="false" data-work-tab="thumbnails">
+              <span class="tab-icon">✦</span>
+              <span class="tab-text">Thumbnail</span>
+              <span class="tab-count">(6)</span>
+            </button>
+          </div>
         </div>
-        <h2 class="section-title" id="process-title">How the story comes alive<span class="dot-accent">.</span></h2>
 
-        <div class="process-timeline">
-          <!-- Step 1 -->
-          <div class="process-card">
-            <span class="process-num">01</span>
-            <div class="process-content">
-              <h3>Research &amp; Narrative Architecture</h3>
-              <p>Dissecting the core brief, archival facts, and emotional beats. Script analysis and auditory roadmapping before touching the timeline.</p>
-            </div>
-          </div>
+        <!-- Full-width dividing rail -->
+        <div class="sketch-divider-rail" aria-hidden="true"></div>
 
-          <!-- Step 2 -->
-          <div class="process-card">
-            <span class="process-num">02</span>
-            <div class="process-content">
-              <h3>The Assembly Cut &amp; Pacing</h3>
-              <p>Building the structural spine in Premiere Pro. Establishing dynamic rhythm, intentional tension pauses, and musical cadence.</p>
-            </div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="process-card">
-            <span class="process-num">03</span>
-            <div class="process-content">
-              <h3>Motion Graphics &amp; Visual Telemetry</h3>
-              <p>Designing dynamic infographics, maps, data visualizations, and kinetic typography in After Effects to anchor complex ideas intuitively.</p>
-            </div>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="process-card">
-            <span class="process-num">04</span>
-            <div class="process-content">
-              <h3>Sound Design, Color &amp; Thumbnail Art</h3>
-              <p>Layering audio soundscapes, foley, and cinematic color grades. Designing arresting thumbnail art in Photoshop to drive viewership.</p>
-            </div>
-          </div>
+        <!-- 6-Card Rounded Grid (2 rows x 3 columns) -->
+        <div class="sketch-work-grid" id="sketch-work-grid" aria-live="polite">
+          <!-- Populated dynamically by JavaScript -->
         </div>
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section class="section about-section" id="about" aria-labelledby="about-title">
-      <div class="section-container">
-        <div class="about-grid">
-          <div class="about-bio">
-            <div class="section-badge-row">
-              <span class="section-badge">THE ARTIST</span>
-              <span class="section-tag">BACKGROUND &amp; PHILOSOPHY</span>
-            </div>
-            <h2 class="section-title" id="about-title">Every frame is a decision<span class="dot-accent">.</span></h2>
-
-            <p class="about-text-lead">
-              I am <strong>Sikder Rakibul Islam</strong>, currently pursuing my <strong>B.Voc in Multimedia and Animation</strong> (5th Semester) at <strong>Bharathiar University</strong>.
-            </p>
-            <p class="about-text">
-              My obsession is with the psychological friction of an edit: where audio leads the eye, where motion clarifies data, and how a documentary can turn dense information into an unforgettable human story. Whether it is deep space telemetry or socio-economic realities, I craft visual work built to leave a lasting impact.
-            </p>
-
-            <div class="academic-sheet">
-              <div class="sheet-row">
-                <span class="sheet-title">ACADEMIC DEGREE</span>
-                <span class="sheet-val">B.Voc. Multimedia &amp; Animation</span>
-              </div>
-              <div class="sheet-row">
-                <span class="sheet-title">INSTITUTION</span>
-                <span class="sheet-val">Bharathiar University</span>
-              </div>
-              <div class="sheet-row">
-                <span class="sheet-title">STATUS</span>
-                <span class="sheet-val">5th Semester / Active Production</span>
-              </div>
-              <div class="sheet-row">
-                <span class="sheet-title">SPECIALIZATION</span>
-                <span class="sheet-val">Video Editing · Motion Design · Visual Direction</span>
-              </div>
-            </div>
-
-            <div class="about-actions">
-              <a class="button button--primary magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
-                <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                <span>Subscribe on YouTube</span>
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-              <a class="button button--ghost magnetic" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">
-                <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                <span>Instagram Profile</span>
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-            </div>
-          </div>
-
-          <div class="about-gallery" data-tilt>
-            <div class="about-photo-wrapper">
-              <img class="about-portrait" src="assets/profile/sikder-rakibul-islam.jpg" alt="Sikder Rakibul Islam at work" loading="lazy">
-              <div class="about-photo-badge">
-                <span class="rec-dot"></span>
-                <span>SIKDER // 2026</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT & CALL TO ACTION -->
+    <!-- ============================================================
+         5. CONTACT
+         ============================================================ -->
     <section class="section contact-section" id="contact" aria-labelledby="contact-title">
       <div class="section-container">
         <div class="contact-card">
           <div class="contact-glow" aria-hidden="true"></div>
           <div class="contact-inner">
-            <span class="contact-kicker">COLLABORATE / COMMISSIONS</span>
-            <h2 class="contact-title" id="contact-title">Have a story that demands to be seen?</h2>
+            <span class="contact-kicker">GET IN TOUCH</span>
+            <h2 class="contact-title" id="contact-title">Want to work together?</h2>
             <p class="contact-desc">
-              Currently accepting selected freelance video editing commissions, motion graphics assignments, and creative partnerships.
+              Currently accepting freelance video editing commissions, motion graphics projects, and creative collaborations.
             </p>
 
             <div class="contact-buttons">
@@ -575,17 +435,17 @@
     <div class="footer-container">
       <div class="footer-top">
         <div class="footer-brand-col">
-          <a class="brand brand--footer" href="#top">
+          <a class="brand brand--footer" href="#about">
             <span class="brand-text">SIKDER<span class="brand-accent">.</span></span>
           </a>
-          <p class="footer-tagline">Visual Stories. Made to Matter.</p>
         </div>
 
         <div class="footer-links-col">
-          <a class="footer-link magnetic" href="#work">Selected Work</a>
-          <a class="footer-link magnetic" href="#featured">Featured Film</a>
-          <a class="footer-link magnetic" href="#skills">Software</a>
           <a class="footer-link magnetic" href="#about">About</a>
+          <a class="footer-link magnetic" href="#skills">Skills</a>
+          <a class="footer-link magnetic" href="#tools">Tools</a>
+          <a class="footer-link magnetic" href="#work">Work</a>
+          <a class="footer-link magnetic" href="#contact">Contact</a>
           <a class="footer-link magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             <span>YouTube ↗</span>
@@ -637,7 +497,7 @@
           <div class="dialog-iframe-container" id="dialog-iframe-container" hidden></div>
         </div>
 
-        <!-- Thumbnail Selector Tabs (if multiple thumbnails exist) -->
+        <!-- Thumbnail Selector Tabs -->
         <div class="dialog-thumbnails-strip" id="dialog-thumbnails-strip" hidden>
           <span class="strip-label">THUMBNAIL ITERATIONS:</span>
           <div class="strip-items" id="dialog-thumb-list"></div>
