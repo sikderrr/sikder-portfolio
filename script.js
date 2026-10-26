@@ -362,7 +362,7 @@
     }
 
     document.addEventListener("mouseover", (e) => {
-      const target = e.target.closest("a, button, [data-cursor], .sketch-card, .featured-card");
+      const target = e.target.closest("a, button, [data-cursor], .sketch-card, .skill-card");
       if (!target) {
         follower.classList.remove("is-hovering", "is-badge");
         if (cursorText) cursorText.textContent = "";
@@ -627,16 +627,6 @@
           if (thumb) this.openThumb(thumb);
           return;
         }
-
-        // Featured section play trigger
-        const featTrigger = e.target.closest("[data-play-project]");
-        if (featTrigger) {
-          e.preventDefault();
-          const pId = featTrigger.getAttribute("data-play-project");
-          const video = portfolioData.videos.find((v) => v.id.includes(pId)) || portfolioData.videos[0];
-          if (video) this.openVideo(video, true);
-          return;
-        }
       });
     },
 
@@ -876,20 +866,6 @@
         });
       });
 
-      const featuredCard = document.querySelector(".featured-card");
-      if (featuredCard) {
-        gsap.from(featuredCard, {
-          scrollTrigger: {
-            trigger: featuredCard,
-            start: "top 80%"
-          },
-          opacity: 0,
-          y: 50,
-          duration: 1.3,
-          ease: "power3.out"
-        });
-      }
-
       const skillCards = document.querySelectorAll(".skill-card");
       if (skillCards.length) {
         gsap.from(skillCards, {
@@ -901,21 +877,6 @@
           y: 40,
           duration: 1,
           stagger: 0.12,
-          ease: "power3.out"
-        });
-      }
-
-      const processCards = document.querySelectorAll(".process-card");
-      if (processCards.length) {
-        gsap.from(processCards, {
-          scrollTrigger: {
-            trigger: ".process-timeline",
-            start: "top 80%"
-          },
-          opacity: 0,
-          y: 40,
-          duration: 1,
-          stagger: 0.15,
           ease: "power3.out"
         });
       }
