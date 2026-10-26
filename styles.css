@@ -517,6 +517,33 @@ img {
   width: 100%;
 }
 
+/* Button & Link Social Icons */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: middle;
+}
+
+.btn-icon svg,
+.btn-icon path {
+  fill: currentColor;
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.footer-link svg {
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
 /* Mobile Hamburger Toggle */
 .menu-toggle {
   display: none;
