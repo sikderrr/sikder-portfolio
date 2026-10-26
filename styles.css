@@ -650,6 +650,140 @@ a:focus-visible, button:focus-visible {
 }
 
 /* ==========================================================================
+   SOFTWARE & TOOLS SECTION (Home-html Design System)
+   ========================================================================== */
+.software-section {
+  padding-top: 96px;
+  padding-bottom: 96px;
+  border-top: 1px solid var(--line-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.software-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 680px;
+}
+
+.software-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.software-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.software-card:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.software-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.software-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: -0.05em;
+  flex-shrink: 0;
+}
+
+.software-badge--pr {
+  background: #00005b;
+  color: #9999ff;
+  border: 1px solid rgba(153, 153, 255, 0.3);
+}
+
+.software-badge--ae {
+  background: #1a0033;
+  color: #d291ff;
+  border: 1px solid rgba(210, 145, 255, 0.3);
+}
+
+.software-badge--ps {
+  background: #001e36;
+  color: #31a8ff;
+  border: 1px solid rgba(49, 168, 255, 0.3);
+}
+
+.software-badge--ai {
+  background: #330000;
+  color: #ff9a00;
+  border: 1px solid rgba(255, 154, 0, 0.3);
+}
+
+.software-category {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.software-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.software-desc {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.software-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.software-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
    ABOUT SECTION
    ========================================================================== */
 .about-section {
