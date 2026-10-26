@@ -1,68 +1,650 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101010">
-  <meta name="description" content="Sikder Rakibul Islam — video editor, graphic designer, and motion graphics artist. Selected documentary work and visual design.">
+  <meta name="theme-color" content="#07070a">
+  <meta name="description" content="Sikder Rakibul Islam — Video Editor, Motion Graphics Artist & Visual Storyteller. High-impact documentary editing and motion design.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Sikder Rakibul Islam — Creative Portfolio">
-  <meta property="og:description" content="Video editor · Graphic designer · Motion graphics artist">
+  <meta property="og:title" content="Sikder Rakibul Islam — Video Editor & Motion Designer">
+  <meta property="og:description" content="Crafting cinematic documentaries, rhythmic video editing, and dynamic motion graphics.">
   <meta property="og:image" content="assets/og-placeholder.svg">
-  <title>Sikder Rakibul Islam — Creative Portfolio</title>
+
+  <title>Sikder Rakibul Islam — Video Editor & Motion Designer</title>
+
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  
+  <!-- Google Fonts: Syne (Display), Plus Jakarta Sans (Body), JetBrains Mono (Technical) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="styles.css">
+
+  <!-- GSAP & Lenis Smooth Scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script defer src="script.js"></script>
 </head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header" id="top">
-    <a class="wordmark" href="#top" aria-label="Sikder, home">SIKDER<span>®</span></a>
-    <nav class="desktop-nav" aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-    <a class="header-link" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">YouTube <span>↗</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span></button>
-    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a><a href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">YouTube ↗</a></nav>
+<body data-barba="wrapper">
+  <!-- Custom Interactive Cursor -->
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-follower" id="cursor-follower" aria-hidden="true">
+    <span class="cursor-text" id="cursor-text"></span>
+  </div>
+
+  <!-- Background Ambient Glow & Grid -->
+  <div class="ambient-glow" aria-hidden="true">
+    <div class="glow-orb glow-orb--1"></div>
+    <div class="glow-orb glow-orb--2"></div>
+    <div class="glow-orb glow-orb--3"></div>
+    <div class="ambient-grid"></div>
+  </div>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Header / Navigation -->
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Sikder Rakibul Islam Home">
+        <span class="rec-dot" aria-hidden="true"></span>
+        <span class="brand-text">SIKDER<span class="brand-accent">.</span></span>
+        <span class="brand-sub">STUDIO</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a class="nav-item magnetic" href="#work"><span>Work</span></a>
+        <a class="nav-item magnetic" href="#featured"><span>Featured</span></a>
+        <a class="nav-item magnetic" href="#skills"><span>Software</span></a>
+        <a class="nav-item magnetic" href="#process"><span>Process</span></a>
+        <a class="nav-item magnetic" href="#about"><span>About</span></a>
+        <a class="nav-item magnetic" href="#contact"><span>Contact</span></a>
+      </nav>
+
+      <div class="header-tools">
+        <!-- Live Timecode Widget -->
+        <div class="timecode-badge" title="Local Time in India (IST)">
+          <span class="time-label">IST</span>
+          <span class="time-val" id="live-time">12:00:00 PM</span>
+        </div>
+
+        <!-- UI Audio Switcher -->
+        <button class="sound-toggle magnetic" id="sound-toggle" type="button" aria-label="Toggle UI Sound Effects" title="Toggle UI Sound">
+          <div class="sound-bars" aria-hidden="true">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+            <span class="bar bar-4"></span>
+          </div>
+          <span class="sound-label">AUDIO OFF</span>
+        </button>
+
+        <!-- YouTube Link Button -->
+        <a class="button button--nav magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
+          <span>YouTube</span>
+          <svg class="icon-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open Navigation Menu">
+          <span class="hamburger-line line-1"></span>
+          <span class="hamburger-line line-2"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <div class="mobile-nav-inner">
+        <div class="mobile-nav-links">
+          <a class="mobile-nav-link" href="#work"><span>01</span>Selected Work</a>
+          <a class="mobile-nav-link" href="#featured"><span>02</span>Featured Film</a>
+          <a class="mobile-nav-link" href="#skills"><span>03</span>Software &amp; Tools</a>
+          <a class="mobile-nav-link" href="#process"><span>04</span>Creative Process</a>
+          <a class="mobile-nav-link" href="#about"><span>05</span>About Artist</a>
+          <a class="mobile-nav-link" href="#contact"><span>06</span>Get in Touch</a>
+        </div>
+        <div class="mobile-nav-footer">
+          <a class="button button--glow" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
+          <a class="button button--ghost" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">SIKDER RAKIBUL ISLAM <span>·</span> CREATIVE PORTFOLIO</p>
-        <h1 id="hero-title">Visual stories.<br>Made to <span>matter.</span></h1>
-        <p class="hero-role">Video Editor <i>·</i> Graphic Designer <i>·</i> Motion Graphics Artist</p>
-        <p class="hero-description">I shape ideas into compelling visual experiences through editing, design, and motion.</p>
-        <div class="hero-intro" aria-label="About Sikder and software used"><div><span>ABOUT ME</span><p>Multimedia &amp; Animation student<br>at Bharathiar University</p></div><div><span>SOFTWARE</span><p>Premiere Pro · After Effects<br>Photoshop · Illustrator</p></div></div>
-        <div class="hero-actions"><a class="button button-dark" href="#work">Explore selected work <span>↓</span></a><a class="text-link" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="top" aria-labelledby="hero-title">
+      <div class="hero-container">
+        <!-- Hero Left Column: Typography & CTAs -->
+        <div class="hero-content">
+          <div class="hero-status-pill reveal-item">
+            <span class="pulse-beacon"></span>
+            <span class="status-text">AVAILABLE FOR COMMISSIONS · 2026</span>
+          </div>
+
+          <h1 class="hero-title" id="hero-title">
+            <span class="title-line reveal-item">VISUAL STORIES<span class="dot-accent">.</span></span>
+            <span class="title-line title-line--gradient reveal-item">ENGINEERED TO</span>
+            <span class="title-line title-line--accent reveal-item">CAPTIVATE<span class="dot-accent">.</span></span>
+          </h1>
+
+          <p class="hero-subtitle reveal-item">
+            I’m <strong>Sikder Rakibul Islam</strong> — a video editor, graphic designer, and motion graphics artist shaping ideas into high-tension visual experiences through rhythm, kinetic typography, and documentary realism.
+          </p>
+
+          <div class="hero-metrics reveal-item">
+            <div class="metric-card">
+              <span class="metric-num">B.Voc</span>
+              <span class="metric-label">Multimedia &amp; Animation</span>
+            </div>
+            <div class="metric-separator" aria-hidden="true">/</div>
+            <div class="metric-card">
+              <span class="metric-num">Premiere · AE</span>
+              <span class="metric-label">Core Creative Pipeline</span>
+            </div>
+            <div class="metric-separator" aria-hidden="true">/</div>
+            <div class="metric-card">
+              <span class="metric-num">Bharathiar</span>
+              <span class="metric-label">University Student</span>
+            </div>
+          </div>
+
+          <div class="hero-actions reveal-item">
+            <a class="button button--primary magnetic" href="#work" data-cursor="EXPLORE">
+              <span>Explore Selected Work</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1V13M7 13L1 7M7 13L13 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="button button--glass magnetic" href="https://www.youtube.com/watch?v=mZSs4lW9-n8" target="_blank" rel="noopener noreferrer" data-cursor="PLAY">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M3 2L12 7L3 12V2Z"/></svg>
+              <span>Watch Reel ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Right Column: 3D Interactive Portrait Showcase -->
+        <div class="hero-visual reveal-item" data-tilt>
+          <div class="portrait-card">
+            <div class="portrait-frame">
+              <img class="portrait-img" src="assets/profile/sikder-rakibul-islam-editorial.png" alt="Sikder Rakibul Islam editorial portrait" width="700" height="900" loading="eager">
+              <div class="portrait-vignette"></div>
+              
+              <!-- Floating HUD Elements -->
+              <div class="hud-tag hud-tag--top">
+                <span class="hud-code">[PROD // 2026]</span>
+                <span class="hud-status">ACTIVE</span>
+              </div>
+              <div class="hud-tag hud-tag--bottom">
+                <span class="hud-title">SIKDER RAKIBUL ISLAM</span>
+                <span class="hud-subtitle">EDITOR · DESIGNER · MOTION</span>
+              </div>
+            </div>
+
+            <!-- Soft Backlight Reflection -->
+            <div class="portrait-glow" aria-hidden="true"></div>
+          </div>
+        </div>
       </div>
-      <figure class="hero-visual hero-visual--portrait"><img src="assets/profile/sikder-rakibul-islam-editorial.png" alt="Editorial portrait of Sikder Rakibul Islam"><figcaption><span>SIKDER RAKIBUL ISLAM</span><span>EDITOR · DESIGNER · MOTION</span></figcaption></figure>
+
+      <!-- Scroll Indicator -->
+      <a class="scroll-cue magnetic" href="#featured" aria-label="Scroll to featured section">
+        <span class="scroll-cue-track"><span class="scroll-cue-wheel"></span></span>
+        <span class="scroll-cue-text">SCROLL</span>
+      </a>
     </section>
 
-    <section class="featured-film" aria-labelledby="featured-film-title">
-      <a class="featured-film-media" href="https://www.youtube.com/watch?v=mZSs4lW9-n8" target="_blank" rel="noopener noreferrer" aria-label="Watch Voyager 1 on YouTube"><img src="assets/design/voyager-thumbnail-2.webp" alt="Beyond Everything — Voyager 1 documentary thumbnail"><span class="featured-film-play" aria-hidden="true">PLAY<br>FILM ↗</span></a>
-      <div class="featured-film-copy"><p class="eyebrow">FEATURED FILM · 01</p><h2 id="featured-film-title">Voyager 1.<br><span>Beyond everything.</span></h2><p>A documentary journey into humanity’s farthest spacecraft—and the power of visual storytelling at a distance.</p><a class="text-link" href="#work">Explore selected work ↘</a></div>
+    <!-- INFINITE MARQUEE TICKER -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-content">
+        <span>DOCUMENTARY EDITING</span><span class="marquee-star">✦</span>
+        <span>MOTION GRAPHICS</span><span class="marquee-star">✦</span>
+        <span>DATA VISUALIZATION</span><span class="marquee-star">✦</span>
+        <span>ADOBE AFTER EFFECTS</span><span class="marquee-star">✦</span>
+        <span>PREMIERE PRO</span><span class="marquee-star">✦</span>
+        <span>THUMBNAIL ARCHITECTURE</span><span class="marquee-star">✦</span>
+        <span>NARRATIVE PACING</span><span class="marquee-star">✦</span>
+        <span>COLOR GRADING</span><span class="marquee-star">✦</span>
+        <!-- Duplicate for loop -->
+        <span>DOCUMENTARY EDITING</span><span class="marquee-star">✦</span>
+        <span>MOTION GRAPHICS</span><span class="marquee-star">✦</span>
+        <span>DATA VISUALIZATION</span><span class="marquee-star">✦</span>
+        <span>ADOBE AFTER EFFECTS</span><span class="marquee-star">✦</span>
+        <span>PREMIERE PRO</span><span class="marquee-star">✦</span>
+        <span>THUMBNAIL ARCHITECTURE</span><span class="marquee-star">✦</span>
+        <span>NARRATIVE PACING</span><span class="marquee-star">✦</span>
+        <span>COLOR GRADING</span><span class="marquee-star">✦</span>
+      </div>
+    </div>
+
+    <!-- FEATURED FILM CINEMA SHOWCASE -->
+    <section class="section featured-section" id="featured" aria-labelledby="featured-title">
+      <div class="section-container">
+        <div class="section-badge-row">
+          <span class="section-badge">CINEMA HIGHLIGHT · 01</span>
+          <span class="section-tag">LONG-FORM DOCUMENTARY</span>
+        </div>
+
+        <div class="featured-card" data-tilt>
+          <div class="featured-media-container" data-cursor="PLAY FILM">
+            <img class="featured-poster" src="assets/design/voyager-thumbnail-2.webp" alt="Voyager 1 documentary cover design" loading="lazy">
+            <div class="featured-overlay"></div>
+
+            <!-- Animated Waveform & Play Trigger -->
+            <button class="cinema-play-btn" type="button" data-play-project="voyager-1" aria-label="Play Voyager 1 Documentary in Theater Mode">
+              <span class="play-ring play-ring--1"></span>
+              <span class="play-ring play-ring--2"></span>
+              <span class="play-icon">▶</span>
+            </button>
+
+            <div class="cinema-hud">
+              <div class="hud-left">
+                <span class="live-rec"><span class="rec-dot"></span> 4K DCI // REC</span>
+                <span class="film-timecode">TC 00:18:42:15</span>
+              </div>
+              <div class="hud-right">
+                <span class="film-ratio">2.39:1 CINEMATIC</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="featured-details">
+            <div class="featured-info">
+              <span class="featured-category">DOCUMENTARY · MOTION DESIGN · RESEARCH</span>
+              <h2 class="featured-headline" id="featured-title">Voyager 1: Beyond Everything.</h2>
+              <p class="featured-summary">
+                A documentary dive into humanity’s most distant technological envoy. Built with rhythmic timeline pacing, space motion graphics, custom UI telemetry, and rigorous archival reconstruction.
+              </p>
+
+              <div class="featured-specs">
+                <div class="spec-item">
+                  <span class="spec-label">ROLE</span>
+                  <span class="spec-val">Lead Editor, Motion Graphics &amp; Narrative Flow</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">SOFTWARE</span>
+                  <span class="spec-val">Premiere Pro · After Effects · Photoshop</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="featured-action-bar">
+              <button class="button button--primary magnetic" type="button" data-play-project="voyager-1" data-cursor="PLAY">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M3 2L12 7L3 12V2Z"/></svg>
+                <span>Watch Film</span>
+              </button>
+              <button class="button button--ghost magnetic" type="button" data-project="voyager-1" data-cursor="INFO">
+                <span>View Details &amp; Thumbnails ↗</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="work section-wrap" id="work" aria-labelledby="work-title">
-      <div class="section-heading"><div><p class="eyebrow">SELECTED WORK · 2026</p><h2 id="work-title">A considered body<br>of <span>work.</span></h2></div><a class="text-link work-channel" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">All videos on YouTube ↗</a></div>
-      <div class="project-list" id="project-list"></div>
+    <!-- MY WORK SECTION (Tabs: Videos & Thumbnail) -->
+    <section class="section work-section" id="work" aria-labelledby="work-title">
+      <div class="section-container">
+        <!-- Top Title & Rail matching sketch -->
+        <div class="work-top-bar">
+          <div class="work-title-group">
+            <span class="work-badge">PORTFOLIO // 2026</span>
+            <h2 class="work-title" id="work-title">My work<span class="dot-accent">.</span></h2>
+          </div>
+
+          <!-- Tabs directly embedded on the dividing rail -->
+          <div class="sketch-tabs" role="tablist" aria-label="Work category selection">
+            <button class="sketch-tab active magnetic" id="tab-videos" type="button" role="tab" aria-selected="true" data-work-tab="videos">
+              <span class="tab-icon">▶</span>
+              <span class="tab-text">Videos</span>
+              <span class="tab-count">(6)</span>
+            </button>
+            <button class="sketch-tab magnetic" id="tab-thumbnails" type="button" role="tab" aria-selected="false" data-work-tab="thumbnails">
+              <span class="tab-icon">✦</span>
+              <span class="tab-text">Thumbnail</span>
+              <span class="tab-count">(6)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Full-width dividing rail running across as sketched -->
+        <div class="sketch-divider-rail" aria-hidden="true"></div>
+
+        <!-- 6-Card Rounded Grid matching sketch (2 rows x 3 columns) -->
+        <div class="sketch-work-grid" id="sketch-work-grid" aria-live="polite">
+          <!-- Populated dynamically by JavaScript -->
+        </div>
+      </div>
     </section>
 
-    <section class="about section-wrap" id="about" aria-labelledby="about-title">
-      <div class="about-heading"><p class="eyebrow">ABOUT</p><h2 id="about-title">Curious by nature.<br><span>Focused on the frame.</span></h2></div>
-      <div class="about-content"><p class="about-lead">I’m Sikder Rakibul Islam, a B.Voc. Multimedia and Animation student with a deep interest in documentary storytelling, editing, graphic design, and motion.</p><dl class="profile-details"><div><dt>DEGREE</dt><dd>B.Voc. Multimedia and Animation</dd></div><div><dt>UNIVERSITY</dt><dd>Bharathiar University</dd></div><div><dt>SEMESTER</dt><dd>5th</dd></div></dl><section class="skills" aria-labelledby="skills-title"><p class="eyebrow" id="skills-title">SOFTWARE I USE</p><ul class="skill-list"><li><span class="skill-mark skill-mark--premiere" aria-hidden="true">Pr</span><span>Adobe Premiere Pro</span></li><li><span class="skill-mark skill-mark--after-effects" aria-hidden="true">Ae</span><span>Adobe After Effects</span></li><li><span class="skill-mark skill-mark--photoshop" aria-hidden="true">Ps</span><span>Adobe Photoshop</span></li><li><span class="skill-mark skill-mark--illustrator" aria-hidden="true">Ai</span><span>Adobe Illustrator</span></li></ul></section></div>
+    <!-- SOFTWARE & CAPABILITY MATRIX -->
+    <section class="section skills-section" id="skills" aria-labelledby="skills-title">
+      <div class="section-container">
+        <div class="section-badge-row">
+          <span class="section-badge">TECHNICAL ARSENAL</span>
+          <span class="section-tag">HARDWARE &amp; CREATIVE SUITE</span>
+        </div>
+        <h2 class="section-title" id="skills-title">Mastery across every pixel<span class="dot-accent">.</span></h2>
+        <p class="section-intro">
+          A modern post-production workflow utilizing industry-standard creative applications for maximum editorial pacing, fidelity, and narrative impact.
+        </p>
+
+        <div class="skills-grid">
+          <!-- Skill Card 1: Premiere Pro -->
+          <div class="skill-card skill-card--pr" data-tilt>
+            <div class="skill-top">
+              <div class="skill-icon-badge skill-icon--pr">Pr</div>
+              <span class="skill-level">PRIMARY TIMELINE</span>
+            </div>
+            <h3 class="skill-name">Adobe Premiere Pro</h3>
+            <p class="skill-desc">
+              Multi-track timeline editing, audio ducking &amp; soundscapes, rhythmic cut pacing, color grade conversion, and documentary assembly.
+            </p>
+            <ul class="skill-features">
+              <li>Pacing &amp; Narrative Flow</li>
+              <li>Sound Design &amp; Multicam Sync</li>
+              <li>Color Correction &amp; LUT Profiling</li>
+            </ul>
+          </div>
+
+          <!-- Skill Card 2: After Effects -->
+          <div class="skill-card skill-card--ae" data-tilt>
+            <div class="skill-top">
+              <div class="skill-icon-badge skill-icon--ae">Ae</div>
+              <span class="skill-level">MOTION GRAPHICS</span>
+            </div>
+            <h3 class="skill-name">Adobe After Effects</h3>
+            <p class="skill-desc">
+              Kinetic typography, screen telemetry, space flight animations, custom visual effects, and animated charts &amp; infographic overlays.
+            </p>
+            <ul class="skill-features">
+              <li>Kinetic Typography &amp; HUDs</li>
+              <li>Motion Tracking &amp; Keyframing</li>
+              <li>Infographics &amp; Data Visuals</li>
+            </ul>
+          </div>
+
+          <!-- Skill Card 3: Photoshop -->
+          <div class="skill-card skill-card--ps" data-tilt>
+            <div class="skill-top">
+              <div class="skill-icon-badge skill-icon--ps">Ps</div>
+              <span class="skill-level">VISUAL DESIGN</span>
+            </div>
+            <h3 class="skill-name">Adobe Photoshop</h3>
+            <p class="skill-desc">
+              High-CTR YouTube thumbnail architecture, photo manipulation, matte blending, color tone matching, and key visual asset generation.
+            </p>
+            <ul class="skill-features">
+              <li>High-Impact Thumbnail Design</li>
+              <li>Advanced Matte Cutting</li>
+              <li>Composition &amp; Lighting Balance</li>
+            </ul>
+          </div>
+
+          <!-- Skill Card 4: Illustrator -->
+          <div class="skill-card skill-card--ai" data-tilt>
+            <div class="skill-top">
+              <div class="skill-icon-badge skill-icon--ai">Ai</div>
+              <span class="skill-level">VECTOR ASSETS</span>
+            </div>
+            <h3 class="skill-name">Adobe Illustrator</h3>
+            <p class="skill-desc">
+              Precision vector creation, editorial diagrams, maps, icons, and SVG assets prepared cleanly for animated After Effects import.
+            </p>
+            <ul class="skill-features">
+              <li>Vector Graphics &amp; Maps</li>
+              <li>AE Motion Pipeline Asset Prep</li>
+              <li>Custom Editorial Identity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="contact section-wrap" id="contact" aria-labelledby="contact-title">
-      <p class="eyebrow">NEXT PROJECT</p><h2 id="contact-title">Have a story<br>to tell?</h2><p class="contact-copy">Open to opportunities, collaborations, and creative projects.</p>
-      <div class="contact-links"><a class="button button-light" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">Get in touch on Instagram ↗</a><a class="text-link" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">Watch my videos ↗</a></div>
+    <!-- CREATIVE PROCESS PIPELINE -->
+    <section class="section process-section" id="process" aria-labelledby="process-title">
+      <div class="section-container">
+        <div class="section-badge-row">
+          <span class="section-badge">WORKFLOW METHODOLOGY</span>
+          <span class="section-tag">FROM CONCEPT TO RENDER</span>
+        </div>
+        <h2 class="section-title" id="process-title">How the story comes alive<span class="dot-accent">.</span></h2>
+
+        <div class="process-timeline">
+          <!-- Step 1 -->
+          <div class="process-card">
+            <span class="process-num">01</span>
+            <div class="process-content">
+              <h3>Research &amp; Narrative Architecture</h3>
+              <p>Dissecting the core brief, archival facts, and emotional beats. Script analysis and auditory roadmapping before touching the timeline.</p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="process-card">
+            <span class="process-num">02</span>
+            <div class="process-content">
+              <h3>The Assembly Cut &amp; Pacing</h3>
+              <p>Building the structural spine in Premiere Pro. Establishing dynamic rhythm, intentional tension pauses, and musical cadence.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="process-card">
+            <span class="process-num">03</span>
+            <div class="process-content">
+              <h3>Motion Graphics &amp; Visual Telemetry</h3>
+              <p>Designing dynamic infographics, maps, data visualizations, and kinetic typography in After Effects to anchor complex ideas intuitively.</p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="process-card">
+            <span class="process-num">04</span>
+            <div class="process-content">
+              <h3>Sound Design, Color &amp; Thumbnail Art</h3>
+              <p>Layering audio soundscapes, foley, and cinematic color grades. Designing arresting thumbnail art in Photoshop to drive viewership.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="section about-section" id="about" aria-labelledby="about-title">
+      <div class="section-container">
+        <div class="about-grid">
+          <div class="about-bio">
+            <div class="section-badge-row">
+              <span class="section-badge">THE ARTIST</span>
+              <span class="section-tag">BACKGROUND &amp; PHILOSOPHY</span>
+            </div>
+            <h2 class="section-title" id="about-title">Every frame is a decision<span class="dot-accent">.</span></h2>
+
+            <p class="about-text-lead">
+              I am <strong>Sikder Rakibul Islam</strong>, currently pursuing my <strong>B.Voc in Multimedia and Animation</strong> (5th Semester) at <strong>Bharathiar University</strong>.
+            </p>
+            <p class="about-text">
+              My obsession is with the psychological friction of an edit: where audio leads the eye, where motion clarifies data, and how a documentary can turn dense information into an unforgettable human story. Whether it is deep space telemetry or socio-economic realities, I craft visual work built to leave a lasting impact.
+            </p>
+
+            <div class="academic-sheet">
+              <div class="sheet-row">
+                <span class="sheet-title">ACADEMIC DEGREE</span>
+                <span class="sheet-val">B.Voc. Multimedia &amp; Animation</span>
+              </div>
+              <div class="sheet-row">
+                <span class="sheet-title">INSTITUTION</span>
+                <span class="sheet-val">Bharathiar University</span>
+              </div>
+              <div class="sheet-row">
+                <span class="sheet-title">STATUS</span>
+                <span class="sheet-val">5th Semester / Active Production</span>
+              </div>
+              <div class="sheet-row">
+                <span class="sheet-title">SPECIALIZATION</span>
+                <span class="sheet-val">Video Editing · Motion Design · Visual Direction</span>
+              </div>
+            </div>
+
+            <div class="about-actions">
+              <a class="button button--primary magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
+                <span>Subscribe on YouTube</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a class="button button--ghost magnetic" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">
+                <span>Instagram Profile</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="about-gallery" data-tilt>
+            <div class="about-photo-wrapper">
+              <img class="about-portrait" src="assets/profile/sikder-rakibul-islam.jpg" alt="Sikder Rakibul Islam at work" loading="lazy">
+              <div class="about-photo-badge">
+                <span class="rec-dot"></span>
+                <span>SIKDER // 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT & CALL TO ACTION -->
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="section-container">
+        <div class="contact-card">
+          <div class="contact-glow" aria-hidden="true"></div>
+          <div class="contact-inner">
+            <span class="contact-kicker">COLLABORATE / COMMISSIONS</span>
+            <h2 class="contact-title" id="contact-title">Have a story that demands to be seen?</h2>
+            <p class="contact-desc">
+              Currently accepting selected freelance video editing commissions, motion graphics assignments, and creative partnerships.
+            </p>
+
+            <div class="contact-buttons">
+              <a class="button button--primary button--large magnetic" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer" data-cursor="CONNECT">
+                <span>Message on Instagram ↗</span>
+              </a>
+              <a class="button button--glass button--large magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer" data-cursor="YOUTUBE">
+                <span>Visit YouTube Channel ↗</span>
+              </a>
+            </div>
+
+            <div class="contact-meta-row">
+              <div class="channel-handle">
+                <span class="handle-label">YOUTUBE</span>
+                <span class="handle-val">@sikder_in</span>
+              </div>
+              <div class="channel-handle">
+                <span class="handle-label">INSTAGRAM</span>
+                <span class="handle-val">@sikder.in</span>
+              </div>
+              <div class="channel-handle">
+                <span class="handle-label">LOCATION</span>
+                <span class="handle-val">India (Available Worldwide)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer"><a class="footer-brand" href="#top">SIKDER RAKIBUL ISLAM<span>.</span></a><p>Video Editor · Graphic Designer · Motion Graphics Artist</p><div class="footer-bottom"><span>© <span data-year>2026</span> SIKDER RAKIBUL ISLAM</span><a href="#top">BACK TO TOP ↑</a></div></footer>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <a class="brand brand--footer" href="#top">
+            <span class="brand-text">SIKDER<span class="brand-accent">.</span></span>
+          </a>
+          <p class="footer-tagline">Visual Stories. Made to Matter.</p>
+        </div>
 
-  <dialog class="project-dialog" aria-labelledby="dialog-title"><button class="dialog-close" type="button" aria-label="Close project details">×</button><div class="dialog-content"></div></dialog>
+        <div class="footer-links-col">
+          <a class="footer-link magnetic" href="#work">Selected Work</a>
+          <a class="footer-link magnetic" href="#featured">Featured Film</a>
+          <a class="footer-link magnetic" href="#skills">Software</a>
+          <a class="footer-link magnetic" href="#about">About</a>
+          <a class="footer-link magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+          <a class="footer-link magnetic" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="copyright">© 2026 SIKDER RAKIBUL ISLAM. ALL RIGHTS RESERVED.</span>
+        <button class="back-to-top magnetic" id="back-to-top" type="button" aria-label="Return to top of page">
+          <span>BACK TO TOP</span>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 11V1M6 1L1 6M6 1L11 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CINEMA THEATER DIALOG / MODAL -->
+  <dialog class="cinema-dialog" id="cinema-dialog" aria-labelledby="dialog-project-title">
+    <div class="dialog-backdrop" data-close-dialog></div>
+    <div class="dialog-window">
+      <div class="dialog-header">
+        <div class="dialog-breadcrumbs">
+          <span class="dialog-rec-dot"></span>
+          <span class="dialog-badge" id="dialog-project-number">PROJECT // 01</span>
+          <span class="dialog-sep">/</span>
+          <span class="dialog-category" id="dialog-project-category">DOCUMENTARY</span>
+        </div>
+        <button class="dialog-close-btn magnetic" type="button" data-close-dialog aria-label="Close dialog">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <div class="dialog-body">
+        <!-- Interactive Player Area -->
+        <div class="dialog-screen" id="dialog-screen">
+          <div class="dialog-poster-wrapper" id="dialog-poster-wrapper">
+            <img class="dialog-poster" id="dialog-poster" src="" alt="Project Poster">
+            <button class="dialog-theater-play" id="dialog-theater-play" type="button" aria-label="Play Video">
+              <span class="play-ring"></span>
+              <span class="play-icon">▶</span>
+              <span class="play-text">START PLAYBACK</span>
+            </button>
+          </div>
+          <div class="dialog-iframe-container" id="dialog-iframe-container" hidden></div>
+        </div>
+
+        <!-- Thumbnail Selector Tabs (if multiple thumbnails exist) -->
+        <div class="dialog-thumbnails-strip" id="dialog-thumbnails-strip" hidden>
+          <span class="strip-label">THUMBNAIL ITERATIONS:</span>
+          <div class="strip-items" id="dialog-thumb-list"></div>
+        </div>
+
+        <!-- Details Info -->
+        <div class="dialog-info-row">
+          <div class="dialog-main-meta">
+            <h2 class="dialog-title" id="dialog-project-title">Project Title</h2>
+            <p class="dialog-desc" id="dialog-project-desc">Project description goes here.</p>
+          </div>
+
+          <div class="dialog-sidebar-meta">
+            <div class="dialog-meta-block">
+              <span class="meta-label">ROLE &amp; EXECUTION</span>
+              <p class="meta-val" id="dialog-project-role">Role info</p>
+            </div>
+            <div class="dialog-meta-block">
+              <span class="meta-label">SOFTWARE USED</span>
+              <div class="dialog-tools-tags" id="dialog-project-tools"></div>
+            </div>
+            <div class="dialog-meta-block">
+              <a class="button button--primary button--full" id="dialog-external-btn" href="#" target="_blank" rel="noopener noreferrer">
+                <span>Watch on YouTube ↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
 </body>
 </html>
