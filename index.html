@@ -1,533 +1,315 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07070a">
-  <meta name="description" content="Sikder Rakibul Islam — Video Editor, Motion Graphics Artist & Visual Storyteller. High-impact documentary editing and motion design.">
+  <meta name="theme-color" content="#0B0B10">
+  <meta name="description" content="Sikder Rakibul Islam — Video Editor and Thumbnail Designer. Turning raw footage into videos people finish, and designing the frame that makes them press play.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Sikder Rakibul Islam — Video Editor & Motion Designer">
-  <meta property="og:description" content="Crafting cinematic documentaries, rhythmic video editing, and dynamic motion graphics.">
+  <meta property="og:title" content="Sikder Rakibul Islam — Video Editor & Thumbnail Designer">
+  <meta property="og:description" content="I cut the video. I design the click. High-impact documentary editing, motion design, and thumbnail architecture.">
   <meta property="og:image" content="assets/og-placeholder.svg">
 
-  <title>Sikder Rakibul Islam — Video Editor & Motion Designer</title>
+  <title>Sikder — Video Editor &amp; Thumbnail Designer</title>
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   
-  <!-- Google Fonts: Syne (Display), Plus Jakarta Sans (Body), JetBrains Mono (Technical) -->
+  <!-- Google Fonts: Archivo (Display), DM Sans (Body), JetBrains Mono (Technical) matching Home-html -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=DM+Sans:opsz,wght@9..40,400..700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
   
   <link rel="stylesheet" href="styles.css">
-
-  <!-- GSAP & Lenis Smooth Scroll -->
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script defer src="script.js"></script>
 </head>
-<body data-barba="wrapper">
-  <!-- Custom Interactive Cursor -->
-  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-follower" id="cursor-follower" aria-hidden="true">
-    <span class="cursor-text" id="cursor-text"></span>
-  </div>
+<body>
+  <a class="skip-link" href="#work">Skip to main content</a>
 
-  <!-- Background Ambient Glow & Grid -->
-  <div class="ambient-glow" aria-hidden="true">
-    <div class="glow-orb glow-orb--1"></div>
-    <div class="glow-orb glow-orb--2"></div>
-    <div class="glow-orb glow-orb--3"></div>
-    <div class="ambient-grid"></div>
-  </div>
-
-  <a class="skip-link" href="#main">Skip to main content</a>
-
-  <!-- Header / Navigation -->
+  <!-- ============================================================
+       NAVIGATION HEADER
+       ============================================================ -->
   <header class="site-header" id="header">
-    <div class="header-inner">
-      <a class="brand" href="#about" aria-label="Sikder Rakibul Islam Home">
-        <span class="rec-dot" aria-hidden="true"></span>
-        <span class="brand-text">SIKDER<span class="brand-accent">.</span></span>
-        <span class="brand-sub">STUDIO</span>
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Sikder Home">
+        Sikder<span class="brand-dot">.</span>
       </a>
 
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a class="nav-item magnetic" href="#about"><span>About</span></a>
-        <a class="nav-item magnetic" href="#skills"><span>Skills</span></a>
-        <a class="nav-item magnetic" href="#tools"><span>Tools</span></a>
-        <a class="nav-item magnetic" href="#work"><span>Work</span></a>
-        <a class="nav-item magnetic" href="#contact"><span>Contact</span></a>
+      <nav class="header-nav" aria-label="Main">
+        <a class="nav-link" href="#work">Work</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#contact">Contact</a>
       </nav>
 
-      <div class="header-tools">
-        <!-- Live Timecode Widget -->
-        <div class="timecode-badge" title="Local Time in India (IST)">
-          <span class="time-label">IST</span>
-          <span class="time-val" id="live-time">12:00:00 PM</span>
-        </div>
-
-        <!-- UI Audio Switcher -->
-        <button class="sound-toggle magnetic" id="sound-toggle" type="button" aria-label="Toggle UI Sound Effects" title="Toggle UI Sound">
-          <div class="sound-bars" aria-hidden="true">
-            <span class="bar bar-1"></span>
-            <span class="bar bar-2"></span>
-            <span class="bar bar-3"></span>
-            <span class="bar bar-4"></span>
-          </div>
-          <span class="sound-label">AUDIO OFF</span>
-        </button>
-
-        <!-- YouTube Link Button -->
-        <a class="button button--nav magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
-          <svg class="btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      <div class="header-actions">
+        <a class="btn-header-social" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
+          <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           <span>YouTube</span>
-          <svg class="icon-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-
-        <!-- Mobile Menu Toggle -->
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open Navigation Menu">
-          <span class="hamburger-line line-1"></span>
-          <span class="hamburger-line line-2"></span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Navigation Drawer -->
-    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
-      <div class="mobile-nav-inner">
-        <div class="mobile-nav-links">
-          <a class="mobile-nav-link" href="#about"><span>01</span>About Me</a>
-          <a class="mobile-nav-link" href="#skills"><span>02</span>Skills</a>
-          <a class="mobile-nav-link" href="#tools"><span>03</span>Software &amp; Tools</a>
-          <a class="mobile-nav-link" href="#work"><span>04</span>My Work</a>
-          <a class="mobile-nav-link" href="#contact"><span>05</span>Get in Touch</a>
-        </div>
-        <div class="mobile-nav-footer">
-          <a class="button button--glow" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
-            <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            <span>YouTube ↗</span>
-          </a>
-          <a class="button button--ghost" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">
-            <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            <span>Instagram ↗</span>
-          </a>
-        </div>
+        <a class="btn-header-social" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+          <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <main id="main">
+  <main>
     <!-- ============================================================
-         1. ABOUT ME (HERO / LANDING)
+         HERO SECTION (Matching Home-html exactly)
          ============================================================ -->
-    <section class="hero-section" id="about" aria-labelledby="about-title">
-      <div class="hero-container">
-        <!-- Left Column: Bio & Academic Details -->
-        <div class="hero-content">
-          <h1 class="hero-title" id="about-title">
-            <span class="title-line reveal-item">Sikder Rakibul</span>
-            <span class="title-line title-line--accent reveal-item">Islam<span class="dot-accent">.</span></span>
-          </h1>
+    <section id="top" class="wrap hero-section">
+      <div class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>Video editor <span style="color:#3A3A50">/</span> Thumbnail designer</span>
+      </div>
 
-          <p class="hero-subtitle reveal-item">
-            Video Editor, Graphics Designer &amp; Motion Graphics Artist — turning ideas into compelling visual experiences through editing, design, and animation.
+      <h1 class="hero-title">
+        I cut the video.<br>I design <span style="color:var(--accent)">the click.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        I turn raw footage into videos people finish, and design the frame that makes them press play.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn--primary" href="#work">
+          <span>Browse projects</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+        <a class="btn btn--outline" href="#about">Read my story</a>
+      </div>
+
+      <!-- Timeline graphic from Home-html -->
+      <div class="timeline-card" role="img" aria-label="Decorative video editing timeline with video track V1, graphics track V2, and audio track A1">
+        <div class="timeline-ruler">
+          <div class="timeline-track-head-spacer"></div>
+          <div class="timeline-ticks">
+            <span>00:00</span><span>00:10</span><span>00:20</span><span>00:30</span><span>00:40</span><span>00:50</span>
+          </div>
+        </div>
+
+        <div class="timeline-body">
+          <!-- V2 Track -->
+          <div class="timeline-track">
+            <div class="track-label">V2</div>
+            <div class="track-lane">
+              <div class="clip-spacer" style="flex:3"></div>
+              <div class="clip clip--title" style="flex:2">TITLE CARD</div>
+              <div class="clip-spacer" style="flex:2"></div>
+              <div class="clip clip--title" style="flex:3">LOWER THIRD</div>
+              <div class="clip-spacer" style="flex:2"></div>
+            </div>
+          </div>
+
+          <!-- V1 Track -->
+          <div class="timeline-track">
+            <div class="track-label">V1</div>
+            <div class="track-lane">
+              <div class="clip clip--aroll" style="flex:3">A-ROLL</div>
+              <div class="clip clip--broll" style="flex:2">B-ROLL</div>
+              <div class="clip clip--aroll" style="flex:4">A-ROLL</div>
+              <div class="clip clip--broll" style="flex:2">B-ROLL</div>
+              <div class="clip clip--aroll" style="flex:3">A-ROLL</div>
+            </div>
+          </div>
+
+          <!-- A1 Track -->
+          <div class="timeline-track">
+            <div class="track-label">A1</div>
+            <div class="track-lane">
+              <div class="clip--audio"></div>
+            </div>
+          </div>
+
+          <!-- Playhead Indicator -->
+          <div class="timeline-playhead-layer">
+            <div class="playhead-needle"></div>
+            <div class="playhead-badge">00:00:20:08</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WORK SECTION (Selected work / Edits and thumbnails)
+         ============================================================ -->
+    <section id="work" class="wrap work-section">
+      <div class="work-header">
+        <div class="work-header-text">
+          <span class="eyebrow" style="gap:0">Selected work</span>
+          <h2 class="sec-title">Edits and thumbnails</h2>
+        </div>
+
+        <!-- Filter Buttons (All work / Video edits / Thumbnails) -->
+        <div class="work-filters" role="group" aria-label="Filter projects">
+          <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All work</button>
+          <button class="filter-btn" type="button" data-filter="video" aria-pressed="false">Video edits</button>
+          <button class="filter-btn" type="button" data-filter="thumb" aria-pressed="false">Thumbnails</button>
+        </div>
+      </div>
+
+      <!-- Work Cards Grid -->
+      <div class="work-grid" id="work-grid" aria-live="polite">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT SECTION (Pacing, sound and a frame worth clicking)
+         ============================================================ -->
+    <section id="about" class="wrap about-section">
+      <!-- Left Column -->
+      <div class="about-col-left">
+        <div style="display:flex; flex-direction:column; gap:16px">
+          <span class="eyebrow" style="gap:0">About</span>
+          <h2 class="sec-title" style="text-wrap:balance">Pacing, sound and a frame worth clicking.</h2>
+        </div>
+
+        <!-- Portrait Card -->
+        <div class="about-photo-card">
+          <img class="about-portrait-img" src="assets/profile/sikder-rakibul-islam-editorial.png" alt="Sikder Rakibul Islam portrait" loading="lazy">
+          <div class="about-photo-tag">
+            <span class="eyebrow-dot" style="width:7px; height:7px"></span>
+            <span>SIKDER // 2026</span>
+          </div>
+        </div>
+
+        <!-- Academic Details Card -->
+        <div class="academic-box">
+          <div class="academic-row">
+            <span class="academic-kicker">ACADEMIC DEGREE</span>
+            <span class="academic-val">B.Voc. Multimedia &amp; Animation</span>
+          </div>
+          <div class="academic-row">
+            <span class="academic-kicker">INSTITUTION</span>
+            <span class="academic-val">Bharathiar University</span>
+          </div>
+          <div class="academic-row">
+            <span class="academic-kicker">STATUS</span>
+            <span class="academic-val">5th Semester</span>
+          </div>
+          <div class="academic-row">
+            <span class="academic-kicker">SPECIALIZATION</span>
+            <span class="academic-val">Video Editing &amp; Motion Design</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="about-col-right">
+        <div style="display:flex; flex-direction:column; gap:16px; max-width:620px">
+          <p class="about-lead">
+            I edit videos and design thumbnails for creators and brands. The thumbnail earns the click and the edit keeps people watching, so I treat both as one job.
           </p>
-
-          <div class="academic-sheet reveal-item">
-            <div class="sheet-row">
-              <span class="sheet-title">DEGREE</span>
-              <span class="sheet-val">B.Voc. Multimedia &amp; Animation</span>
-            </div>
-            <div class="sheet-row">
-              <span class="sheet-title">UNIVERSITY</span>
-              <span class="sheet-val">Bharathiar University</span>
-            </div>
-            <div class="sheet-row">
-              <span class="sheet-title">SEMESTER</span>
-              <span class="sheet-val">5th Semester</span>
-            </div>
-            <div class="sheet-row">
-              <span class="sheet-title">FOCUS</span>
-              <span class="sheet-val">Video Editing · Graphics Design · Motion Graphics</span>
-            </div>
-          </div>
-
-          <div class="hero-actions reveal-item">
-            <a class="button button--primary magnetic" href="#work" data-cursor="EXPLORE">
-              <span>View My Work</span>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1V13M7 13L1 7M7 13L13 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a class="button button--glass magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
-              <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              <span>YouTube ↗</span>
-            </a>
-            <a class="button button--ghost magnetic" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">
-              <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              <span>Instagram ↗</span>
-            </a>
-          </div>
+          <p class="about-copy">
+            Currently pursuing my degree in Multimedia and Animation while working on long-form documentaries, fast-paced YouTube journalism, and high-CTR thumbnail packaging. I balance story rhythm with analytical hooks so every project achieves its full viewer potential.
+          </p>
+          <p class="about-tools-label">
+            Tools: Premiere Pro · After Effects · Photoshop · Illustrator
+          </p>
         </div>
 
-        <!-- Right Column: Portrait -->
-        <div class="hero-visual reveal-item" data-tilt>
-          <div class="portrait-card">
-            <div class="portrait-frame">
-              <img class="portrait-img" src="assets/profile/sikder-rakibul-islam-editorial.png" alt="Sikder Rakibul Islam" width="700" height="900" loading="eager">
-              <div class="portrait-vignette"></div>
-              
-              <!-- Floating HUD Elements -->
-              <div class="hud-tag hud-tag--top">
-                <span class="hud-code">[PROD // 2026]</span>
-                <span class="hud-status">ACTIVE</span>
-              </div>
-              <div class="hud-tag hud-tag--bottom">
-                <span class="hud-title">SIKDER RAKIBUL ISLAM</span>
-                <span class="hud-subtitle">EDITOR · DESIGNER · MOTION</span>
-              </div>
-            </div>
-
-            <!-- Soft Backlight Reflection -->
-            <div class="portrait-glow" aria-hidden="true"></div>
+        <!-- Services Breakdown List -->
+        <div class="service-list">
+          <div class="service-row">
+            <h3 class="service-title">Long-form editing</h3>
+            <p class="service-desc">Cuts, pacing, sound and color for videos that run past the first minute.</p>
+          </div>
+          <div class="service-row">
+            <h3 class="service-title">Short-form editing</h3>
+            <p class="service-desc">Vertical edits for Shorts, Reels and TikTok, built around the first second.</p>
+          </div>
+          <div class="service-row">
+            <h3 class="service-title">Thumbnail design</h3>
+            <p class="service-desc">1280 × 720 frames with one clear subject, strong contrast and readable type.</p>
+          </div>
+          <div class="service-row">
+            <h3 class="service-title">Thumbnail series</h3>
+            <p class="service-desc">A consistent look across a channel's uploads, so viewers know it is yours.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ============================================================
-         2. MY SKILLS (Video Editing, Graphics Design, Motion Graphics)
+         CONTACT SECTION & FOOTER
          ============================================================ -->
-    <section class="section" id="skills" aria-labelledby="skills-title">
-      <div class="section-container">
-        <div class="section-badge-row">
-          <span class="section-badge">WHAT I DO</span>
-        </div>
-        <h2 class="section-title" id="skills-title">My Skills<span class="dot-accent">.</span></h2>
+    <section id="contact" class="wrap contact-section">
+      <span class="eyebrow" style="gap:0">Contact</span>
+      <h2 class="cta-title">Got footage that needs a cut?</h2>
 
-        <div class="skills-grid">
-          <!-- Video Editing -->
-          <div class="skill-card skill-card--ve" data-tilt>
-            <div class="skill-top">
-              <div class="skill-icon-badge skill-icon--ve">VE</div>
-              <span class="skill-level">PRIMARY CRAFT</span>
-            </div>
-            <h3 class="skill-name">Video Editing</h3>
-            <p class="skill-desc">
-              Cinematic documentary editing, rhythmic pacing, multi-track audio design, color grading, and narrative assembly for compelling visual storytelling.
-            </p>
-            <ul class="skill-features">
-              <li>Documentary &amp; Short Film Editing</li>
-              <li>Rhythmic Pacing &amp; Narrative Flow</li>
-              <li>Sound Design &amp; Color Grading</li>
-            </ul>
-          </div>
-
-          <!-- Graphics Design -->
-          <div class="skill-card skill-card--gd" data-tilt>
-            <div class="skill-top">
-              <div class="skill-icon-badge skill-icon--gd">GD</div>
-              <span class="skill-level">VISUAL DESIGN</span>
-            </div>
-            <h3 class="skill-name">Graphics Design</h3>
-            <p class="skill-desc">
-              High-impact YouTube thumbnail design, photo manipulation, visual identity creation, and editorial artwork for digital platforms.
-            </p>
-            <ul class="skill-features">
-              <li>YouTube Thumbnail Design</li>
-              <li>Photo Manipulation &amp; Compositing</li>
-              <li>Visual Identity &amp; Branding</li>
-            </ul>
-          </div>
-
-          <!-- Motion Graphics -->
-          <div class="skill-card skill-card--mg" data-tilt>
-            <div class="skill-top">
-              <div class="skill-icon-badge skill-icon--mg">MG</div>
-              <span class="skill-level">ANIMATION</span>
-            </div>
-            <h3 class="skill-name">Motion Graphics</h3>
-            <p class="skill-desc">
-              Kinetic typography, animated infographics, HUD overlays, and dynamic data visualization sequences for documentaries and digital content.
-            </p>
-            <ul class="skill-features">
-              <li>Kinetic Typography &amp; HUDs</li>
-              <li>Animated Infographics &amp; Charts</li>
-              <li>Visual Effects &amp; Compositing</li>
-            </ul>
-          </div>
-        </div>
+      <div class="contact-action-row">
+        <a class="contact-pill-primary" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Message on Instagram</span>
+        </a>
+        <a class="btn btn--outline" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <span>Visit YouTube Channel</span>
+        </a>
+        <span class="contact-subtext">Send a link to the footage and what you need.</span>
       </div>
-    </section>
 
-    <!-- ============================================================
-         3. MY TOOLS (Premiere Pro, After Effects, Photoshop, Illustrator)
-         ============================================================ -->
-    <section class="section skills-section" id="tools" aria-labelledby="tools-title">
-      <div class="section-container">
-        <div class="section-badge-row">
-          <span class="section-badge">SOFTWARE</span>
+      <footer class="site-footer">
+        <span>&copy; 2026 Sikder Rakibul Islam</span>
+        <div class="footer-social-links">
+          <a class="footer-social-link" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <span>YouTube</span>
+          </a>
+          <a class="footer-social-link" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span>Instagram</span>
+          </a>
         </div>
-        <h2 class="section-title" id="tools-title">My Tools<span class="dot-accent">.</span></h2>
-
-        <div class="skills-grid">
-          <!-- Premiere Pro -->
-          <div class="skill-card skill-card--pr" data-tilt>
-            <div class="skill-top">
-              <div class="skill-icon-badge skill-icon--pr">Pr</div>
-              <span class="skill-level">PRIMARY TIMELINE</span>
-            </div>
-            <h3 class="skill-name">Adobe Premiere Pro</h3>
-            <p class="skill-desc">
-              Multi-track timeline editing, audio ducking &amp; soundscapes, rhythmic cut pacing, color grade conversion, and documentary assembly.
-            </p>
-            <ul class="skill-features">
-              <li>Pacing &amp; Narrative Flow</li>
-              <li>Sound Design &amp; Multicam Sync</li>
-              <li>Color Correction &amp; LUT Profiling</li>
-            </ul>
-          </div>
-
-          <!-- After Effects -->
-          <div class="skill-card skill-card--ae" data-tilt>
-            <div class="skill-top">
-              <div class="skill-icon-badge skill-icon--ae">Ae</div>
-              <span class="skill-level">MOTION GRAPHICS</span>
-            </div>
-            <h3 class="skill-name">Adobe After Effects</h3>
-            <p class="skill-desc">
-              Kinetic typography, screen telemetry, space flight animations, custom visual effects, and animated charts &amp; infographic overlays.
-            </p>
-            <ul class="skill-features">
-              <li>Kinetic Typography &amp; HUDs</li>
-              <li>Motion Tracking &amp; Keyframing</li>
-              <li>Infographics &amp; Data Visuals</li>
-            </ul>
-          </div>
-
-          <!-- Photoshop -->
-          <div class="skill-card skill-card--ps" data-tilt>
-            <div class="skill-top">
-              <div class="skill-icon-badge skill-icon--ps">Ps</div>
-              <span class="skill-level">VISUAL DESIGN</span>
-            </div>
-            <h3 class="skill-name">Adobe Photoshop</h3>
-            <p class="skill-desc">
-              High-CTR YouTube thumbnail architecture, photo manipulation, matte blending, color tone matching, and key visual asset generation.
-            </p>
-            <ul class="skill-features">
-              <li>High-Impact Thumbnail Design</li>
-              <li>Advanced Matte Cutting</li>
-              <li>Composition &amp; Lighting Balance</li>
-            </ul>
-          </div>
-
-          <!-- Illustrator -->
-          <div class="skill-card skill-card--ai" data-tilt>
-            <div class="skill-top">
-              <div class="skill-icon-badge skill-icon--ai">Ai</div>
-              <span class="skill-level">VECTOR ASSETS</span>
-            </div>
-            <h3 class="skill-name">Adobe Illustrator</h3>
-            <p class="skill-desc">
-              Precision vector creation, editorial diagrams, maps, icons, and SVG assets prepared cleanly for animated After Effects import.
-            </p>
-            <ul class="skill-features">
-              <li>Vector Graphics &amp; Maps</li>
-              <li>AE Motion Pipeline Asset Prep</li>
-              <li>Custom Editorial Identity</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         4. MY WORK (Videos & Thumbnails Tabs)
-         ============================================================ -->
-    <section class="section work-section" id="work" aria-labelledby="work-title">
-      <div class="section-container">
-        <!-- Top Title & Rail -->
-        <div class="work-top-bar">
-          <div class="work-title-group">
-            <span class="work-badge">PORTFOLIO // 2026</span>
-            <h2 class="work-title" id="work-title">My Work<span class="dot-accent">.</span></h2>
-          </div>
-
-          <!-- Tabs: Videos vs Thumbnails -->
-          <div class="sketch-tabs" role="tablist" aria-label="Work category selection">
-            <button class="sketch-tab active magnetic" id="tab-videos" type="button" role="tab" aria-selected="true" data-work-tab="videos">
-              <span class="tab-icon">▶</span>
-              <span class="tab-text">Videos</span>
-              <span class="tab-count">(6)</span>
-            </button>
-            <button class="sketch-tab magnetic" id="tab-thumbnails" type="button" role="tab" aria-selected="false" data-work-tab="thumbnails">
-              <span class="tab-icon">✦</span>
-              <span class="tab-text">Thumbnail</span>
-              <span class="tab-count">(6)</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Full-width dividing rail -->
-        <div class="sketch-divider-rail" aria-hidden="true"></div>
-
-        <!-- 6-Card Rounded Grid (2 rows x 3 columns) -->
-        <div class="sketch-work-grid" id="sketch-work-grid" aria-live="polite">
-          <!-- Populated dynamically by JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         5. CONTACT
-         ============================================================ -->
-    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
-      <div class="section-container">
-        <div class="contact-card">
-          <div class="contact-glow" aria-hidden="true"></div>
-          <div class="contact-inner">
-            <span class="contact-kicker">GET IN TOUCH</span>
-            <h2 class="contact-title" id="contact-title">Want to work together?</h2>
-            <p class="contact-desc">
-              Currently accepting freelance video editing commissions, motion graphics projects, and creative collaborations.
-            </p>
-
-            <div class="contact-buttons">
-              <a class="button button--primary button--large magnetic" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer" data-cursor="CONNECT">
-                <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                <span>Message on Instagram ↗</span>
-              </a>
-              <a class="button button--glass button--large magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer" data-cursor="YOUTUBE">
-                <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                <span>Visit YouTube Channel ↗</span>
-              </a>
-            </div>
-
-            <div class="contact-meta-row">
-              <div class="channel-handle">
-                <span class="handle-label">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                  YOUTUBE
-                </span>
-                <span class="handle-val">@sikder_in</span>
-              </div>
-              <div class="channel-handle">
-                <span class="handle-label">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                  INSTAGRAM
-                </span>
-                <span class="handle-val">@sikder.in</span>
-              </div>
-              <div class="channel-handle">
-                <span class="handle-label">LOCATION</span>
-                <span class="handle-val">India (Available Worldwide)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </footer>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-top">
-        <div class="footer-brand-col">
-          <a class="brand brand--footer" href="#about">
-            <span class="brand-text">SIKDER<span class="brand-accent">.</span></span>
-          </a>
-        </div>
-
-        <div class="footer-links-col">
-          <a class="footer-link magnetic" href="#about">About</a>
-          <a class="footer-link magnetic" href="#skills">Skills</a>
-          <a class="footer-link magnetic" href="#tools">Tools</a>
-          <a class="footer-link magnetic" href="#work">Work</a>
-          <a class="footer-link magnetic" href="#contact">Contact</a>
-          <a class="footer-link magnetic" href="https://youtube.com/@sikder_in" target="_blank" rel="noopener noreferrer">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            <span>YouTube ↗</span>
-          </a>
-          <a class="footer-link magnetic" href="https://www.instagram.com/sikder.in/" target="_blank" rel="noopener noreferrer">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            <span>Instagram ↗</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <span class="copyright">© 2026 SIKDER RAKIBUL ISLAM. ALL RIGHTS RESERVED.</span>
-        <button class="back-to-top magnetic" id="back-to-top" type="button" aria-label="Return to top of page">
-          <span>BACK TO TOP</span>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 11V1M6 1L1 6M6 1L11 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-    </div>
-  </footer>
-
-  <!-- CINEMA THEATER DIALOG / MODAL -->
+  <!-- ============================================================
+       CINEMA THEATER & LIGHTBOX MODAL
+       ============================================================ -->
   <dialog class="cinema-dialog" id="cinema-dialog" aria-labelledby="dialog-project-title">
-    <div class="dialog-backdrop" data-close-dialog></div>
     <div class="dialog-window">
       <div class="dialog-header">
         <div class="dialog-breadcrumbs">
-          <span class="dialog-rec-dot"></span>
           <span class="dialog-badge" id="dialog-project-number">PROJECT // 01</span>
-          <span class="dialog-sep">/</span>
-          <span class="dialog-category" id="dialog-project-category">DOCUMENTARY</span>
+          <span>/</span>
+          <span id="dialog-project-category">DOCUMENTARY</span>
         </div>
-        <button class="dialog-close-btn magnetic" type="button" data-close-dialog aria-label="Close dialog">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <button class="dialog-close-btn" type="button" data-close-dialog aria-label="Close dialog">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
       </div>
 
-      <div class="dialog-body">
-        <!-- Interactive Player Area -->
-        <div class="dialog-screen" id="dialog-screen">
-          <div class="dialog-poster-wrapper" id="dialog-poster-wrapper">
-            <img class="dialog-poster" id="dialog-poster" src="" alt="Project Poster">
-            <button class="dialog-theater-play" id="dialog-theater-play" type="button" aria-label="Play Video">
-              <span class="play-ring"></span>
-              <span class="play-icon">▶</span>
-              <span class="play-text">START PLAYBACK</span>
-            </button>
-          </div>
-          <div class="dialog-iframe-container" id="dialog-iframe-container" hidden></div>
+      <div class="dialog-screen">
+        <div class="dialog-poster-wrapper" id="dialog-poster-wrapper">
+          <img class="dialog-poster" id="dialog-poster" src="" alt="Project Poster">
+          <button class="dialog-theater-play" id="dialog-theater-play" type="button" aria-label="Play Video">
+            <span class="play-ring-circle">▶</span>
+            <span class="play-text">START PLAYBACK</span>
+          </button>
         </div>
+        <div class="dialog-iframe-container" id="dialog-iframe-container" hidden></div>
+      </div>
 
-        <!-- Thumbnail Selector Tabs -->
-        <div class="dialog-thumbnails-strip" id="dialog-thumbnails-strip" hidden>
-          <span class="strip-label">THUMBNAIL ITERATIONS:</span>
-          <div class="strip-items" id="dialog-thumb-list"></div>
+      <div class="dialog-info-row">
+        <div>
+          <h2 class="dialog-title" id="dialog-project-title">Project Title</h2>
+          <p class="dialog-desc" id="dialog-project-desc">Project description goes here.</p>
         </div>
-
-        <!-- Details Info -->
-        <div class="dialog-info-row">
-          <div class="dialog-main-meta">
-            <h2 class="dialog-title" id="dialog-project-title">Project Title</h2>
-            <p class="dialog-desc" id="dialog-project-desc">Project description goes here.</p>
+        <div class="dialog-sidebar-meta">
+          <div>
+            <span class="meta-label">ROLE</span>
+            <p class="meta-val" id="dialog-project-role">Role info</p>
           </div>
-
-          <div class="dialog-sidebar-meta">
-            <div class="dialog-meta-block">
-              <span class="meta-label">ROLE &amp; EXECUTION</span>
-              <p class="meta-val" id="dialog-project-role">Role info</p>
-            </div>
-            <div class="dialog-meta-block">
-              <span class="meta-label">SOFTWARE USED</span>
-              <div class="dialog-tools-tags" id="dialog-project-tools"></div>
-            </div>
-            <div class="dialog-meta-block">
-              <a class="button button--primary button--full" id="dialog-external-btn" href="#" target="_blank" rel="noopener noreferrer">
-                <span id="dialog-external-icon" class="btn-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                </span>
-                <span id="dialog-external-text">Watch on YouTube ↗</span>
-              </a>
-            </div>
+          <div>
+            <span class="meta-label">SOFTWARE</span>
+            <div class="dialog-tools-tags" id="dialog-project-tools"></div>
           </div>
+          <a class="btn btn--primary" id="dialog-external-btn" href="#" target="_blank" rel="noopener noreferrer" style="min-height:44px; padding:0 18px; font-size:14px">
+            <span id="dialog-external-text">Watch on YouTube ↗</span>
+          </a>
         </div>
       </div>
     </div>
