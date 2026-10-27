@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIKDER. — Video Editor &amp; Thumbnail Designer</title>
+<!-- Tailwind CSS CDN with forms & container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Custom Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            dark: {
+              950: '#090a0b',
+              900: '#0d0e11',
+              850: '#121418',
+              800: '#171a1f',
+              700: '#232730',
+              600: '#343946'
+            },
+            accent: {
+              yellow: '#F5C725',
+              yellowHover: '#e0b51f'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles & Motion Keyframes -->
+<style data-purpose="base-styling">
+    body {
+      background-color: #0b0c0e;
+      color: #f3f4f6;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      overflow-x: hidden;
+    }
+    ::selection {
+      background-color: #F5C725;
+      color: #000000;
+    }
+
+    /* Ambient Spotlight Background Layer */
+    #ambient-spotlight {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background: radial-gradient(750px circle at var(--mouse-x, 50%) var(--mouse-y, 30%), rgba(245, 199, 37, 0.045), transparent 75%);
+      transition: opacity 0.4s ease;
+    }
+
+    /* Micro Motion & Reveals */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-item.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Ambient Pulsing Text Highlights */
+    @keyframes glow-pulse {
+      0%, 100% {
+        text-shadow: 0 0 12px rgba(245, 199, 37, 0.35), 0 0 28px rgba(245, 199, 37, 0.15);
+      }
+      50% {
+        text-shadow: 0 0 24px rgba(245, 199, 37, 0.65), 0 0 45px rgba(245, 199, 37, 0.35);
+      }
+    }
+    .animate-glow-text {
+      animation: glow-pulse 3.5s ease-in-out infinite;
+    }
+
+    /* Subtle Playhead Scanning & Breathing */
+    @keyframes playhead-breathe {
+      0%, 100% {
+        box-shadow: 0 0 8px #F5C725;
+        opacity: 0.92;
+      }
+      50% {
+        box-shadow: 0 0 18px #F5C725, 0 0 32px rgba(245, 199, 37, 0.6);
+        opacity: 1;
+      }
+    }
+    .playhead-glow {
+      animation: playhead-breathe 2.4s ease-in-out infinite;
+    }
+
+    /* Audio Waveform Live Pulse */
+    @keyframes wave-bounce {
+      0%, 100% { transform: scaleY(0.7); }
+      50% { transform: scaleY(1.35); }
+    }
+    .waveform-bar {
+      display: inline-block;
+      width: 2px;
+      background-color: #34d399;
+      border-radius: 9999px;
+      margin: 0 1px;
+      transform-origin: center;
+      animation: wave-bounce 1.6s ease-in-out infinite alternate;
+    }
+
+    /* Card Lift and Glow Utilities */
+    .card-motion {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .card-motion:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px -15px rgba(0, 0, 0, 0.7), 0 0 22px rgba(245, 199, 37, 0.1);
+    }
+
+    /* Button and Pill Micro-interaction */
+    .btn-motion {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .btn-motion:hover {
+      transform: translateY(-2px);
+    }
+    .btn-motion:active {
+      transform: translateY(0);
+    }
+
+    /* Accessibility: Respect Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-item {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .waveform-bar,
+      .animate-glow-text,
+      .playhead-glow {
+        animation: none !important;
+      }
+      .card-motion,
+      .btn-motion {
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="font-sans antialiased text-gray-100 selection:bg-accent-yellow selection:text-black relative">
+<!-- Ambient Spotlight Follower Layer -->
+<div aria-hidden="true" id="ambient-spotlight"></div>
+<!-- BEGIN: MainHeader -->
+<header class="w-full sticky top-0 z-50 backdrop-blur-md bg-[#0b0c0e]/85 border-b border-white/5 transition-all duration-300">
+<div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+<!-- Site Logo / Wordmark -->
+<a class="text-xl font-black tracking-tight text-white flex items-center gap-0.5 hover:opacity-90 hover:scale-[1.02] transition-transform duration-200" data-purpose="brand-logo" href="#">
+        SIKDER<span class="text-accent-yellow text-2xl leading-none animate-pulse">.</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="flex items-center space-x-8 text-sm font-medium text-gray-400" data-purpose="desktop-nav">
+<a class="hover:text-white hover:-translate-y-0.5 transition-all duration-200" href="#work">Work</a>
+<a class="hover:text-white hover:-translate-y-0.5 transition-all duration-200" href="#about">About</a>
+<a class="hover:text-white hover:-translate-y-0.5 transition-all duration-200" href="#contact">Contact</a>
+</nav>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-6xl mx-auto px-6 relative z-10">
+<!-- BEGIN: HeroSection -->
+<section class="pt-16 pb-20 md:pt-24 md:pb-28 reveal-item" data-purpose="hero">
+<div class="max-w-3xl">
+<!-- Sub-kicker / Category Tag -->
+<div class="inline-flex items-center gap-2 mb-6 text-xs uppercase tracking-widest font-semibold text-gray-400 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5 backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-accent-yellow inline-block animate-pulse shadow-[0_0_8px_#F5C725]"></span>
+<span class="">VIDEO EDITOR / THUMBNAIL DESIGNER</span>
+</div>
+<!-- Big Bold Title -->
+<h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-6">
+          I cut the video.<br/>
+          I design <span class="text-accent-yellow inline-block animate-glow-text">the click.</span>
+</h1>
+<!-- Supporting Lead Text -->
+<p class="text-base sm:text-lg text-gray-400 leading-relaxed max-w-xl mb-9">
+          I turn raw footage into videos people finish, and design the frame that makes them press play.
+        </p>
+<!-- CTA Action Buttons -->
+<div class="flex flex-wrap items-center gap-4">
+<a class="btn-motion inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-accent-yellow text-black font-bold text-sm hover:bg-accent-yellowHover transition duration-200 shadow-lg shadow-accent-yellow/20 hover:shadow-accent-yellow/35" href="#work">
+            Browse projects →
+          </a>
+<a class="btn-motion inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-[#16181d] text-gray-200 font-semibold text-sm border border-white/10 hover:border-white/20 hover:bg-[#1f2229] transition duration-200 shadow-md" href="#about">About me</a>
+</div>
+</div>
+<!-- BEGIN: VideoEditingTimelineMockup -->
+<!-- Visual representation of an editing workspace timeline -->
+<div class="mt-16 w-full rounded-2xl bg-[#111317] border border-white/10 p-4 md:p-6 shadow-2xl relative overflow-hidden group hover:border-accent-yellow/30 transition-all duration-500" data-purpose="timeline-workspace">
+<!-- Ambient internal glow -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-accent-yellow/5 rounded-full blur-3xl pointer-events-none group-hover:bg-accent-yellow/10 transition-all duration-700"></div>
+<!-- Timeline Header Bar: Time Ruler -->
+<div class="relative w-full border-b border-white/10 pb-3 flex justify-between text-[11px] font-mono text-gray-500 select-none">
+<span class="w-12 text-left">00:00</span>
+<span class="w-12 text-center">00:10</span>
+<span class="w-12 text-center text-accent-yellow font-bold drop-shadow-[0_0_6px_rgba(245,199,37,0.5)]">00:20</span>
+<span class="w-12 text-center">00:30</span>
+<span class="w-12 text-center">00:40</span>
+<span class="w-12 text-right">00:50</span>
+<!-- Current Playhead Indicator Pin -->
+<div class="absolute left-[44%] -top-1 transform -translate-x-1/2 flex flex-col items-center z-20 pointer-events-none">
+<span class="bg-accent-yellow text-black text-[9px] font-bold px-1.5 py-0.5 rounded shadow-lg">00:20:08</span>
+<div class="w-[1.5px] h-32 md:h-36 bg-accent-yellow playhead-glow"></div>
+</div>
+</div>
+<!-- Tracks Container -->
+<div class="pt-4 space-y-2.5 text-xs font-mono select-none">
+<!-- Track V2: Motion Graphics / Overlays -->
+<div class="flex items-center gap-3 group/track hover:bg-white/[0.02] rounded px-1 -mx-1 transition-colors">
+<span class="w-7 text-[10px] font-semibold text-gray-500 uppercase">V2</span>
+<div class="flex-1 h-7 rounded bg-[#171a22] flex items-center px-2 gap-2 relative overflow-hidden">
+<div class="w-1/4"></div>
+<!-- Clip: Title Card -->
+<div class="w-28 h-5 rounded bg-indigo-900/60 border border-indigo-500/40 text-indigo-200 text-[9px] flex items-center px-2 font-medium truncate hover:border-indigo-400 transition-colors">
+                TITLE CARD
+              </div>
+<div class="w-20"></div>
+<!-- Clip: Lower Third -->
+<div class="w-36 h-5 rounded bg-indigo-900/60 border border-indigo-500/40 text-indigo-200 text-[9px] flex items-center px-2 font-medium truncate hover:border-indigo-400 transition-colors">
+                LOWER THIRD
+              </div>
+</div>
+</div>
+<!-- Track V1: Main Video Clips -->
+<div class="flex items-center gap-3 group/track hover:bg-white/[0.02] rounded px-1 -mx-1 transition-colors">
+<span class="w-7 text-[10px] font-semibold text-gray-500 uppercase">V1</span>
+<div class="flex-1 h-8 rounded bg-[#171a22] flex items-center gap-1.5 p-1 relative overflow-hidden">
+<!-- Clip 1: A-ROLL -->
+<div class="w-[28%] h-full rounded bg-[#27356d] border border-blue-400/30 text-blue-200 text-[10px] font-semibold flex items-center px-2 hover:border-blue-400/60 transition-colors">
+                A-ROLL
+              </div>
+<!-- Clip 2: B-ROLL -->
+<div class="w-[18%] h-full rounded bg-[#1a4a4d] border border-teal-400/30 text-teal-200 text-[10px] font-semibold flex items-center px-2 hover:border-teal-400/60 transition-colors">
+                B-ROLL
+              </div>
+<!-- Clip 3: A-ROLL -->
+<div class="w-[22%] h-full rounded bg-[#27356d] border border-blue-400/30 text-blue-200 text-[10px] font-semibold flex items-center px-2 hover:border-blue-400/60 transition-colors">
+                A-ROLL
+              </div>
+<!-- Clip 4: B-ROLL -->
+<div class="w-[16%] h-full rounded bg-[#1a4a4d] border border-teal-400/30 text-teal-200 text-[10px] font-semibold flex items-center px-2 hover:border-teal-400/60 transition-colors">
+                B-ROLL
+              </div>
+<!-- Clip 5: A-ROLL -->
+<div class="flex-1 h-full rounded bg-[#27356d] border border-blue-400/30 text-blue-200 text-[10px] font-semibold flex items-center px-2 hover:border-blue-400/60 transition-colors">
+                A-ROLL
+              </div>
+</div>
+</div>
+<!-- Track A1: Audio Waveform -->
+<div class="flex items-center gap-3 group/track hover:bg-white/[0.02] rounded px-1 -mx-1 transition-colors">
+<span class="w-7 text-[10px] font-semibold text-gray-500 uppercase">A1</span>
+<div class="flex-1 h-8 rounded bg-[#171a22] flex items-center px-2 overflow-hidden border border-emerald-950/40">
+<!-- Stylized animated procedural waveform bars -->
+<div class="flex items-center w-full justify-between h-4 opacity-80 overflow-hidden">
+<span class="waveform-bar h-2" style="animation-delay: 0.1s"></span><span class="waveform-bar h-4" style="animation-delay: 0.3s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.5s"></span><span class="waveform-bar h-1" style="animation-delay: 0.2s"></span>
+<span class="waveform-bar h-4" style="animation-delay: 0.4s"></span><span class="waveform-bar h-3" style="animation-delay: 0.6s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.15s"></span><span class="waveform-bar h-4" style="animation-delay: 0.35s"></span>
+<span class="waveform-bar h-1" style="animation-delay: 0.25s"></span><span class="waveform-bar h-3" style="animation-delay: 0.55s"></span>
+<span class="waveform-bar h-4" style="animation-delay: 0.45s"></span><span class="waveform-bar h-2" style="animation-delay: 0.65s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.2s"></span><span class="waveform-bar h-4" style="animation-delay: 0.5s"></span>
+<span class="waveform-bar h-1" style="animation-delay: 0.1s"></span><span class="waveform-bar h-2" style="animation-delay: 0.4s"></span>
+<span class="waveform-bar h-4" style="animation-delay: 0.3s"></span><span class="waveform-bar h-3" style="animation-delay: 0.7s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.25s"></span><span class="waveform-bar h-4" style="animation-delay: 0.6s"></span>
+<span class="waveform-bar h-1" style="animation-delay: 0.15s"></span><span class="waveform-bar h-3" style="animation-delay: 0.45s"></span>
+<span class="waveform-bar h-4" style="animation-delay: 0.35s"></span><span class="waveform-bar h-2" style="animation-delay: 0.55s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.2s"></span><span class="waveform-bar h-4" style="animation-delay: 0.65s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.1s"></span><span class="waveform-bar h-1" style="animation-delay: 0.3s"></span>
+<span class="waveform-bar h-4" style="animation-delay: 0.5s"></span><span class="waveform-bar h-3" style="animation-delay: 0.4s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.25s"></span><span class="waveform-bar h-4" style="animation-delay: 0.6s"></span>
+<span class="waveform-bar h-1" style="animation-delay: 0.15s"></span><span class="waveform-bar h-3" style="animation-delay: 0.35s"></span>
+<span class="waveform-bar h-4" style="animation-delay: 0.55s"></span><span class="waveform-bar h-2" style="animation-delay: 0.45s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.2s"></span><span class="waveform-bar h-4" style="animation-delay: 0.65s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.1s"></span><span class="waveform-bar h-3" style="animation-delay: 0.3s"></span>
+<span class="waveform-bar h-4" style="animation-delay: 0.5s"></span><span class="waveform-bar h-1" style="animation-delay: 0.25s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.4s"></span><span class="waveform-bar h-4" style="animation-delay: 0.6s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.35s"></span><span class="waveform-bar h-2" style="animation-delay: 0.15s"></span>
+<span class="waveform-bar h-4" style="animation-delay: 0.55s"></span><span class="waveform-bar h-1" style="animation-delay: 0.45s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.2s"></span><span class="waveform-bar h-4" style="animation-delay: 0.65s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.1s"></span><span class="waveform-bar h-4" style="animation-delay: 0.3s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.5s"></span><span class="waveform-bar h-1" style="animation-delay: 0.25s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.4s"></span><span class="waveform-bar h-4" style="animation-delay: 0.6s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.35s"></span><span class="waveform-bar h-4" style="animation-delay: 0.15s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.55s"></span><span class="waveform-bar h-1" style="animation-delay: 0.45s"></span>
+<span class="waveform-bar h-4" style="animation-delay: 0.2s"></span><span class="waveform-bar h-3" style="animation-delay: 0.65s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.1s"></span><span class="waveform-bar h-4" style="animation-delay: 0.3s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.5s"></span><span class="waveform-bar h-1" style="animation-delay: 0.25s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.4s"></span><span class="waveform-bar h-4" style="animation-delay: 0.6s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.35s"></span><span class="waveform-bar h-4" style="animation-delay: 0.15s"></span>
+<span class="waveform-bar h-2" style="animation-delay: 0.55s"></span><span class="waveform-bar h-1" style="animation-delay: 0.45s"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- END: VideoEditingTimelineMockup -->
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: SelectedWorkSection -->
+<!-- BEGIN: SkillsSection -->
+<section class="py-16 md:py-24 border-t border-white/5 reveal-item" data-purpose="skills-showcase" id="skills">
+<!-- Section Header -->
+<div class="mb-12">
+<div class="inline-flex items-center gap-2 mb-3 text-xs uppercase tracking-widest font-mono font-bold text-accent-yellow">
+<span class="w-2 h-2 rounded-full bg-accent-yellow inline-block animate-pulse shadow-[0_0_8px_#F5C725]"></span>
+<span class="">// CORE CRAFT &amp; SKILLS</span>
+</div>
+<h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+      Built for retention. <span class="text-accent-yellow inline-block animate-glow-text">Engineered for the click.</span>
+</h2>
+</div>
+<!-- Two Software-Inspired Interactive Skill Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-7"><!-- Skill Card 1: Video Editing (NLE Software & Inspector Mockup) -->
+<div class="card-motion rounded-2xl bg-[#111317] border border-white/10 p-5 md:p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between h-full group hover:border-accent-yellow/40">
+<div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 pb-4 border-b border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-accent-yellow/10 border border-accent-yellow/40 flex items-center justify-center text-accent-yellow shadow-inner shrink-0 group-hover:scale-110 group-hover:bg-accent-yellow/20 transition-all duration-300" title="Video Editing">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zm-6.5 12.5v-5l4.5 2.5-4.5 2.5z"></path></svg>
+</div>
+<div>
+<h3 class="text-xl md:text-2xl font-extrabold text-white tracking-tight leading-none group-hover:text-accent-yellow transition-colors duration-300">Video Editing</h3>
+</div>
+</div>
+<div class="flex items-center gap-2 select-none shrink-0">
+<div class="btn-motion flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-[#16181d] border border-[#9999FF]/40 shadow-[0_0_12px_rgba(153,153,255,0.25)] hover:border-[#9999FF] hover:shadow-[0_0_18px_rgba(153,153,255,0.5)]">
+<div class="w-6 h-6 rounded bg-gradient-to-br from-[#000080] to-[#00005b] border border-[#9999FF]/50 flex items-center justify-center text-[#9999FF] font-black text-xs shadow-[0_0_8px_rgba(153,153,255,0.5)]">Pr</div>
+<div class="flex flex-col"><span class="text-xs font-bold text-white leading-tight">Premiere Pro</span></div>
+</div>
+<div class="btn-motion flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-[#16181d] border border-[#cf96fd]/40 shadow-[0_0_12px_rgba(207,150,253,0.25)] hover:border-[#cf96fd] hover:shadow-[0_0_18px_rgba(207,150,253,0.5)]">
+<div class="w-6 h-6 rounded bg-gradient-to-br from-[#2d0047] to-[#16002b] border border-[#cf96fd]/50 flex items-center justify-center text-[#cf96fd] font-black text-xs shadow-[0_0_8px_rgba(207,150,253,0.5)]">Ae</div>
+<div class="flex flex-col"><span class="text-xs font-bold text-white leading-tight">After Effects</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Realistic Video Editing Suite Mockup -->
+<div class="rounded-xl bg-[#0d0e11] border border-white/10 overflow-hidden shadow-2xl select-none text-xs font-mono flex-1 flex flex-col justify-between group-hover:border-white/20 transition-colors">
+<!-- Window Top Chrome -->
+<div class="bg-[#16181d] px-3 py-2 border-b border-white/10 flex items-center justify-between shrink-0">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-accent-yellow/80 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80 inline-block"></span>
+<span class="ml-2 text-[10px] text-gray-400 font-sans tracking-wide">Final_Cut_Master_v4.prproj</span>
+</div>
+<div class="flex items-center gap-3 text-[10px] text-gray-400">
+<span class="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-accent-yellow font-bold">4K · 60fps</span>
+<span class="text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>REC 709</span>
+</div>
+</div>
+<!-- Main Editor Interface Area: Sidebar Tools + Program Monitor -->
+<div class="flex border-b border-white/10 bg-[#121418] flex-1">
+<!-- Micro Tool Palette -->
+<div class="w-9 py-2 px-1 border-r border-white/10 bg-[#16181d] flex flex-col items-center gap-2 text-gray-400 shrink-0">
+<button class="w-6 h-6 rounded bg-accent-yellow/15 text-accent-yellow border border-accent-yellow/30 flex items-center justify-center hover:scale-110 transition-transform" title="Selection Tool (V)">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24"><path d="M4 0l16 12.279-6.951 1.17 4.325 8.817-3.596 1.734-4.35-8.879-5.428 5.428z"></path></svg>
+</button>
+<button class="w-6 h-6 rounded hover:bg-white/5 text-gray-400 hover:text-white flex items-center justify-center hover:scale-110 transition-transform" title="Razor Blade (C)">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24"><path d="M9.64 7.64c.23-.5.36-1.05.36-1.64 0-2.21-1.79-4-4-4S2 3.79 2 6s1.79 4 4 4c.59 0 1.14-.13 1.64-.36L10 12l-2.36 2.36C7.14 14.13 6.59 14 6 14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4c0-.59-.13-1.14-.36-1.64L12 14l7 7h3v-1L9.64 7.64z"></path></svg>
+</button>
+<button class="w-6 h-6 rounded hover:bg-white/5 text-gray-400 hover:text-white flex items-center justify-center hover:scale-110 transition-transform" title="Ripple Edit (B)">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24"><path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm1 5h-4v3H3l5 5 5-5h-3v-3zm5-5v4h3v3l5-5-5-5v3h-3z"></path></svg>
+</button>
+<button class="w-6 h-6 rounded hover:bg-white/5 text-gray-400 hover:text-white flex items-center justify-center hover:scale-110 transition-transform" title="Slip Tool (Y)">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24"><path d="M6 5h2v14H6zm10 0h2v14h-2zM9 13l3-3v2h2V8l3 3-3 3v-2h-2v2z"></path></svg>
+</button>
+</div>
+<!-- Program Monitor -->
+<div class="flex-1 p-2.5 flex flex-col items-center justify-center bg-[#0a0b0d]">
+<div class="w-full aspect-[16/9] rounded bg-[#131722] border border-white/10 relative overflow-hidden flex items-center justify-center shadow-inner group/monitor">
+<!-- Cinematic footage background with color grade -->
+<div class="absolute inset-0 bg-gradient-to-tr from-[#0a1128] via-[#1a233e] to-[#2e153b] opacity-90"></div>
+<div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-accent-yellow/20 blur-xl group-hover/monitor:scale-125 transition-transform duration-700"></div>
+<div class="absolute left-1/4 -top-8 w-28 h-28 rounded-full bg-indigo-500/20 blur-xl group-hover/monitor:scale-125 transition-transform duration-700"></div>
+<!-- Safe margin guides & rule-of-thirds grid -->
+<div class="absolute inset-2 border border-white/10 border-dashed rounded pointer-events-none"></div>
+<div class="absolute inset-0 grid grid-cols-3 pointer-events-none opacity-15">
+<div class="border-r border-white"></div>
+<div class="border-r border-white"></div>
+<div></div>
+</div>
+<!-- Subject Silhouette with Rim Lighting -->
+<div class="relative z-10 flex flex-col items-center justify-center group-hover/monitor:scale-105 transition-transform duration-500">
+<div class="w-14 h-14 rounded-full bg-[#1b2234] border-2 border-accent-yellow/60 shadow-[0_0_15px_rgba(245,199,37,0.35)] flex items-center justify-center">
+<svg class="w-8 h-8 text-accent-yellow fill-current" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+</div>
+<div class="mt-1 px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm border border-accent-yellow/30 text-[9px] font-mono text-accent-yellow">
+              KEY SUBJECT · HOOK
+            </div>
+</div>
+<!-- Monitor HUD Overlays -->
+<div class="absolute top-2 left-2 flex items-center gap-1.5 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[9px] text-gray-300 border border-white/10">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+<span class="">00:03:14:18</span>
+</div>
+<div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-1.5 py-0.5 rounded text-[9px] text-gray-400 border border-white/10">
+            FIT · 100%
+          </div>
+<!-- Transport Bar -->
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded border border-white/10 text-gray-300 text-[10px]">
+<span class="text-[9px] text-accent-yellow font-bold">IN 00:00:00</span>
+<div class="flex items-center gap-2.5 text-gray-300">
+<button class="hover:text-white hover:scale-110 transition-transform"><svg class="w-3 h-3 fill-current" viewbox="0 0 24 24"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"></path></svg></button>
+<button class="w-5 h-5 rounded-full bg-accent-yellow text-black flex items-center justify-center font-bold shadow hover:scale-115 transition-transform"><svg class="w-2.5 h-2.5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></button>
+<button class="hover:text-white hover:scale-110 transition-transform"><svg class="w-3 h-3 fill-current" viewbox="0 0 24 24"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"></path></svg></button>
+</div>
+<span class="text-[9px] text-gray-400">OUT 00:08:42</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Precision Multi-Track Timeline -->
+<div class="p-3 bg-[#111317] space-y-1.5 relative overflow-hidden shrink-0">
+<!-- Active Glowing Playhead Needle -->
+<div class="absolute left-[42%] top-0 bottom-0 w-[2px] bg-accent-yellow playhead-glow z-30 pointer-events-none flex flex-col items-center">
+<div class="w-2.5 h-2.5 bg-accent-yellow rotate-45 -mt-1 shadow"></div>
+<div class="mt-1 px-1 py-0.5 rounded bg-accent-yellow text-black text-[8px] font-bold tracking-tight shadow">00:03:14</div>
+</div>
+<!-- Track V2: Overlay & Motion Graphics -->
+<div class="flex items-center gap-2">
+<span class="w-5 text-[9px] font-bold text-gray-500 text-right">V2</span>
+<div class="flex-1 h-5 rounded bg-[#171a22] flex items-center gap-1.5 px-1 overflow-hidden border border-white/5 relative hover:border-white/15 transition-colors">
+<div class="w-[15%]"></div>
+<div class="w-[28%] h-3.5 rounded bg-[#8b5cf6]/40 border border-[#cf96fd]/50 text-[#cf96fd] text-[8px] font-semibold flex items-center justify-between px-1.5 truncate">
+<span class="">TITLE_HOOK</span>
+<span class="text-[7px] opacity-70">FX</span>
+</div>
+<div class="w-[18%]"></div>
+<div class="w-[24%] h-3.5 rounded bg-[#1a4a4d] border border-teal-400/40 text-teal-200 text-[8px] font-semibold flex items-center px-1.5 truncate">
+<span class="">B-ROLL_4K</span>
+</div>
+</div>
+</div>
+<!-- Track V1: Main A-Roll talking head cuts -->
+<div class="flex items-center gap-2">
+<span class="w-5 text-[9px] font-bold text-gray-500 text-right">V1</span>
+<div class="flex-1 h-6 rounded bg-[#171a22] flex items-center gap-0.5 p-0.5 overflow-hidden border border-white/5 relative hover:border-white/15 transition-colors">
+<div class="w-[22%] h-full rounded bg-[#27356d] border border-blue-400/40 text-blue-200 text-[9px] font-semibold flex items-center px-1.5 justify-between">
+<span class="truncate">A-ROLL_01</span>
+<span class="w-1 h-1 bg-blue-300 rounded-full"></span>
+</div>
+<div class="w-[20%] h-full rounded bg-[#203254] border border-blue-400/40 text-blue-200 text-[9px] font-semibold flex items-center px-1.5 justify-between">
+<span class="truncate">A-ROLL_02</span>
+<span class="w-1 h-1 bg-accent-yellow rounded-full"></span>
+</div>
+<div class="w-[26%] h-full rounded bg-[#27356d] border border-blue-400/40 text-blue-200 text-[9px] font-semibold flex items-center px-1.5 justify-between">
+<span class="truncate">A-ROLL_03</span>
+<span class="w-1 h-1 bg-blue-300 rounded-full"></span>
+</div>
+<div class="flex-1 h-full rounded bg-[#203254] border border-blue-400/40 text-blue-200 text-[9px] font-semibold flex items-center px-1.5 truncate">
+<span class="">A-ROLL_04</span>
+</div>
+</div>
+</div>
+<!-- Track A1: Voice Dialogue & Soundwaves -->
+<div class="flex items-center gap-2">
+<span class="w-5 text-[9px] font-bold text-gray-500 text-right">A1</span>
+<div class="flex-1 h-5 rounded bg-[#171a22] flex items-center px-1.5 overflow-hidden border border-emerald-950/40">
+<div class="flex items-center w-full justify-between h-3 opacity-90">
+<span class="waveform-bar h-1.5" style="animation-delay: 0.1s"></span><span class="waveform-bar h-3" style="animation-delay: 0.3s"></span><span class="waveform-bar h-2" style="animation-delay: 0.5s"></span><span class="waveform-bar h-1" style="animation-delay: 0.2s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.4s"></span><span class="waveform-bar h-2.5" style="animation-delay: 0.6s"></span><span class="waveform-bar h-1.5" style="animation-delay: 0.15s"></span><span class="waveform-bar h-3" style="animation-delay: 0.35s"></span>
+<span class="waveform-bar h-1" style="animation-delay: 0.25s"></span><span class="waveform-bar h-2.5" style="animation-delay: 0.55s"></span><span class="waveform-bar h-3" style="animation-delay: 0.45s"></span><span class="waveform-bar h-1.5" style="animation-delay: 0.65s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.2s"></span><span class="waveform-bar h-2" style="animation-delay: 0.5s"></span><span class="waveform-bar h-1" style="animation-delay: 0.1s"></span><span class="waveform-bar h-3" style="animation-delay: 0.4s"></span>
+<span class="waveform-bar h-2.5" style="animation-delay: 0.3s"></span><span class="waveform-bar h-1.5" style="animation-delay: 0.7s"></span><span class="waveform-bar h-3" style="animation-delay: 0.25s"></span><span class="waveform-bar h-2" style="animation-delay: 0.6s"></span>
+<span class="waveform-bar h-1.5" style="animation-delay: 0.15s"></span><span class="waveform-bar h-3" style="animation-delay: 0.45s"></span><span class="waveform-bar h-2.5" style="animation-delay: 0.35s"></span><span class="waveform-bar h-1" style="animation-delay: 0.55s"></span>
+<span class="waveform-bar h-3" style="animation-delay: 0.2s"></span><span class="waveform-bar h-1.5" style="animation-delay: 0.65s"></span><span class="waveform-bar h-2" style="animation-delay: 0.1s"></span><span class="waveform-bar h-3" style="animation-delay: 0.4s"></span>
+</div>
+</div>
+</div>
+<!-- Track A2: SFX & Music Bed -->
+<div class="flex items-center gap-2">
+<span class="w-5 text-[9px] font-bold text-gray-500 text-right">A2</span>
+<div class="flex-1 h-4 rounded bg-[#171a22] flex items-center px-1 gap-1 overflow-hidden border border-white/5">
+<div class="w-16 h-2.5 rounded bg-amber-500/20 border border-amber-500/30 text-[7px] text-amber-300 font-sans px-1 truncate flex items-center">WHOOSH</div>
+<div class="w-8"></div>
+<div class="w-20 h-2.5 rounded bg-amber-500/20 border border-amber-500/30 text-[7px] text-amber-300 font-sans px-1 truncate flex items-center">RISER_SFX</div>
+<div class="flex-1 h-2 rounded bg-accent-yellow/10 border border-accent-yellow/20"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Skill Card 2: Thumbnail Design (Photoshop & High-CTR Canvas Mockup) -->
+<div class="card-motion rounded-2xl bg-[#111317] border border-white/10 p-5 md:p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between h-full group hover:border-accent-yellow/40">
+<div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 pb-4 border-b border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-accent-yellow/10 border border-accent-yellow/40 flex items-center justify-center text-accent-yellow shadow-inner shrink-0 group-hover:scale-110 group-hover:bg-accent-yellow/20 transition-all duration-300" title="Thumbnail Design">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M21 3H3C1.9 3 1 3.9 1 5v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h16c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-8.5-4.5l-2.5 3.01L7.25 15l-3.25 4h16l-5.5-7.5z"></path><circle cx="8.5" cy="9.5" r="1.5"></circle></svg>
+</div>
+<div>
+<h3 class="text-xl md:text-2xl font-extrabold text-white tracking-tight leading-none group-hover:text-accent-yellow transition-colors duration-300">Thumbnail Design</h3>
+</div>
+</div>
+<div class="flex items-center gap-2 select-none shrink-0">
+<div class="btn-motion flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-[#16181d] border border-[#31A8FF]/40 shadow-[0_0_12px_rgba(49,168,255,0.25)] hover:border-[#31A8FF] hover:shadow-[0_0_18px_rgba(49,168,255,0.5)]">
+<div class="w-6 h-6 rounded bg-gradient-to-br from-[#001d3d] to-[#000c1a] border border-[#31A8FF]/50 flex items-center justify-center text-[#31A8FF] font-black text-xs shadow-[0_0_8px_rgba(49,168,255,0.5)]">Ps</div>
+<div class="flex flex-col"><span class="text-xs font-bold text-white leading-tight">Photoshop</span></div>
+</div>
+<div class="btn-motion flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-[#16181d] border border-[#FF9A00]/40 shadow-[0_0_12px_rgba(255,154,0,0.25)] hover:border-[#FF9A00] hover:shadow-[0_0_18px_rgba(255,154,0,0.5)]">
+<div class="w-6 h-6 rounded bg-gradient-to-br from-[#331b00] to-[#1a0d00] border border-[#FF9A00]/50 flex items-center justify-center text-[#FF9A00] font-black text-xs shadow-[0_0_8px_rgba(255,154,0,0.5)]">Ai</div>
+<div class="flex flex-col"><span class="text-xs font-bold text-white leading-tight">Illustrator</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Realistic Photoshop/Canvas Artboard Workspace -->
+<div class="rounded-xl bg-[#0d0e11] border border-white/10 overflow-hidden shadow-2xl select-none text-xs font-mono flex-1 flex flex-col justify-between group-hover:border-white/20 transition-colors">
+<!-- App Header & Workspace Breadcrumb -->
+<div class="bg-[#16181d] px-3 py-2 border-b border-white/10 flex items-center justify-between shrink-0">
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-accent-yellow/80 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80 inline-block"></span>
+</div>
+<span class="text-[10px] text-gray-400 font-sans ml-1">High_CTR_Thumbnail_1280x720.psd</span>
+</div>
+<div class="flex items-center gap-2 text-[10px]">
+<span class="text-gray-400">Zoom: <strong class="text-white">66.7%</strong></span>
+<span class="px-1.5 py-0.5 rounded bg-accent-yellow/10 border border-accent-yellow/30 text-accent-yellow font-bold">RGB · 8bit</span>
+</div>
+</div>
+<!-- Main Canvas Area with Floating Tools & Layers Inspector -->
+<div class="relative p-2.5 bg-[#0a0b0d] flex items-center justify-center overflow-hidden flex-1 border-b border-white/10">
+<!-- Photoshop Micro Toolbar on left edge -->
+<div class="absolute left-2.5 top-2.5 bottom-2.5 w-7 rounded-lg bg-[#16181d]/90 backdrop-blur-md border border-white/10 z-20 flex flex-col items-center py-1.5 gap-2 text-gray-400 shrink-0">
+<button class="w-5 h-5 rounded hover:bg-white/10 flex items-center justify-center text-accent-yellow hover:scale-110 transition-transform" title="Move (V)">
+<svg class="w-3 h-3 fill-current" viewbox="0 0 24 24"><path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm1 5h-4v3H3l5 5 5-5h-3v-3zm5-5v4h3v3l5-5-5-5v3h-3z"></path></svg>
+</button>
+<button class="w-5 h-5 rounded bg-accent-yellow/20 text-accent-yellow border border-accent-yellow/40 flex items-center justify-center hover:scale-110 transition-transform" title="Selection (M)">
+<svg class="w-3 h-3 fill-current" viewbox="0 0 24 24"><path d="M3 3h4v2H5v2H3V3zm14 0h4v4h-2V5h-2V3zM3 17h2v2h2v2H3v-4zm16 2h-2v2h4v-4h-2v2z"></path></svg>
+</button>
+<button class="w-5 h-5 rounded hover:bg-white/10 flex items-center justify-center hover:scale-110 transition-transform" title="Pen Tool (P)">
+<svg class="w-3 h-3 fill-current" viewbox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>
+</button>
+<button class="w-5 h-5 rounded hover:bg-white/10 flex items-center justify-center hover:scale-110 transition-transform" title="Type Tool (T)">
+<svg class="w-3 h-3 fill-current" viewbox="0 0 24 24"><path d="M5 4v3h5.5v12h3V7H19V4z"></path></svg>
+</button>
+</div>
+<!-- 16:9 Thumbnail Canvas -->
+<div class="w-full aspect-[16/9] rounded-lg bg-[#07080a] border border-white/20 relative overflow-hidden shadow-2xl pl-6 group/canvas">
+<!-- Dynamic Viral Thumbnail Composition -->
+<div class="absolute inset-0 bg-gradient-to-tr from-[#1b0928] via-[#0b1424] to-[#1e1302]"></div>
+<!-- Dramatic lighting glow blooms -->
+<div class="absolute -left-4 -bottom-4 w-40 h-40 rounded-full bg-accent-yellow/25 blur-2xl pointer-events-none group-hover/canvas:bg-accent-yellow/35 transition-colors duration-500"></div>
+<div class="absolute -right-4 -top-4 w-36 h-36 rounded-full bg-[#8b5cf6]/30 blur-2xl pointer-events-none group-hover/canvas:bg-[#8b5cf6]/40 transition-colors duration-500"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-28 bg-red-500/10 blur-3xl pointer-events-none"></div>
+<!-- YouTube Badge Floating in top right corner -->
+<div class="absolute top-2.5 right-2.5 z-20 flex items-center gap-1 bg-red-600/90 text-white px-1.5 py-0.5 rounded shadow border border-white/20 hover:scale-105 transition-transform">
+<svg class="w-3 h-3 fill-current" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+<span class="text-[8px] font-sans font-black tracking-tight">12% CTR</span>
+</div>
+<!-- Left Cutout Subject: Mask with Outer Stroke / Neon Rim -->
+<div class="absolute left-8 bottom-0 z-10 flex flex-col items-center group-hover/canvas:translate-y-[-2px] transition-transform duration-300">
+<div class="relative">
+<!-- Neon rim stroke glow effect -->
+<div class="w-20 h-24 md:w-24 md:h-28 rounded-t-full bg-gradient-to-t from-accent-yellow via-amber-300 to-white p-0.5 shadow-[0_0_20px_rgba(245,199,37,0.5)]">
+<div class="w-full h-full rounded-t-full bg-[#151821] flex flex-col items-center justify-end pb-1 border-t border-white/40">
+<div class="w-10 h-10 rounded-full bg-[#202738] border border-accent-yellow/40 flex items-center justify-center text-accent-yellow mb-1 shadow-inner">
+<svg class="w-6 h-6 fill-current" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+</div>
+<span class="text-[8px] font-sans font-bold text-gray-300">CREATOR</span>
+</div>
+</div>
+<!-- Bounding Box selection around subject cutout -->
+<div class="absolute -inset-1 border border-accent-yellow/70 border-dashed rounded pointer-events-none">
+<div class="absolute -top-1 -left-1 w-1.5 h-1.5 bg-accent-yellow border border-black"></div>
+<div class="absolute -top-1 -right-1 w-1.5 h-1.5 bg-accent-yellow border border-black"></div>
+<div class="absolute -bottom-1 -left-1 w-1.5 h-1.5 bg-accent-yellow border border-black"></div>
+<div class="absolute -bottom-1 -right-1 w-1.5 h-1.5 bg-accent-yellow border border-black"></div>
+</div>
+</div>
+</div>
+<!-- Center-Right Viral Punchy Text with active Transform Box & Rotation -->
+<div class="absolute right-8 top-1/3 -translate-y-1/2 z-20 group-hover/canvas:scale-105 transition-transform duration-300">
+<div class="relative transform -rotate-6 select-none">
+<!-- Transform Bounding Box Handles -->
+<div class="absolute -inset-2 border border-white/60 border-dashed rounded pointer-events-none">
+<div class="absolute -top-1 -left-1 w-2 h-2 bg-white border border-black shadow"></div>
+<div class="absolute -top-1 -right-1 w-2 h-2 bg-white border border-black shadow"></div>
+<div class="absolute -bottom-1 -left-1 w-2 h-2 bg-white border border-black shadow"></div>
+<div class="absolute -bottom-1 -right-1 w-2 h-2 bg-white border border-black shadow"></div>
+<!-- Rotation handle pin -->
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-accent-yellow rounded-full border border-black"></div>
+<div class="absolute -top-4 left-1/2 w-[1px] h-3 bg-white/60"></div>
+</div>
+<!-- Bold High-Contrast Sticker Typography -->
+<div class="bg-accent-yellow text-black font-black text-base md:text-xl px-3 py-1 rounded shadow-[4px_4px_0_#000] tracking-tighter uppercase leading-none border-2 border-black">
+              10X VIEWS
+            </div>
+<div class="bg-white text-black font-black text-xs md:text-sm px-2.5 py-0.5 rounded shadow-[3px_3px_0_#000] tracking-tight uppercase leading-none border-2 border-black mt-1 ml-2">
+              SECRET HOOK
+            </div>
+</div>
+</div>
+<!-- Glowing Viral Curved Pointer Graphic -->
+<div class="absolute right-20 bottom-3 z-15">
+<svg class="w-12 h-9 text-accent-yellow drop-shadow-[0_0_8px_rgba(245,199,37,0.7)] group-hover/canvas:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="6" viewbox="0 0 100 60">
+<path d="M10 50 Q 55 55 75 25"></path>
+<path d="M60 20 L 78 23 L 73 40"></path>
+</svg>
+</div>
+<!-- Floating Mini Layers Palette Pill -->
+<div class="absolute bottom-2 right-2 z-25 bg-[#121418]/90 backdrop-blur-md border border-white/10 rounded-lg p-1.5 shadow-xl text-[8px] space-y-1">
+<div class="flex items-center gap-1.5 px-1 py-0.5 rounded bg-accent-yellow/20 text-accent-yellow font-bold">
+<span class="text-[7px]">👁</span>
+<span class="">T  10X VIEWS</span>
+</div>
+<div class="flex items-center gap-1.5 px-1 text-gray-300">
+<span class="text-[7px]">👁</span>
+<span class="">FX Subject Cutout</span>
+</div>
+<div class="flex items-center gap-1.5 px-1 text-gray-400">
+<span class="text-[7px]">👁</span>
+<span class="">☼ Neon Glow Rim</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Photoshop Layers & Asset Inspector Deck -->
+<div class="p-3 bg-[#111317] space-y-1.5 relative overflow-hidden shrink-0">
+<div class="flex items-center justify-between text-[10px] text-gray-400 pb-1 border-b border-white/5">
+<div class="flex items-center gap-2">
+<span class="font-bold text-accent-yellow uppercase tracking-wider text-[9px]">LAYERS &amp; ASSETS</span>
+<span class="text-[8px] text-gray-500 font-mono">4 ACTIVE</span>
+</div>
+<div class="flex items-center gap-1.5 text-[8px]">
+<span class="px-1.5 py-0.5 rounded bg-[#16181d] border border-white/10 text-gray-300">Pass: Normal</span>
+<span class="px-1.5 py-0.5 rounded bg-[#16181d] border border-white/10 text-gray-300">Opac: 100%</span>
+</div>
+</div>
+<!-- Layer Rows with Eye toggle & Color Tags -->
+<div class="grid grid-cols-2 gap-1.5 pt-0.5">
+<div class="h-5 rounded bg-[#171a22] border border-accent-yellow/30 flex items-center justify-between px-2 text-[8px] text-accent-yellow font-semibold truncate hover:bg-white/[0.04] transition-colors">
+<div class="flex items-center gap-1.5 truncate">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-yellow shrink-0"></span>
+<span class="truncate">L4 · Typography (10x Views)</span>
+</div>
+<span class="text-[7px] text-gray-400 shrink-0 font-mono">TXT</span>
+</div>
+<div class="h-5 rounded bg-[#171a22] border border-[#cf96fd]/40 flex items-center justify-between px-2 text-[8px] text-[#cf96fd] font-semibold truncate hover:bg-white/[0.04] transition-colors">
+<div class="flex items-center gap-1.5 truncate">
+<span class="w-1.5 h-1.5 rounded-full bg-[#8b5cf6] shrink-0"></span>
+<span class="truncate">L3 · Subject Cutout (Creator)</span>
+</div>
+<span class="text-[7px] text-gray-400 shrink-0 font-mono">MSK</span>
+</div>
+<div class="h-5 rounded bg-[#171a22] border border-teal-400/30 flex items-center justify-between px-2 text-[8px] text-teal-200 font-semibold truncate hover:bg-white/[0.04] transition-colors">
+<div class="flex items-center gap-1.5 truncate">
+<span class="w-1.5 h-1.5 rounded-full bg-[#35b5a2] shrink-0"></span>
+<span class="truncate">L2 · Glow Blooms &amp; Rim FX</span>
+</div>
+<span class="text-[7px] text-gray-400 shrink-0 font-mono">FX</span>
+</div>
+<div class="h-5 rounded bg-[#171a22] border border-blue-400/30 flex items-center justify-between px-2 text-[8px] text-blue-200 font-semibold truncate hover:bg-white/[0.04] transition-colors">
+<div class="flex items-center gap-1.5 truncate">
+<span class="w-1.5 h-1.5 rounded-full bg-[#27356d] shrink-0"></span>
+<span class="truncate">L1 · High-Contrast Gradient</span>
+</div>
+<span class="text-[7px] text-gray-400 shrink-0 font-mono">BKG</span>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<!-- END: SkillsSection --><section class="py-16 md:py-24 border-t border-white/5 reveal-item" data-purpose="portfolio-showcase" id="work">
+<!-- Section Header & Filter Pills -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Selected Work</h2>
+</div>
+<!-- Filter Buttons -->
+<div class="flex items-center gap-2" data-purpose="work-filters"><button class="btn-motion px-5 py-2 rounded-full bg-accent-yellow text-black font-bold text-xs tracking-wide transition shadow-sm hover:bg-accent-yellowHover">
+            Video edits
+          </button>
+<button class="btn-motion px-5 py-2 rounded-full bg-[#16181d] text-gray-300 font-semibold text-xs tracking-wide border border-white/10 hover:border-white/20 hover:text-white hover:bg-[#1f2229] transition">
+            Thumbnails
+          </button></div>
+</div>
+<!-- 6-Card Portfolio Grid with Staggered Visual Motion -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7"><!-- Card 1: Long-form Edit (Blue/Yellow Geometry) -->
+<article class="group cursor-pointer">
+<div class="card-motion relative aspect-video rounded-xl bg-[#121418] overflow-hidden border border-white/10 shadow-md group-hover:border-accent-yellow/50 flex items-center justify-center"><div class="absolute inset-0 bg-gradient-to-br from-[#171a22] to-[#0d0e11] opacity-90 transition-opacity duration-300 group-hover:opacity-75"></div><div class="relative z-10 flex flex-col items-center justify-center gap-2"><div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent-yellow group-hover:scale-115 group-hover:bg-accent-yellow group-hover:text-black group-hover:border-accent-yellow transition-all duration-300 shadow-lg shadow-accent-yellow/0 group-hover:shadow-accent-yellow/40"><svg class="w-5 h-5 fill-current ml-0.5 group-hover:translate-x-0.5 transition-transform duration-200" viewbox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div>
+<div class="mt-3.5"><h3 class="text-base font-bold text-white group-hover:text-accent-yellow transition-colors duration-200">[Project Name]</h3></div>
+</article>
+<!-- Card 2: Short-Form 9:16 (Teal/Vertical Layout) -->
+<article class="group cursor-pointer">
+<div class="card-motion relative aspect-video rounded-xl bg-[#121418] overflow-hidden border border-white/10 shadow-md group-hover:border-accent-yellow/50 flex items-center justify-center"><div class="absolute inset-0 bg-gradient-to-br from-[#171a22] to-[#0d0e11] opacity-90 transition-opacity duration-300 group-hover:opacity-75"></div><div class="relative z-10 flex flex-col items-center justify-center gap-2"><div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent-yellow group-hover:scale-115 group-hover:bg-accent-yellow group-hover:text-black group-hover:border-accent-yellow transition-all duration-300 shadow-lg shadow-accent-yellow/0 group-hover:shadow-accent-yellow/40"><svg class="w-5 h-5 fill-current ml-0.5 group-hover:translate-x-0.5 transition-transform duration-200" viewbox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div>
+<div class="mt-3.5"><h3 class="text-base font-bold text-white group-hover:text-accent-yellow transition-colors duration-200">[Project Name]</h3></div>
+</article>
+<!-- Card 3: Long-form Edit (Purple/Lavender Composition) -->
+<article class="group cursor-pointer">
+<div class="card-motion relative aspect-video rounded-xl bg-[#121418] overflow-hidden border border-white/10 shadow-md group-hover:border-accent-yellow/50 flex items-center justify-center"><div class="absolute inset-0 bg-gradient-to-br from-[#171a22] to-[#0d0e11] opacity-90 transition-opacity duration-300 group-hover:opacity-75"></div><div class="relative z-10 flex flex-col items-center justify-center gap-2"><div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent-yellow group-hover:scale-115 group-hover:bg-accent-yellow group-hover:text-black group-hover:border-accent-yellow transition-all duration-300 shadow-lg shadow-accent-yellow/0 group-hover:shadow-accent-yellow/40"><svg class="w-5 h-5 fill-current ml-0.5 group-hover:translate-x-0.5 transition-transform duration-200" viewbox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div>
+<div class="mt-3.5"><h3 class="text-base font-bold text-white group-hover:text-accent-yellow transition-colors duration-200">[Project Name]</h3></div>
+</article>
+<!-- Card 4: Thumbnail (Red/Coral Bold CTR Art) -->
+<article class="group cursor-pointer">
+<div class="card-motion relative aspect-video rounded-xl bg-[#121418] overflow-hidden border border-white/10 shadow-md group-hover:border-accent-yellow/50 flex items-center justify-center"><div class="absolute inset-0 bg-gradient-to-br from-[#171a22] to-[#0d0e11] opacity-90 transition-opacity duration-300 group-hover:opacity-75"></div><div class="relative z-10 flex flex-col items-center justify-center gap-2"><div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent-yellow group-hover:scale-115 group-hover:bg-accent-yellow group-hover:text-black group-hover:border-accent-yellow transition-all duration-300 shadow-lg shadow-accent-yellow/0 group-hover:shadow-accent-yellow/40"><svg class="w-5 h-5 fill-current ml-0.5 group-hover:translate-x-0.5 transition-transform duration-200" viewbox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div>
+<div class="mt-3.5"><h3 class="text-base font-bold text-white group-hover:text-accent-yellow transition-colors duration-200">[Project Name]</h3></div>
+</article>
+<!-- Card 5: Thumbnail (Yellow & Black High-Contrast Art) -->
+<article class="group cursor-pointer">
+<div class="card-motion relative aspect-video rounded-xl bg-[#121418] overflow-hidden border border-white/10 shadow-md group-hover:border-accent-yellow/50 flex items-center justify-center"><div class="absolute inset-0 bg-gradient-to-br from-[#171a22] to-[#0d0e11] opacity-90 transition-opacity duration-300 group-hover:opacity-75"></div><div class="relative z-10 flex flex-col items-center justify-center gap-2"><div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent-yellow group-hover:scale-115 group-hover:bg-accent-yellow group-hover:text-black group-hover:border-accent-yellow transition-all duration-300 shadow-lg shadow-accent-yellow/0 group-hover:shadow-accent-yellow/40"><svg class="w-5 h-5 fill-current ml-0.5 group-hover:translate-x-0.5 transition-transform duration-200" viewbox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div>
+<div class="mt-3.5"><h3 class="text-base font-bold text-white group-hover:text-accent-yellow transition-colors duration-200">[Project Name]</h3></div>
+</article>
+<!-- Card 6: Long-Form Edit / Podcast Show -->
+<article class="group cursor-pointer">
+<div class="card-motion relative aspect-video rounded-xl bg-[#121418] overflow-hidden border border-white/10 shadow-md group-hover:border-accent-yellow/50 flex items-center justify-center"><div class="absolute inset-0 bg-gradient-to-br from-[#171a22] to-[#0d0e11] opacity-90 transition-opacity duration-300 group-hover:opacity-75"></div><div class="relative z-10 flex flex-col items-center justify-center gap-2"><div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent-yellow group-hover:scale-115 group-hover:bg-accent-yellow group-hover:text-black group-hover:border-accent-yellow transition-all duration-300 shadow-lg shadow-accent-yellow/0 group-hover:shadow-accent-yellow/40"><svg class="w-5 h-5 fill-current ml-0.5 group-hover:translate-x-0.5 transition-transform duration-200" viewbox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div>
+<div class="mt-3.5"><h3 class="text-base font-bold text-white group-hover:text-accent-yellow transition-colors duration-200">[Project Name]</h3></div>
+</article></div>
+</section>
+<!-- END: SelectedWorkSection -->
+<!-- BEGIN: AboutSection -->
+<section class="py-16 md:py-24 border-t border-white/5 reveal-item" data-purpose="about-me" id="about"><div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+<!-- Left Column: Executive Portrait Card & Bio Meta -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="card-motion relative rounded-2xl bg-[#16181d] border border-white/10 overflow-hidden shadow-2xl p-3 group hover:border-accent-yellow/30">
+<!-- Portrait Image with Ambient Glow & Badges -->
+<div class="relative rounded-xl overflow-hidden aspect-[4/5] bg-[#111317]">
+<img alt="Sikder - Video Editor &amp; Thumbnail Designer" class="w-full h-full object-cover object-top transition duration-700 group-hover:scale-[1.03]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBvSADmder4O67NDE_oSL-EMEucgKwa3A-E3TPdTVzUBY2KOqrOJoGpxqZNO59QrLbe3lxSwzCC__cafky6-imGPkmJC6RdKfl9mct31aZINbOcYmU78QapOgC0_5U-IsSGvlqVNwYPZ5WZJ29W8O03Resi3r5Ua_3CvkhXCMxnf_sh34lHN_6hXtxZ1EP6MrOynWmV_DTxznCEM18mxhX1WtHDgm-b6putkEJxHmqH_tQTqXnTkps"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0b0c0e]/90 via-transparent to-transparent pointer-events-none"></div>
+<!-- Availability Status Floating Badge -->
+<div class="absolute top-3 left-3 z-10">
+</div>
+<!-- Profile Lower Overlay Card Info -->
+<div class="absolute bottom-4 left-4 right-4 z-10">
+<div class="p-4 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 shadow-2xl flex flex-col gap-1.5 group-hover:border-accent-yellow/20 transition-colors"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><h3 class="text-lg font-extrabold text-white tracking-tight leading-none">Sikder</h3><span class="w-1.5 h-1.5 rounded-full bg-accent-yellow animate-pulse shrink-0"></span></div><span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium text-emerald-400 bg-emerald-400/10 border border-emerald-400/30 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>Available for Projects</span></div><div class="flex items-center justify-between text-xs text-gray-400"><p class="text-xs font-medium text-gray-300 tracking-wide">Video Editor &amp; Visual Storyteller</p></div></div>
+</div>
+</div>
+</div>
+<!-- Metadata Stats Grid -->
+<div class="grid grid-cols-2 gap-3">
+<div class="p-4 rounded-xl bg-[#121418] border border-white/5 hover:border-white/15 transition-colors"><span class="text-[10px] font-mono uppercase text-gray-500 block mb-1 tracking-wider font-semibold">EXPERIENCE</span><span class="text-base sm:text-lg font-extrabold text-white tracking-tight flex items-center gap-1.5"><svg class="w-3.5 h-3.5 fill-current text-[#FF0000] shrink-0" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>Creator &amp; Editor</span><p class="text-xs text-gray-400 mt-0.5 truncate">YouTube &amp; Post-Production</p></div>
+<div class="p-4 rounded-xl bg-[#121418] border border-white/5 hover:border-white/15 transition-colors"><span class="text-[10px] font-mono uppercase text-gray-500 block mb-1 tracking-wider font-semibold">LOCATION</span><span class="text-base sm:text-lg font-extrabold text-white tracking-tight">Remote Worldwide</span><p class="text-xs text-gray-400 mt-0.5">Available Anywhere (Remote Only)</p></div>
+</div>
+</div>
+<!-- Right Column: Story, Creative Suite, Academic Credentials, Disciplines -->
+<div class="lg:col-span-7 space-y-9 text-gray-300"><div class="space-y-3">
+<div class="flex items-center gap-2">
+<span class="text-xs font-mono uppercase tracking-widest text-accent-yellow font-bold">// ABOUT SIKDER</span>
+</div>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+    Crafting stories that retain.<br/>
+    Designing visuals that <span class="text-accent-yellow inline-block animate-glow-text">convert</span>.
+  </h3>
+<p class="text-sm sm:text-base text-gray-300 leading-relaxed font-normal pt-1">I enjoy transforming raw ideas into high-retention stories and designing click-worthy thumbnails that genuinely connect with audiences and keep viewers hooked from the first second.</p>
+</div>
+<!-- Header & Editorial Story -->
+<!-- Creative Software Suite -->
+<div class="pt-2">
+<span class="text-xs font-mono text-gray-400 block mb-3 uppercase tracking-wider font-semibold">PRIMARY CREATIVE SUITE</span>
+<div class="flex flex-wrap items-center gap-2.5 select-none"><div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full"><div class="btn-motion flex items-center gap-3 p-3 rounded-xl bg-[#16181d] border border-[#9999FF]/40 shadow-[0_0_12px_rgba(153,153,255,0.25)] hover:border-[#9999FF] hover:shadow-[0_0_18px_rgba(153,153,255,0.45)] transition-all group cursor-pointer"><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#000080] to-[#00005b] border border-[#9999FF]/50 flex items-center justify-center text-[#9999FF] font-black text-base shrink-0 shadow-[0_0_12px_rgba(153,153,255,0.5)] group-hover:scale-105 transition-transform">Pr</div><div class="flex flex-col min-w-0"><span class="text-sm font-bold text-white tracking-tight group-hover:text-[#9999FF] transition-colors truncate">Premiere Pro</span></div></div><div class="btn-motion flex items-center gap-3 p-3 rounded-xl bg-[#16181d] border border-[#cf96fd]/40 shadow-[0_0_12px_rgba(207,150,253,0.25)] hover:border-[#cf96fd] hover:shadow-[0_0_18px_rgba(207,150,253,0.45)] transition-all group cursor-pointer"><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2d0047] to-[#16002b] border border-[#cf96fd]/50 flex items-center justify-center text-[#cf96fd] font-black text-base shrink-0 shadow-[0_0_12px_rgba(207,150,253,0.5)] group-hover:scale-105 transition-transform">Ae</div><div class="flex flex-col min-w-0"><span class="text-sm font-bold text-white tracking-tight group-hover:text-[#cf96fd] transition-colors truncate">After Effects</span></div></div><div class="btn-motion flex items-center gap-3 p-3 rounded-xl bg-[#16181d] border border-[#31A8FF]/40 shadow-[0_0_12px_rgba(49,168,255,0.25)] hover:border-[#31A8FF] hover:shadow-[0_0_18px_rgba(49,168,255,0.45)] transition-all group cursor-pointer"><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#001d3d] to-[#000c1a] border border-[#31A8FF]/50 flex items-center justify-center text-[#31A8FF] font-black text-base shrink-0 shadow-[0_0_12px_rgba(49,168,255,0.5)] group-hover:scale-105 transition-transform">Ps</div><div class="flex flex-col min-w-0"><span class="text-sm font-bold text-white tracking-tight group-hover:text-[#31A8FF] transition-colors truncate">Photoshop</span></div></div><div class="btn-motion flex items-center gap-3 p-3 rounded-xl bg-[#16181d] border border-[#FF9A00]/40 shadow-[0_0_12px_rgba(255,154,0,0.25)] hover:border-[#FF9A00] hover:shadow-[0_0_18px_rgba(255,154,0,0.45)] transition-all group cursor-pointer"><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#331b00] to-[#1a0d00] border border-[#FF9A00]/50 flex items-center justify-center text-[#FF9A00] font-black text-base shrink-0 shadow-[0_0_12px_rgba(255,154,0,0.5)] group-hover:scale-105 transition-transform">Ai</div><div class="flex flex-col min-w-0"><span class="text-sm font-bold text-white tracking-tight group-hover:text-[#FF9A00] transition-colors truncate">Illustrator</span></div></div></div></div>
+</div>
+<!-- Academic & Education Credentials Block -->
+<div class="p-5 rounded-2xl bg-[#121418] border border-white/10 shadow-lg space-y-3 hover:border-white/20 transition-all"><div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-accent-yellow inline-block animate-pulse"></span>
+<span class="text-xs font-mono uppercase tracking-wider font-bold text-gray-300">ACADEMIC &amp; EDUCATION</span>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium text-accent-yellow bg-accent-yellow/10 border border-accent-yellow/30 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-accent-yellow animate-pulse shrink-0"></span>Pursuing · Sem 5</span>
+</div>
+<div class=""><h4 class="text-base font-bold text-white tracking-tight">Bachelor of Vocation in Multimedia and Animation</h4><p class="text-xs font-mono text-accent-yellow font-medium mt-0.5 tracking-wide">Bharathiar University</p><p class="text-xs text-gray-400 mt-2 leading-relaxed">Currently pursuing (5th Semester Undergraduate) · Focusing on post-production workflows, high-retention video storytelling, and motion design.</p></div></div><div class="grid grid-cols-2 gap-3 pt-1"><div class="p-4 rounded-xl bg-[#121418] border border-white/5 hover:border-white/15 transition-colors"><span class="text-[10px] font-mono uppercase text-gray-500 block mb-1 tracking-wider font-semibold">SERVICE</span><span class="text-base sm:text-lg font-extrabold text-white tracking-tight flex items-center gap-1.5"><svg class="w-3.5 h-3.5 fill-current text-accent-yellow shrink-0" viewbox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zm-6.5 12.5v-5l4.5 2.5-4.5 2.5z"></path></svg>Full Edits</span><p class="text-xs text-gray-400 mt-0.5 truncate">Short-form Reels, Shorts &amp; long-form YouTube cuts</p></div><div class="p-4 rounded-xl bg-[#121418] border border-white/5 hover:border-white/15 transition-colors"><span class="text-[10px] font-mono uppercase text-gray-500 block mb-1 tracking-wider font-semibold">DELIVERABLE</span><span class="text-base sm:text-lg font-extrabold text-white tracking-tight flex items-center gap-1.5"><svg class="w-3.5 h-3.5 fill-current text-accent-yellow shrink-0" viewbox="0 0 24 24"><path d="M21 3H3C1.9 3 1 3.9 1 5v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h16c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-8.5-4.5l-2.5 3.01L7.25 15l-3.25 4h16l-5.5-7.5z"></path><circle cx="8.5" cy="9.5" r="1.5"></circle></svg>Thumbnail Design</span><p class="text-xs text-gray-400 mt-0.5 truncate">High-CTR clickable cover art &amp; titles</p></div></div>
+<!-- Specialized Disciplines Breakdown Table -->
+</div>
+</div></section>
+<!-- END: AboutSection -->
+<!-- BEGIN: ContactSection -->
+<section class="py-16 md:py-24 border-t border-white/5 reveal-item" data-purpose="contact-cta" id="contact">
+<div class="max-w-2xl">
+<span class="text-xs uppercase tracking-widest font-semibold text-gray-500 mb-3 block">CONTACT</span>
+<h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-8">Need the cut &amp; the click?<br class=""/>Let's make videos <span class="text-accent-yellow inline-block animate-glow-text">that convert.</span></h2>
+<!-- Action / Email Anchor Group -->
+<div class="flex flex-col sm:flex-row sm:items-center gap-4 text-sm">
+<a class="btn-motion inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-accent-yellow text-black font-extrabold tracking-tight hover:bg-accent-yellowHover transition duration-200 shadow-lg shadow-accent-yellow/20 hover:shadow-accent-yellow/40" data-stitch-orig-opacity="0" href="mailto:sikderrakibulislam@gmail.com">sikderrakibulislam@gmail.com</a>
+<span class="text-gray-400 text-sm">From raw footage to high-CTR thumbnails — send your footage, script, or channel link and let's get started.</span>
+</div>
+</div>
+</section>
+<!-- END: ContactSection -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="border-t border-white/5 py-12 mt-12 relative z-10" data-purpose="site-footer">
+<div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-500">
+<p class="">© 2026 Sikder</p>
+<div class="flex items-center flex-wrap gap-2"><a class="btn-motion inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#16181d] text-gray-300 font-semibold text-xs border border-white/10 hover:border-red-500/50 hover:text-white hover:bg-[#1f2229] transition duration-200" href="https://youtube.com" rel="noopener noreferrer" target="_blank"><svg class="w-3.5 h-3.5 fill-current text-[#FF0000]" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>YouTube</a><a class="btn-motion inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#16181d] text-gray-300 font-semibold text-xs border border-white/10 hover:border-pink-500/50 hover:text-white hover:bg-[#1f2229] transition duration-200" href="https://instagram.com" rel="noopener noreferrer" target="_blank"><svg class="w-3.5 h-3.5 fill-current text-[#E4405F]" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>Instagram</a><a class="btn-motion inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#16181d] text-gray-300 font-semibold text-xs border border-white/10 hover:border-blue-500/50 hover:text-white hover:bg-[#1f2229] transition duration-200" href="https://linkedin.com" rel="noopener noreferrer" target="_blank"><svg class="w-3.5 h-3.5 fill-current text-[#0A66C2]" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>LinkedIn</a><a class="btn-motion inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#16181d] text-gray-300 font-semibold text-xs border border-white/10 hover:border-red-400/50 hover:text-white hover:bg-[#1f2229] transition duration-200" href="mailto:sikderrakibulislam@gmail.com"><svg class="w-3.5 h-3.5 fill-current text-[#EA4335]" viewbox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>Mail</a></div></div>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: Interactive Motion & Scroll Observers -->
+<script>
+  (function() {
+    // 1. Subtle Mouse-Follow Spotlight Effect
+    const spotlight = document.getElementById('ambient-spotlight');
+    if (spotlight && window.matchMedia('(pointer: fine)').matches) {
+      let rafId;
+      window.addEventListener('mousemove', (e) => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
+          spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
+        });
+      }, { passive: true });
+    }
+
+    // 2. High-Performance IntersectionObserver for Entrance Reveals
+    const revealItems = document.querySelectorAll('.reveal-item');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      revealItems.forEach((el, index) => {
+        // Stagger entrance subtly
+        el.style.transitionDelay = `${Math.min(index * 0.1, 0.3)}s`;
+        observer.observe(el);
+      });
+    } else {
+      revealItems.forEach(el => el.classList.add('revealed'));
+    }
+  })();
+</script>
+<!-- END: Interactive Motion & Scroll Observers -->
+</body></html>

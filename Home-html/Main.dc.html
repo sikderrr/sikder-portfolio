@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Portfolio Home</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=DM+Sans:opsz,wght@9..40,400..700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1296px;margin:0 auto;padding:0 48px}
+.hero-title{font-size:112px}
+.sec-title{font-size:64px}
+.cta-title{font-size:88px}
+.nav-link{color:#A3A2B8}
+.nav-link:hover{color:#F4F3FA}
+.btn{transition:transform .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.card .art-frame{outline:2px solid transparent;outline-offset:3px;transition:outline-color .15s ease}
+.card:hover .art-frame{outline-color:#F4F3FA}
+a:focus-visible,button:focus-visible{outline:2px solid #F4F3FA;outline-offset:3px}
+@media (max-width:900px){
+  .wrap{padding:0 24px}
+  .hero-title{font-size:72px}
+  .sec-title{font-size:44px}
+  .cta-title{font-size:52px}
+}
+@media (max-width:520px){
+  .wrap{padding:0 20px}
+  .hero-title{font-size:46px}
+  .sec-title{font-size:34px}
+  .cta-title{font-size:38px}
+  .nav-tag{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .btn,.card .art-frame{transition:none}
+  .btn:hover{transform:none}
+}
+</style>
+</helmet>
+
+<div style="background:#0B0B10;color:#F4F3FA;font-family:'DM Sans',system-ui,sans-serif;font-size:17px;line-height:1.6;min-height:100%">
+
+  <!-- NAV -->
+  <header class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:28px;padding-bottom:28px">
+    <a href="#top" style="font-family:'Archivo',system-ui,sans-serif;font-weight:900;font-stretch:125%;font-size:22px;letter-spacing:0.02em;text-transform:uppercase">Sikder<span style="color:{{accent}}">.</span></a>
+    <nav style="display:flex;align-items:center;gap:32px;flex-wrap:wrap" aria-label="Main">
+      <a class="nav-link" href="#work" style="font-size:15px">Work</a>
+      <a class="nav-link" href="#about" style="font-size:15px">About</a>
+      <a class="nav-link" href="#contact" style="font-size:15px">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" class="wrap" style="padding-top:72px;padding-bottom:96px;display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#A3A2B8">
+      <span style="width:10px;height:10px;border-radius:50%;background:{{accent}};display:block"></span>
+      <span>Video editor <span style="color:#3A3A50">/</span> Thumbnail designer</span>
+    </div>
+    <h1 class="hero-title" style="margin:0;font-family:'Archivo',system-ui,sans-serif;font-weight:900;line-height:0.96;letter-spacing:-0.035em;text-wrap:balance">
+      I cut the video.<br>I design <span style="color:{{accent}}">the click.</span>
+    </h1>
+    <p style="margin:0;max-width:560px;font-size:19px;color:#A3A2B8">I turn raw footage into videos people finish, and design the frame that makes them press play.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <a class="btn" href="#work" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;background:{{accent}};color:#0B0B10;font-weight:700;font-size:16px">
+        Browse projects
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+      <a class="btn" href="#about" style="display:inline-flex;align-items:center;min-height:52px;padding:0 28px;border-radius:999px;border:1px solid #2A2A3B;color:#F4F3FA;font-weight:600;font-size:16px">Read my story</a>
+    </div>
+
+    <!-- Timeline graphic -->
+    <div role="img" aria-label="Decorative video editing timeline with a video track, a graphics track and an audio track" style="margin-top:40px;background:#14141D;border:1px solid #2A2A3B;border-radius:14px;overflow:hidden">
+      <div style="display:flex;border-bottom:1px solid #2A2A3B">
+        <div style="width:48px;flex:none"></div>
+        <div style="flex:1;min-width:0;display:flex;justify-content:space-between;padding:10px 12px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#8B8AA2">
+          <span>00:00</span><span>00:10</span><span>00:20</span><span>00:30</span><span>00:40</span><span>00:50</span>
+        </div>
+      </div>
+      <div style="position:relative">
+        <!-- V2 -->
+        <div style="display:flex;border-bottom:1px solid #20202E">
+          <div style="width:48px;flex:none;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#8B8AA2;border-right:1px solid #20202E">V2</div>
+          <div style="flex:1;min-width:0;display:flex;gap:4px;padding:6px">
+            <div style="flex:3;height:36px"></div>
+            <div style="flex:2;height:36px;border-radius:6px;background:#4B3F86;padding:0 10px;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#E6E2FA;white-space:nowrap;overflow:hidden">TITLE CARD</div>
+            <div style="flex:2;height:36px"></div>
+            <div style="flex:3;height:36px;border-radius:6px;background:#4B3F86;padding:0 10px;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#E6E2FA;white-space:nowrap;overflow:hidden">LOWER THIRD</div>
+            <div style="flex:2;height:36px"></div>
+          </div>
+        </div>
+        <!-- V1 -->
+        <div style="display:flex;border-bottom:1px solid #20202E">
+          <div style="width:48px;flex:none;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#8B8AA2;border-right:1px solid #20202E">V1</div>
+          <div style="flex:1;min-width:0;display:flex;gap:4px;padding:6px">
+            <div style="flex:3;height:36px;border-radius:6px;background:#33407F;padding:0 10px;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#DDE2FA;white-space:nowrap;overflow:hidden">A-ROLL</div>
+            <div style="flex:2;height:36px;border-radius:6px;background:#2C6E7A;padding:0 10px;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#D8F2F4;white-space:nowrap;overflow:hidden">B-ROLL</div>
+            <div style="flex:4;height:36px;border-radius:6px;background:#33407F;padding:0 10px;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#DDE2FA;white-space:nowrap;overflow:hidden">A-ROLL</div>
+            <div style="flex:2;height:36px;border-radius:6px;background:#2C6E7A;padding:0 10px;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#D8F2F4;white-space:nowrap;overflow:hidden">B-ROLL</div>
+            <div style="flex:3;height:36px;border-radius:6px;background:#33407F;padding:0 10px;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#DDE2FA;white-space:nowrap;overflow:hidden">A-ROLL</div>
+          </div>
+        </div>
+        <!-- A1 -->
+        <div style="display:flex">
+          <div style="width:48px;flex:none;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#8B8AA2;border-right:1px solid #20202E">A1</div>
+          <div style="flex:1;min-width:0;padding:6px">
+            <div style="height:36px;border-radius:6px;background:#173A36;background-image:linear-gradient(90deg,#5BC0AB 2px,transparent 2px),linear-gradient(90deg,#5BC0AB 2px,transparent 2px),linear-gradient(90deg,#5BC0AB 2px,transparent 2px);background-size:7px 38%,11px 78%,5px 20%;background-position:0 50%,3px 50%,1px 50%;background-repeat:repeat-x"></div>
+          </div>
+        </div>
+        <!-- Playhead -->
+        <div style="position:absolute;top:0;bottom:0;left:48px;right:0;pointer-events:none">
+          <div style="position:absolute;top:0;bottom:0;left:41%;width:2px;background:{{accent}}"></div>
+          <div style="position:absolute;top:0;left:41%;transform:translateX(-50%);background:{{accent}};color:#0B0B10;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;font-weight:500;padding:2px 6px;border-radius:0 0 4px 4px;white-space:nowrap">00:00:20:08</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="wrap" style="padding-top:96px;padding-bottom:96px;border-top:1px solid #1C1C28;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#A3A2B8">Selected work</span>
+        <h2 class="sec-title" style="margin:0;font-family:'Archivo',system-ui,sans-serif;font-weight:900;line-height:1;letter-spacing:-0.03em">Edits and thumbnails</h2>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap" role="group" aria-label="Filter projects">
+        <sc-for list="{{filters}}" as="f" hint-placeholder-count="3">
+          <button type="button" onClick="{{ f.pick }}" aria-pressed="{{ f.active }}" style="min-height:44px;padding:0 22px;border-radius:999px;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;font-size:15px;font-weight:600;background:{{f.bg}};color:{{f.fg}};border:1px solid {{f.bd}}">{{f.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:40px 24px">
+      <sc-for list="{{cards}}" as="card" hint-placeholder-count="6">
+        <article class="card" style="display:flex;flex-direction:column;gap:16px;min-width:0">
+          <div class="art-frame" style="position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:12px;background:{{card.bg}}">
+            <div style="position:absolute;top:0;right:0;bottom:0;left:0;transform:{{card.flip}}">
+              <sc-if value="{{card.isFlat}}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute;right:-6%;top:-24%;width:58%;aspect-ratio:1/1;border-radius:50%;background:{{card.a}}"></div>
+                <div style="position:absolute;left:-8%;bottom:16%;width:72%;height:20%;background:{{card.b}};transform:rotate(-8deg)"></div>
+                <div style="position:absolute;left:8%;top:14%;width:30%;height:9%;background:{{card.a}};border-radius:4px"></div>
+                <div style="position:absolute;left:8%;top:28%;width:20%;height:9%;background:{{card.b}};border-radius:4px"></div>
+              </sc-if>
+              <sc-if value="{{card.isShort}}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;left:50%;top:50%;height:84%;aspect-ratio:9/16;transform:translate(-50%,-50%);border-radius:14px;background:{{card.b}};overflow:hidden">
+                  <div style="position:absolute;left:-20%;top:-10%;width:90%;aspect-ratio:1/1;border-radius:50%;background:{{card.a}}"></div>
+                  <div style="position:absolute;left:12%;right:12%;bottom:10%;height:6%;border-radius:4px;background:{{card.bg}}"></div>
+                </div>
+              </sc-if>
+            </div>
+            <span style="position:absolute;left:12px;top:12px;padding:4px 10px;border-radius:999px;background:rgba(11,11,16,0.78);color:#F4F3FA;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase">{{card.badge}}</span>
+            <sc-if value="{{card.isVideo}}" hint-placeholder-val="{{ true }}">
+              <span style="position:absolute;right:12px;bottom:12px;width:40px;height:40px;border-radius:50%;background:rgba(11,11,16,0.78);display:flex;align-items:center;justify-content:center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#F4F3FA" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"></path></svg>
+              </span>
+            </sc-if>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <h3 style="margin:0;font-family:'Archivo',system-ui,sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.01em;line-height:1.2">[Project name]</h3>
+            <span style="font-size:15px;color:#A3A2B8">[Channel or client] · [Year]</span>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="wrap" style="padding-top:96px;padding-bottom:96px;border-top:1px solid #1C1C28;display:flex;gap:64px;flex-wrap:wrap">
+    <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:16px">
+      <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#A3A2B8">About</span>
+      <h2 class="sec-title" style="margin:0;font-family:'Archivo',system-ui,sans-serif;font-weight:900;line-height:1;letter-spacing:-0.03em;text-wrap:balance">Pacing, sound and a frame worth clicking.</h2>
+    </div>
+    <div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:620px">
+        <p style="margin:0;font-size:19px">I edit videos and design thumbnails for creators and brands. The thumbnail earns the click and the edit keeps people watching, so I treat both as one job.</p>
+        <p style="margin:0;color:#A3A2B8">[Write your story here: when you started editing, what you make most, and who you like working with.]</p>
+        <p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#A3A2B8">Tools: [Premiere Pro · After Effects · Photoshop]</p>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid #2A2A3B">
+        <div style="display:flex;gap:24px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid #2A2A3B">
+          <h3 style="margin:0;flex:0 0 200px;font-family:'Archivo',system-ui,sans-serif;font-weight:800;font-size:20px">Long-form editing</h3>
+          <p style="margin:0;flex:1 1 240px;min-width:0;color:#A3A2B8">Cuts, pacing, sound and color for videos that run past the first minute.</p>
+        </div>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid #2A2A3B">
+          <h3 style="margin:0;flex:0 0 200px;font-family:'Archivo',system-ui,sans-serif;font-weight:800;font-size:20px">Short-form editing</h3>
+          <p style="margin:0;flex:1 1 240px;min-width:0;color:#A3A2B8">Vertical edits for Shorts, Reels and TikTok, built around the first second.</p>
+        </div>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid #2A2A3B">
+          <h3 style="margin:0;flex:0 0 200px;font-family:'Archivo',system-ui,sans-serif;font-weight:800;font-size:20px">Thumbnail design</h3>
+          <p style="margin:0;flex:1 1 240px;min-width:0;color:#A3A2B8">1280 × 720 frames with one clear subject, strong contrast and readable type.</p>
+        </div>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid #2A2A3B">
+          <h3 style="margin:0;flex:0 0 200px;font-family:'Archivo',system-ui,sans-serif;font-weight:800;font-size:20px">Thumbnail series</h3>
+          <p style="margin:0;flex:1 1 240px;min-width:0;color:#A3A2B8">A consistent look across a channel's uploads, so viewers know it is yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="wrap" style="padding-top:96px;padding-bottom:48px;border-top:1px solid #1C1C28;display:flex;flex-direction:column;gap:32px">
+    <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#A3A2B8">Contact</span>
+    <h2 class="cta-title" style="margin:0;max-width:900px;font-family:'Archivo',system-ui,sans-serif;font-weight:900;line-height:0.98;letter-spacing:-0.035em;text-wrap:balance">Got footage that needs a cut?</h2>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="display:inline-flex;align-items:center;min-height:52px;padding:0 28px;border-radius:999px;background:{{accent}};color:#0B0B10;font-weight:700;font-size:16px;user-select:all">[your@email.com]</span>
+      <span style="color:#A3A2B8;font-size:15px">Send a link to the footage and what you need.</span>
+    </div>
+    <footer style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:64px;padding-top:24px;border-top:1px solid #1C1C28;font-size:14px;color:#8B8AA2">
+      <span>© 2026 Sikder</span>
+      <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">[YouTube] · [Instagram] · [Behance]</span>
+    </footer>
+  </section>
+
+</div>
+</x-dc>
+
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FFD23F","options":["#FFD23F","#FF4D6D","#4DE1C1","#7C9CFF"]}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filter: 'all' };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#FFD23F';
+    const filter = this.state.filter;
+
+    const all = [
+      { group: 'video', badge: 'Long-form edit', bg: 'linear-gradient(135deg,#1E2A78 0%,#0F1030 100%)', a: '#FFD23F', b: '#F4F3FA', flip: 'none' },
+      { group: 'thumb', badge: 'Thumbnail · 1280×720', bg: '#E8454B', a: '#FFD23F', b: '#0B0B10', flip: 'scaleX(-1)' },
+      { group: 'video', badge: 'Short-form · 9:16', bg: '#0E3B43', a: '#FFD23F', b: '#7EE0D0', flip: 'none', short: true },
+      { group: 'thumb', badge: 'Thumbnail · 1280×720', bg: '#FFD23F', a: '#0B0B10', b: '#F4F3FA', flip: 'none' },
+      { group: 'video', badge: 'Long-form edit', bg: 'linear-gradient(135deg,#2B1B4E 0%,#0B0B10 100%)', a: '#8B6CFF', b: '#FFD23F', flip: 'scaleX(-1)' },
+      { group: 'thumb', badge: 'Thumbnail · 1280×720', bg: '#1D6FF2', a: '#F4F3FA', b: '#FFD23F', flip: 'none' }
+    ];
+
+    const cards = all
+      .filter((c) => filter === 'all' || c.group === filter)
+      .map((c) => ({
+        ...c,
+        isShort: !!c.short,
+        isFlat: !c.short,
+        isVideo: c.group === 'video',
+        flip: c.short ? 'none' : c.flip
+      }));
+
+    const filters = [
+      { id: 'all', label: 'All work' },
+      { id: 'video', label: 'Video edits' },
+      { id: 'thumb', label: 'Thumbnails' }
+    ].map((f) => {
+      const active = filter === f.id;
+      return {
+        label: f.label,
+        active,
+        bg: active ? accent : 'transparent',
+        fg: active ? '#0B0B10' : '#F4F3FA',
+        bd: active ? accent : '#2A2A3B',
+        pick: () => this.setState({ filter: f.id })
+      };
+    });
+
+    return { accent, cards, filters };
+  }
+}
+</script>
+</body>
+</html>
