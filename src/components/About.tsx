@@ -12,9 +12,9 @@ export const About: React.FC = () => {
               <img
                 alt="Sikder - Video Editor &amp; Thumbnail Designer"
                 className="w-full h-full object-cover object-top transition duration-700 group-hover:scale-[1.03]"
-                src="/assets/profile/sikder-rakibul-islam-editorial.png"
+                src="./assets/profile/sikder-rakibul-islam-editorial.png"
                 onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = '/assets/profile/sikder-rakibul-islam.jpg';
+                  (e.currentTarget as HTMLImageElement).src = './assets/profile/sikder-rakibul-islam.jpg';
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c0e]/90 via-transparent to-transparent pointer-events-none" />

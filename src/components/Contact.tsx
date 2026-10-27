@@ -22,7 +22,7 @@ export const Contact: React.FC = () => {
           </a>
           <a
             id="resume-download"
-            href="/assets/Resume.pdf"
+            href="./assets/Resume.pdf"
             download="Sikder-Rakibul-Islam-Resume.pdf"
             className="btn-motion inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#16181d] text-gray-100 font-bold text-sm border border-white/15 hover:border-[#F5C725] hover:text-[#F5C725] transition duration-200"
           >

@@ -28,7 +28,7 @@ export const projects: Project[] = [
       "An interstellar documentary exploring humanity's farthest artificial emissary. Crafted with rhythmic timeline pacing, space telemetry HUDs, archival space restoration, and custom typography.",
     role: "Lead Video Editor, Motion Graphics Artist & Narrative Sequencing",
     tools: ["Premiere Pro", "After Effects", "Photoshop"],
-    image: "/assets/design/voyager-thumbnail-2.webp",
+    image: "./assets/design/voyager-thumbnail-2.webp",
     videoUrl: "https://www.youtube.com/watch?v=mZSs4lW9-n8"
   },
   {
@@ -44,7 +44,7 @@ export const projects: Project[] = [
       "A fast-paced, investigative documentary exploring administration, infrastructure development, and policy realities in Uttar Pradesh with cinematic tension and sharp editorial cutting.",
     role: "Timeline Assembly, Editorial Pacing & Archival Curation",
     tools: ["Premiere Pro", "After Effects", "Photoshop"],
-    image: "/assets/design/uttar-pradesh-thumbnail.webp",
+    image: "./assets/design/uttar-pradesh-thumbnail.webp",
     videoUrl: "https://www.youtube.com/watch?v=Ukf5jY53J3Y"
   },
   {
@@ -60,7 +60,7 @@ export const projects: Project[] = [
       "A data-backed analytical documentary breaking down national employment data, demographic challenges, and economic systems with custom animated charts and dynamic text callouts.",
     role: "Video Editing, Data Visualization & Motion Infographics",
     tools: ["Premiere Pro", "After Effects", "Photoshop"],
-    image: "/assets/design/india-needs-jobs-thumbnail.webp",
+    image: "./assets/design/india-needs-jobs-thumbnail.webp",
     videoUrl: "https://www.youtube.com/watch?v=wc0twYCiIvw"
   },
   {
@@ -74,7 +74,7 @@ export const projects: Project[] = [
       "Designed to evoke deep existential awe. Features hyper-focused lighting on the spacecraft, cinematic cosmic dust, and typographic hierarchy calibrated for high click-through rate.",
     role: "Visual Composition & Matte Painting",
     tools: ["Photoshop", "Camera Raw"],
-    image: "/assets/design/voyager-thumbnail-2.webp"
+    image: "./assets/design/voyager-thumbnail-2.webp"
   },
   {
     id: "proj-up-thumb",
@@ -87,7 +87,7 @@ export const projects: Project[] = [
       "Documentary portrait grading with high micro-contrast, expressive facial contours, and provocative editorial question framing.",
     role: "Portrait Retouching & Typography",
     tools: ["Photoshop", "Lightroom"],
-    image: "/assets/design/uttar-pradesh-thumbnail.webp"
+    image: "./assets/design/uttar-pradesh-thumbnail.webp"
   },
   {
     id: "proj-jobs-thumb",
@@ -100,7 +100,7 @@ export const projects: Project[] = [
       "Composed with emotional tension using color-separated yellow highlights to isolate the central economic struggle and guide viewer attention.",
     role: "Color Grading & Typographic Hook",
     tools: ["Photoshop", "Illustrator"],
-    image: "/assets/design/india-needs-jobs-thumbnail.webp"
+    image: "./assets/design/india-needs-jobs-thumbnail.webp"
   },
   {
     id: "proj-voyager-envoy",
@@ -115,7 +115,7 @@ export const projects: Project[] = [
       "A visual exploration into deep space telemetry, radio signals across billions of kilometers, and the engineering behind humanity's immortal probe.",
     role: "Visual Sequencing, Timeline Pacing & Motion Grading",
     tools: ["Premiere Pro", "After Effects"],
-    image: "/assets/design/voyager-thumbnail-1.webp",
+    image: "./assets/design/voyager-thumbnail-1.webp",
     videoUrl: "https://www.youtube.com/watch?v=mZSs4lW9-n8"
   },
   {
@@ -129,7 +129,7 @@ export const projects: Project[] = [
       "Emphasizes scale and curiosity. High-impact text placement tested for mobile readability in YouTube recommendation feeds.",
     role: "Layout Design & Typographic Hierarchy",
     tools: ["Photoshop", "Illustrator"],
-    image: "/assets/design/voyager-thumbnail-1.webp"
+    image: "./assets/design/voyager-thumbnail-1.webp"
   },
   {
     id: "proj-interstellar-drift",
@@ -144,7 +144,7 @@ export const projects: Project[] = [
       "An atmospheric exploration of interstellar silence, speed, and cosmic horizons featuring custom UI coordinates, screen telemetry, and audio wave design.",
     role: "Motion Graphics, UI Telemetry & Sound Design",
     tools: ["After Effects", "Premiere Pro", "Photoshop"],
-    image: "/assets/design/voyager-thumbnail-3.webp",
+    image: "./assets/design/voyager-thumbnail-3.webp",
     videoUrl: "https://www.youtube.com/watch?v=mZSs4lW9-n8"
   },
   {
@@ -158,6 +158,6 @@ export const projects: Project[] = [
       "A data-driven thumbnail featuring precise numeric coordinates and distance telemetry to stimulate instant curiosity and technical legitimacy.",
     role: "Telemetry Overlay & Graphic Assembly",
     tools: ["Photoshop", "After Effects"],
-    image: "/assets/design/voyager-thumbnail-3.webp"
+    image: "./assets/design/voyager-thumbnail-3.webp"
   }
 ];
