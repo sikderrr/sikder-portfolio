@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>SIKDER. — Video Editor &amp; Thumbnail Designer</title>
+  <title>Sikder | Video Editor &amp; Thumbnail Designer</title>
   
   <!-- Favicon / Meta -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23FFD23F'/%3E%3Cpath d='M25 17V47L49 32Z' fill='%230F0F10' stroke='%230F0F10' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
   <meta name="description" content="Portfolio of Sikder Rakibul Islam — Video Editor and High-CTR Thumbnail Designer. Turning raw footage into high-retention stories.">
   <meta property="og:title" content="SIKDER. — Video Editor &amp; Thumbnail Designer">
   <meta property="og:description" content="Portfolio of Sikder Rakibul Islam — Video Editor and High-CTR Thumbnail Designer. Turning raw footage into high-retention stories.">
-
   <!-- Tailwind CSS CDN with forms & container queries plugins -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   
@@ -18,7 +18,6 @@
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-
   <!-- Tailwind Custom Configuration -->
   <script>
     tailwind.config = {
@@ -46,7 +45,6 @@
       }
     }
   </script>
-
   <!-- BEGIN: Custom Styles & Motion Keyframes -->
   <style data-purpose="base-styling">
     body {
@@ -59,7 +57,6 @@
       background-color: #F5C725;
       color: #000000;
     }
-
     /* Ambient Spotlight Background Layer */
     #ambient-spotlight {
       display: none;
@@ -69,7 +66,6 @@
       z-index: 1;
       background: none;
     }
-
     /* Micro Motion & Reveals */
     .reveal-item {
       opacity: 0;
@@ -81,7 +77,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-
     /* Ambient Pulsing Text Highlights */
     @keyframes glow-pulse {
       0%, 100% {
@@ -94,7 +89,6 @@
     .animate-glow-text {
       animation: glow-pulse 3.5s ease-in-out infinite;
     }
-
     /* Subtle Playhead Scanning & Breathing */
     @keyframes playhead-breathe {
       0%, 100% {
@@ -109,7 +103,6 @@
     .playhead-glow {
       animation: playhead-breathe 2.4s ease-in-out infinite;
     }
-
     /* Audio Waveform Live Pulse */
     @keyframes wave-bounce {
       0%, 100% { transform: scaleY(0.7); }
@@ -124,7 +117,6 @@
       transform-origin: center;
       animation: wave-bounce 1.6s ease-in-out infinite alternate;
     }
-
     /* Card Lift and Glow Utilities */
     .card-motion {
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
@@ -133,7 +125,6 @@
       transform: translateY(-4px);
       box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7);
     }
-
     /* Button and Pill Micro-interaction */
     .btn-motion {
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.2s ease, border-color 0.2s ease;
@@ -144,13 +135,11 @@
     .btn-motion:active {
       transform: translateY(0);
     }
-
     /* Lightbox Modal Backdrop */
     dialog::backdrop {
       background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(8px);
     }
-
     /* Accessibility: Respect Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
       .reveal-item {
@@ -173,10 +162,8 @@
   <!-- END: Custom Styles -->
 </head>
 <body class="font-sans antialiased text-gray-100 selection:bg-accent-yellow selection:text-black relative">
-
   <!-- Ambient Spotlight Follower Layer -->
   <div aria-hidden="true" id="ambient-spotlight"></div>
-
   <!-- BEGIN: MainHeader -->
   <header class="w-full sticky top-0 z-50 backdrop-blur-md bg-[#0b0c0e]/85 border-b border-white/5 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -184,7 +171,6 @@
       <a class="text-xl font-black tracking-tight text-white flex items-center gap-0.5 hover:opacity-90 hover:scale-[1.02] transition-transform duration-200" data-purpose="brand-logo" href="#">
         SIKDER<span class="text-accent-yellow text-2xl leading-none animate-pulse">.</span>
       </a>
-
       <!-- Desktop Navigation Links -->
       <nav class="flex items-center space-x-8 text-sm font-medium text-gray-400" data-purpose="desktop-nav">
         <a class="hover:text-white hover:-translate-y-0.5 transition-all duration-200" href="#work">Work</a>
@@ -196,10 +182,8 @@
     </div>
   </header>
   <!-- END: MainHeader -->
-
   <!-- BEGIN: MainContent -->
   <main class="max-w-6xl mx-auto px-6 relative z-10">
-
     <!-- BEGIN: HeroSection -->
     <section class="pt-16 pb-20 md:pt-24 md:pb-28 reveal-item" data-purpose="hero" id="hero">
       <div class="max-w-3xl">
@@ -208,18 +192,15 @@
           <span class="w-2 h-2 rounded-full bg-accent-yellow inline-block animate-pulse shadow-[0_0_8px_#F5C725]"></span>
           <span>VIDEO EDITOR / THUMBNAIL DESIGNER</span>
         </div>
-
         <!-- Big Bold Title -->
         <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-6">
           I cut the video.<br/>
           I design <span class="text-accent-yellow inline-block animate-glow-text">the click.</span>
         </h1>
-
         <!-- Supporting Lead Text -->
         <p class="text-base sm:text-lg text-gray-400 leading-relaxed max-w-xl mb-9">
           I turn raw footage into videos people finish, and design the frame that makes them press play.
         </p>
-
         <!-- CTA Action Buttons -->
         <div class="flex flex-wrap items-center gap-4">
           <a class="btn-motion inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-accent-yellow text-black font-bold text-sm hover:bg-accent-yellowHover transition duration-200 shadow-lg shadow-accent-yellow/20 hover:shadow-accent-yellow/35" href="#work">
@@ -230,13 +211,11 @@
           </a>
         </div>
       </div>
-
       <!-- BEGIN: VideoEditingTimelineMockup -->
       <!-- Visual representation of an editing workspace timeline -->
       <div class="mt-16 w-full rounded-2xl bg-[#111317] border border-white/10 p-4 md:p-6 shadow-2xl relative overflow-hidden group hover:border-accent-yellow/30 transition-all duration-500" data-purpose="timeline-workspace">
         <!-- Ambient internal glow -->
         <div class="absolute -right-20 -top-20 w-64 h-64 bg-accent-yellow/5 rounded-full blur-3xl pointer-events-none group-hover:bg-accent-yellow/10 transition-all duration-700"></div>
-
         <!-- Timeline Header Bar: Time Ruler -->
         <div class="relative w-full border-b border-white/10 pb-3 flex justify-between text-[11px] font-mono text-gray-500 select-none">
           <span class="w-12 text-left">00:00</span>
@@ -252,7 +231,6 @@
             <div class="w-[1.5px] h-32 md:h-36 bg-accent-yellow playhead-glow"></div>
           </div>
         </div>
-
         <!-- Tracks Container -->
         <div class="pt-4 space-y-2.5 text-xs font-mono select-none">
           <!-- Track V2: Motion Graphics / Overlays -->
@@ -271,7 +249,6 @@
               </div>
             </div>
           </div>
-
           <!-- Track V1: Main Video Clips -->
           <div class="flex items-center gap-3 group/track hover:bg-white/[0.02] rounded px-1 -mx-1 transition-colors">
             <span class="w-7 text-[10px] font-semibold text-gray-500 uppercase">V1</span>
@@ -298,7 +275,6 @@
               </div>
             </div>
           </div>
-
           <!-- Track A1: Audio Waveform -->
           <div class="flex items-center gap-3 group/track hover:bg-white/[0.02] rounded px-1 -mx-1 transition-colors">
             <span class="w-7 text-[10px] font-semibold text-gray-500 uppercase">A1</span>
@@ -341,7 +317,6 @@
       <!-- END: VideoEditingTimelineMockup -->
     </section>
     <!-- END: HeroSection -->
-
     <!-- BEGIN: SkillsSection -->
     <section class="py-16 md:py-24 border-t border-white/5 reveal-item" data-purpose="skills-showcase" id="skills">
       <!-- Section Header -->
@@ -354,7 +329,6 @@
           Built for retention. <span class="text-accent-yellow inline-block animate-glow-text">Engineered for the click.</span>
         </h2>
       </div>
-
       <!-- Two Software-Inspired Interactive Skill Cards Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-7">
         
@@ -382,7 +356,6 @@
               </div>
             </div>
           </div>
-
           <!-- Realistic Video Editing Suite Mockup -->
           <div class="rounded-xl bg-[#0d0e11] border border-white/10 overflow-hidden shadow-2xl select-none text-xs font-mono flex-1 flex flex-col justify-between group-hover:border-white/20 transition-colors">
             <!-- Window Top Chrome -->
@@ -398,7 +371,6 @@
                 <span class="text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>REC 709</span>
               </div>
             </div>
-
             <!-- Main Editor Interface Area: Sidebar Tools + Program Monitor -->
             <div class="flex border-b border-white/10 bg-[#121418] flex-1">
               <!-- Micro Tool Palette -->
@@ -416,7 +388,6 @@
                   <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M6 5h2v14H6zm10 0h2v14h-2zM9 13l3-3v2h2V8l3 3-3 3v-2h-2v2z"></path></svg>
                 </button>
               </div>
-
               <!-- Program Monitor -->
               <div class="flex-1 p-2.5 flex flex-col items-center justify-center bg-[#0a0b0d]">
                 <div class="w-full aspect-[16/9] rounded bg-[#131722] border border-white/10 relative overflow-hidden flex items-center justify-center shadow-inner group/monitor">
@@ -432,7 +403,6 @@
                     <div class="border-r border-white"></div>
                     <div></div>
                   </div>
-
                   <!-- Subject Silhouette with Rim Lighting -->
                   <div class="relative z-10 flex flex-col items-center justify-center group-hover/monitor:scale-105 transition-transform duration-500">
                     <div class="w-14 h-14 rounded-full bg-[#1b2234] border-2 border-accent-yellow/60 shadow-[0_0_15px_rgba(245,199,37,0.35)] flex items-center justify-center">
@@ -442,7 +412,6 @@
                       KEY SUBJECT · HOOK
                     </div>
                   </div>
-
                   <!-- Monitor HUD Overlays -->
                   <div class="absolute top-2 left-2 flex items-center gap-1.5 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[9px] text-gray-300 border border-white/10">
                     <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
@@ -451,7 +420,6 @@
                   <div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-1.5 py-0.5 rounded text-[9px] text-gray-400 border border-white/10">
                     FIT · 100%
                   </div>
-
                   <!-- Transport Bar -->
                   <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded border border-white/10 text-gray-300 text-[10px]">
                     <span class="text-[9px] text-accent-yellow font-bold">IN 00:00:00</span>
@@ -465,7 +433,6 @@
                 </div>
               </div>
             </div>
-
             <!-- Precision Multi-Track Timeline -->
             <div class="p-3 bg-[#111317] space-y-1.5 relative overflow-hidden shrink-0">
               <!-- Active Glowing Playhead Needle -->
@@ -473,7 +440,6 @@
                 <div class="w-2.5 h-2.5 bg-accent-yellow rotate-45 -mt-1 shadow"></div>
                 <div class="mt-1 px-1 py-0.5 rounded bg-accent-yellow text-black text-[8px] font-bold tracking-tight shadow">00:03:14</div>
               </div>
-
               <!-- Track V2: Overlay & Motion Graphics -->
               <div class="flex items-center gap-2">
                 <span class="w-5 text-[9px] font-bold text-gray-500 text-right">V2</span>
@@ -489,7 +455,6 @@
                   </div>
                 </div>
               </div>
-
               <!-- Track V1: Main A-Roll talking head cuts -->
               <div class="flex items-center gap-2">
                 <span class="w-5 text-[9px] font-bold text-gray-500 text-right">V1</span>
@@ -511,7 +476,6 @@
                   </div>
                 </div>
               </div>
-
               <!-- Track A1: Voice Dialogue & Soundwaves -->
               <div class="flex items-center gap-2">
                 <span class="w-5 text-[9px] font-bold text-gray-500 text-right">A1</span>
@@ -527,7 +491,6 @@
                   </div>
                 </div>
               </div>
-
               <!-- Track A2: SFX & Music Bed -->
               <div class="flex items-center gap-2">
                 <span class="w-5 text-[9px] font-bold text-gray-500 text-right">A2</span>
@@ -541,7 +504,6 @@
             </div>
           </div>
         </div>
-
         <!-- Skill Card 2: Thumbnail Design (Photoshop & High-CTR Canvas Mockup) -->
         <div class="card-motion rounded-2xl bg-[#111317] border border-white/10 p-5 md:p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between h-full group hover:border-accent-yellow/40">
           <div>
@@ -566,7 +528,6 @@
               </div>
             </div>
           </div>
-
           <!-- Realistic Photoshop/Canvas Artboard Workspace -->
           <div class="rounded-xl bg-[#0d0e11] border border-white/10 overflow-hidden shadow-2xl select-none text-xs font-mono flex-1 flex flex-col justify-between group-hover:border-white/20 transition-colors">
             <!-- App Header & Workspace Breadcrumb -->
@@ -584,7 +545,6 @@
                 <span class="px-1.5 py-0.5 rounded bg-accent-yellow/10 border border-accent-yellow/30 text-accent-yellow font-bold">RGB · 8bit</span>
               </div>
             </div>
-
             <!-- Main Canvas Area with Floating Tools & Layers Inspector -->
             <div class="relative p-2.5 bg-[#0a0b0d] flex items-center justify-center overflow-hidden flex-1 border-b border-white/10">
               <!-- Photoshop Micro Toolbar on left edge -->
@@ -602,7 +562,6 @@
                   <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M5 4v3h5.5v12h3V7H19V4z"></path></svg>
                 </button>
               </div>
-
               <!-- 16:9 Thumbnail Canvas -->
               <div class="w-full aspect-[16/9] rounded-lg bg-[#07080a] border border-white/20 relative overflow-hidden shadow-2xl pl-6 group/canvas">
                 <!-- Dynamic Viral Thumbnail Composition -->
@@ -612,13 +571,11 @@
                 <div class="absolute -left-4 -bottom-4 w-40 h-40 rounded-full bg-accent-yellow/25 blur-2xl pointer-events-none group-hover/canvas:bg-accent-yellow/35 transition-colors duration-500"></div>
                 <div class="absolute -right-4 -top-4 w-36 h-36 rounded-full bg-[#8b5cf6]/30 blur-2xl pointer-events-none group-hover/canvas:bg-[#8b5cf6]/40 transition-colors duration-500"></div>
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-28 bg-red-500/10 blur-3xl pointer-events-none"></div>
-
                 <!-- YouTube Badge Floating in top right corner -->
                 <div class="absolute top-2.5 right-2.5 z-20 flex items-center gap-1 bg-red-600/90 text-white px-1.5 py-0.5 rounded shadow border border-white/20 hover:scale-105 transition-transform">
                   <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
                   <span class="text-[8px] font-sans font-black tracking-tight">12% CTR</span>
                 </div>
-
                 <!-- Left Cutout Subject: Mask with Outer Stroke / Neon Rim -->
                 <div class="absolute left-8 bottom-0 z-10 flex flex-col items-center group-hover/canvas:translate-y-[-2px] transition-transform duration-300">
                   <div class="relative">
@@ -640,7 +597,6 @@
                     </div>
                   </div>
                 </div>
-
                 <!-- Center-Right Viral Punchy Text with active Transform Box & Rotation -->
                 <div class="absolute right-8 top-1/3 -translate-y-1/2 z-20 group-hover/canvas:scale-105 transition-transform duration-300">
                   <div class="relative transform -rotate-6 select-none">
@@ -663,7 +619,6 @@
                     </div>
                   </div>
                 </div>
-
                 <!-- Glowing Viral Curved Pointer Graphic -->
                 <div class="absolute right-20 bottom-3 z-15">
                   <svg class="w-12 h-9 text-accent-yellow drop-shadow-[0_0_8px_rgba(245,199,37,0.7)] group-hover/canvas:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="6" viewBox="0 0 100 60">
@@ -671,7 +626,6 @@
                     <path d="M60 20 L 78 23 L 73 40"></path>
                   </svg>
                 </div>
-
                 <!-- Floating Mini Layers Palette Pill -->
                 <div class="absolute bottom-2 right-2 z-25 bg-[#121418]/90 backdrop-blur-md border border-white/10 rounded-lg p-1.5 shadow-xl text-[8px] space-y-1">
                   <div class="flex items-center gap-1.5 px-1 py-0.5 rounded bg-accent-yellow/20 text-accent-yellow font-bold">
@@ -689,7 +643,6 @@
                 </div>
               </div>
             </div>
-
             <!-- Bottom Photoshop Layers & Asset Inspector Deck -->
             <div class="p-3 bg-[#111317] space-y-1.5 relative overflow-hidden shrink-0">
               <div class="flex items-center justify-between text-[10px] text-gray-400 pb-1 border-b border-white/5">
@@ -702,7 +655,6 @@
                   <span class="px-1.5 py-0.5 rounded bg-[#16181d] border border-white/10 text-gray-300">Opac: 100%</span>
                 </div>
               </div>
-
               <!-- Layer Rows with Eye toggle & Color Tags -->
               <div class="grid grid-cols-2 gap-1.5 pt-0.5">
                 <div class="h-5 rounded bg-[#171a22] border border-accent-yellow/30 flex items-center justify-between px-2 text-[8px] text-accent-yellow font-semibold truncate hover:bg-white/[0.04] transition-colors">
@@ -737,11 +689,9 @@
             </div>
           </div>
         </div>
-
       </div>
     </section>
     <!-- END: SkillsSection -->
-
     <!-- BEGIN: SelectedWorkSection -->
     <section class="py-16 md:py-24 border-t border-white/5 reveal-item" data-purpose="portfolio-showcase" id="work">
       <!-- Section Header & Filter Pills -->
@@ -754,8 +704,7 @@
           <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Selected work</h2>
         </div>
         
-        <!-- Filter Buttons & Horizontal Scroll Navigation -->
-        <div class="flex items-center gap-3">
+        <!-- Filter Buttons: Video edits, Thumbnails -->
           <div class="flex items-center p-1 rounded-full bg-[#111317] border border-white/10 shrink-0 select-none" data-purpose="work-filters" id="work-filters">
             <button class="filter-btn btn-motion px-5 py-2 rounded-full bg-accent-yellow text-black font-bold text-xs tracking-wide transition shadow-sm hover:bg-accent-yellowHover" data-filter="video">
               Video edits (3)
@@ -764,21 +713,10 @@
               Thumbnails (5)
             </button>
           </div>
-          <div class="flex items-center gap-1.5 p-1 rounded-full bg-[#111317] border border-white/10 shrink-0">
-            <button id="feed-scroll-left" class="p-2 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition" aria-label="Scroll left" title="Scroll left">
-              <svg class="w-4 h-4 fill-none stroke-currentColor stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-            </button>
-            <button id="feed-scroll-right" class="p-2 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition" aria-label="Scroll right" title="Scroll right">
-              <svg class="w-4 h-4 fill-none stroke-currentColor stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </button>
-          </div>
-        </div>
       </div>
-
       <!-- Horizontal Left-to-Right Stream: 2 cards visible on desktop, 1 on mobile -->
       <div class="flex flex-row gap-6 w-full overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-1" id="work-feed">
         <!-- 3 YouTube Channel Videos -->
-
         <!-- Card: Voyager 1: Beyond Everything -->
         <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="video" data-video-url="https://www.youtube.com/watch?v=mZSs4lW9-n8" data-title="Voyager 1: Beyond Everything" data-category="DOCUMENTARY · SPACE SCIENCE" data-desc="An interstellar documentary exploring humanity's farthest artificial emissary. Crafted with rhythmic timeline pacing, space telemetry HUDs, archival space restoration, and custom typography." data-role="Lead Video Editor, Motion Graphics Artist & Narrative Sequencing" data-tools="Premiere Pro, After Effects, Photoshop" data-image="assets/design/voyager-thumbnail-2.webp">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
@@ -802,7 +740,6 @@
             </span>
           </div>
         </article>
-
         <!-- Card: Uttar Pradesh: Governance & Reality -->
         <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="video" data-video-url="https://www.youtube.com/watch?v=Ukf5jY53J3Y" data-title="Uttar Pradesh: Governance & Reality" data-category="INVESTIGATIVE JOURNALISM" data-desc="A fast-paced, investigative documentary exploring administration, infrastructure development, and policy realities in Uttar Pradesh with cinematic tension and sharp editorial cutting." data-role="Timeline Assembly, Editorial Pacing & Archival Curation" data-tools="Premiere Pro, After Effects, Photoshop" data-image="assets/design/uttar-pradesh-thumbnail.webp">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
@@ -826,7 +763,6 @@
             </span>
           </div>
         </article>
-
         <!-- Card: India Needs Jobs: Economic Dilemma -->
         <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="video" data-video-url="https://www.youtube.com/watch?v=wc0twYCiIvw" data-title="India Needs Jobs: Economic Dilemma" data-category="DATA MOTION DOCUMENTARY" data-desc="A data-backed analytical documentary breaking down national employment data, demographic challenges, and economic systems with custom animated charts and dynamic text callouts." data-role="Video Editing, Data Visualization & Motion Infographics" data-tools="Premiere Pro, After Effects, Photoshop" data-image="assets/design/india-needs-jobs-thumbnail.webp">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
@@ -850,9 +786,7 @@
             </span>
           </div>
         </article>
-
         <!-- 5 High-CTR Thumbnails -->
-
         <!-- Card: No Jobs -->
         <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="thumb" data-title="No Jobs" data-category="YOUTUBE THUMBNAIL" data-desc="High-impact thumbnail addressing India's job crisis with bold red typography and emotional portraiture for maximum click-through." data-role="Thumbnail Design & Visual Composition" data-tools="Photoshop" data-image="assets/thumbnails/thumb_no_jobs.jpg">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
@@ -875,7 +809,6 @@
             </span>
           </div>
         </article>
-
         <!-- Card: Unemployment Crisis -->
         <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="thumb" data-title="Unemployment Crisis" data-category="YOUTUBE THUMBNAIL" data-desc="Political commentary thumbnail featuring bold red distressed typography with curtain-reveal composition for dramatic editorial impact." data-role="Thumbnail Design & Portrait Composite" data-tools="Photoshop" data-image="assets/thumbnails/thumb_unemployment_crisis.jpg">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
@@ -898,7 +831,6 @@
             </span>
           </div>
         </article>
-
         <!-- Card: Reality of Yogi -->
         <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="thumb" data-title="Reality of Yogi" data-category="YOUTUBE THUMBNAIL" data-desc="Documentary portrait with high micro-contrast and provocative editorial framing, designed for maximum engagement on political content." data-role="Portrait Composite & Typography" data-tools="Photoshop" data-image="assets/thumbnails/thumb_reality_of_yogi.jpg">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
@@ -921,7 +853,6 @@
             </span>
           </div>
         </article>
-
         <!-- Card: Farthest Human Object -->
         <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="thumb" data-title="Farthest Human Object" data-category="YOUTUBE THUMBNAIL" data-desc="Space documentary thumbnail with hyper-focused lighting on spacecraft, cinematic dust, and bold distressed typography for high CTR." data-role="Visual Composition & Matte Painting" data-tools="Photoshop" data-image="assets/thumbnails/thumb_farthest_human_object.jpg">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
@@ -944,7 +875,6 @@
             </span>
           </div>
         </article>
-
         <!-- Card: Beyond Everything -->
         <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="thumb" data-title="Beyond Everything" data-category="YOUTUBE THUMBNAIL" data-desc="Deep existential space artwork featuring cinematic cosmic dust and typographic hierarchy calibrated for high click-through rate." data-role="Visual Composition & Layout Design" data-tools="Photoshop" data-image="assets/thumbnails/thumb_beyond_everything.jpg">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
@@ -968,18 +898,15 @@
           </div>
         </article>
       </div>
-
       <!-- Action: Open Complete Grid Gallery -->
       <div class="mt-14 flex flex-col items-center gap-3">
         <button id="btn-more-work" class="btn-motion inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#16181d] text-accent-yellow font-bold text-sm border border-accent-yellow/40 hover:border-accent-yellow hover:bg-accent-yellow hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl">
           <span id="btn-more-text">More Video Edits</span>
           <svg class="w-4 h-4 fill-none stroke-currentColor stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
         </button>
-        <span class="text-xs text-gray-500 font-medium">Click to open full grid gallery showcase</span>
       </div>
     </section>
     <!-- END: SelectedWorkSection -->
-
     <!-- BEGIN: AboutSection -->
     <section class="py-16 md:py-24 border-t border-white/5 reveal-item" data-purpose="about-me" id="about">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -991,7 +918,6 @@
             <div class="relative rounded-xl overflow-hidden aspect-[4/5] bg-[#111317]">
               <img alt="Sikder - Video Editor &amp; Thumbnail Designer" class="w-full h-full object-cover object-top transition duration-700 group-hover:scale-[1.03]" src="assets/profile/sikder-rakibul-islam-editorial.png" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuBBvSADmder4O67NDE_oSL-EMEucgKwa3A-E3TPdTVzUBY2KOqrOJoGpxqZNO59QrLbe3lxSwzCC__cafky6-imGPkmJC6RdKfl9mct31aZINbOcYmU78QapOgC0_5U-IsSGvlqVNwYPZ5WZJ29W8O03Resi3r5Ua_3CvkhXCMxnf_sh34lHN_6hXtxZ1EP6MrOynWmV_DTxznCEM18mxhX1WtHDgm-b6putkEJxHmqH_tQTqXnTkps'"/>
               <div class="absolute inset-0 bg-gradient-to-t from-[#0b0c0e]/90 via-transparent to-transparent pointer-events-none"></div>
-
               <!-- Profile Lower Overlay Card Info -->
               <div class="absolute bottom-4 left-4 right-4 z-10">
                 <div class="p-4 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 shadow-2xl flex flex-col gap-1.5 group-hover:border-accent-yellow/20 transition-colors">
@@ -1011,7 +937,6 @@
               </div>
             </div>
           </div>
-
           <!-- Metadata Stats Grid -->
           <div class="grid grid-cols-2 gap-3">
             <div class="p-4 rounded-xl bg-[#121418] border border-white/5 hover:border-white/15 transition-colors">
@@ -1029,7 +954,6 @@
             </div>
           </div>
         </div>
-
         <!-- Right Column: Story, Creative Suite, Academic Credentials, Disciplines -->
         <div class="lg:col-span-7 space-y-9 text-gray-300">
           <div class="space-y-3">
@@ -1044,7 +968,6 @@
               I enjoy transforming raw ideas into high-retention stories and designing click-worthy thumbnails that genuinely connect with audiences and keep viewers hooked from the first second.
             </p>
           </div>
-
           <!-- Creative Software Suite -->
           <div class="pt-2">
             <span class="text-xs font-mono text-gray-400 block mb-3 uppercase tracking-wider font-semibold">PRIMARY CREATIVE SUITE</span>
@@ -1057,7 +980,6 @@
                     <span class="text-sm font-bold text-white tracking-tight group-hover:text-[#9999FF] transition-colors truncate">Premiere Pro</span>
                   </div>
                 </div>
-
                 <!-- After Effects -->
                 <div class="btn-motion flex items-center gap-3 p-3 rounded-xl bg-[#16181d] border border-[#cf96fd]/40 shadow-[0_0_12px_rgba(207,150,253,0.25)] hover:border-[#cf96fd] hover:shadow-[0_0_18px_rgba(207,150,253,0.45)] transition-all group cursor-pointer">
                   <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2d0047] to-[#16002b] border border-[#cf96fd]/50 flex items-center justify-center text-[#cf96fd] font-black text-base shrink-0 shadow-[0_0_12px_rgba(207,150,253,0.5)] transition-transform">Ae</div>
@@ -1065,7 +987,6 @@
                     <span class="text-sm font-bold text-white tracking-tight group-hover:text-[#cf96fd] transition-colors truncate">After Effects</span>
                   </div>
                 </div>
-
                 <!-- Photoshop -->
                 <div class="btn-motion flex items-center gap-3 p-3 rounded-xl bg-[#16181d] border border-[#31A8FF]/40 shadow-[0_0_12px_rgba(49,168,255,0.25)] hover:border-[#31A8FF] hover:shadow-[0_0_18px_rgba(49,168,255,0.45)] transition-all group cursor-pointer">
                   <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#001d3d] to-[#000c1a] border border-[#31A8FF]/50 flex items-center justify-center text-[#31A8FF] font-black text-base shrink-0 shadow-[0_0_12px_rgba(49,168,255,0.5)] transition-transform">Ps</div>
@@ -1073,7 +994,6 @@
                     <span class="text-sm font-bold text-white tracking-tight group-hover:text-[#31A8FF] transition-colors truncate">Photoshop</span>
                   </div>
                 </div>
-
                 <!-- Illustrator -->
                 <div class="btn-motion flex items-center gap-3 p-3 rounded-xl bg-[#16181d] border border-[#FF9A00]/40 shadow-[0_0_12px_rgba(255,154,0,0.25)] hover:border-[#FF9A00] hover:shadow-[0_0_18px_rgba(255,154,0,0.45)] transition-all group cursor-pointer">
                   <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#331b00] to-[#1a0d00] border border-[#FF9A00]/50 flex items-center justify-center text-[#FF9A00] font-black text-base shrink-0 shadow-[0_0_12px_rgba(255,154,0,0.5)] transition-transform">Ai</div>
@@ -1084,7 +1004,6 @@
               </div>
             </div>
           </div>
-
           <!-- Academic & Education Credentials Block -->
           <div class="p-5 rounded-2xl bg-[#121418] border border-white/10 shadow-lg space-y-4 hover:border-white/20 transition-all">
             <div class="flex flex-wrap items-center justify-between gap-2">
@@ -1108,13 +1027,8 @@
                 <span class="text-xs font-semibold text-white block">Official Resume / Curriculum Vitae</span>
                 <span class="text-[11px] text-gray-400">PDF document · Updated 2026</span>
               </div>
-              <a class="btn-motion inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-yellow text-black font-extrabold text-xs hover:bg-accent-yellowHover transition duration-200 shadow-md shadow-accent-yellow/20" href="assets/resume/Sikder_Rakibul_Islam_Resume.pdf" download="Sikder_Rakibul_Islam_Resume.pdf" target="_blank" rel="noopener noreferrer">
-                <svg class="w-3.5 h-3.5 fill-none stroke-currentColor stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16"></path></svg>
-                <span>Download Resume (PDF)</span>
-              </a>
             </div>
           </div>
-
           <!-- Service Breakdown Cards -->
           <div class="grid grid-cols-2 gap-3 pt-1">
             <div class="p-4 rounded-xl bg-[#121418] border border-white/5 hover:border-white/15 transition-colors">
@@ -1138,7 +1052,6 @@
       </div>
     </section>
     <!-- END: AboutSection -->
-
     <!-- BEGIN: ContactSection -->
     <section class="py-16 md:py-24 border-t border-white/5 reveal-item" data-purpose="contact-cta" id="contact">
       <div class="max-w-2xl">
@@ -1159,20 +1072,14 @@
       </div>
     </section>
     <!-- END: ContactSection -->
-
   </main>
   <!-- END: MainContent -->
-
   <!-- BEGIN: MainFooter -->
   <footer class="border-t border-white/5 py-12 mt-12 relative z-10" data-purpose="site-footer">
     <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-500">
       <p>© 2026 Sikder</p>
       
       <div class="flex items-center flex-wrap gap-2">
-        <a class="btn-motion inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#16181d] text-accent-yellow font-bold text-xs border border-accent-yellow/30 hover:border-accent-yellow hover:text-black hover:bg-accent-yellow transition duration-200" href="assets/resume/Sikder_Rakibul_Islam_Resume.pdf" download="Sikder_Rakibul_Islam_Resume.pdf" target="_blank" rel="noopener noreferrer">
-          <svg class="w-3.5 h-3.5 fill-none stroke-currentColor stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16"></path></svg>
-          Resume
-        </a>
         <a class="btn-motion inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#16181d] text-gray-300 font-semibold text-xs border border-white/10 hover:border-red-500/50 hover:text-white hover:bg-[#1f2229] transition duration-200" href="https://youtube.com/@sikder_in" rel="noopener noreferrer" target="_blank">
           <svg class="w-3.5 h-3.5 fill-current text-[#FF0000]" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
           YouTube
@@ -1193,7 +1100,6 @@
     </div>
   </footer>
   <!-- END: MainFooter -->
-
   <!-- BEGIN: Project Lightbox Dialog Modal -->
   <dialog class="rounded-2xl bg-[#111317] border border-white/15 text-white max-w-3xl w-full p-0 shadow-2xl overflow-hidden backdrop:bg-black/80" id="project-dialog">
     <div class="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-[#16181d]">
@@ -1205,13 +1111,11 @@
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
     </div>
-
     <!-- Media Area: Video or Image -->
     <div class="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
       <iframe class="w-full h-full border-0" id="dialog-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen hidden></iframe>
       <img class="w-full h-full object-contain" id="dialog-img" src="" alt="Project Artwork" hidden>
     </div>
-
     <!-- Details Info Bar -->
     <div class="p-6 space-y-3 bg-[#111317]">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -1230,7 +1134,6 @@
     </div>
   </dialog>
   <!-- END: Project Lightbox Dialog Modal -->
-
   <!-- BEGIN: All Work Grid Modal -->
   <dialog class="rounded-2xl bg-[#111317] border border-white/15 text-white max-w-5xl w-[94vw] max-h-[90vh] p-0 shadow-2xl overflow-hidden backdrop:bg-black/85" id="grid-modal">
     <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#16181d] shrink-0">
@@ -1258,7 +1161,6 @@
         </button>
       </div>
     </div>
-
     <!-- Modal Grid Container -->
     <div class="p-6 md:p-8 overflow-y-auto max-h-[75vh] bg-[#0c0d10]">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="modal-grid-container">
@@ -1267,7 +1169,6 @@
     </div>
   </dialog>
   <!-- END: All Work Grid Modal -->
-
   <!-- BEGIN: Interactive Motion & Scroll Observers -->
   <script>
     (function() {
@@ -1284,10 +1185,8 @@
             });
           }, { passive: true });
         }
-
         // 2. IntersectionObserver for Entrance Reveals
         var revealItems = document.querySelectorAll('.reveal-item');
-
         // Safety fallback: force content visible after 2s no matter what
         setTimeout(function() {
           var items = document.querySelectorAll('.reveal-item');
@@ -1295,7 +1194,6 @@
             items[i].classList.add('revealed');
           }
         }, 2000);
-
         if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           var observer = new IntersectionObserver(function(entries, obs) {
             entries.forEach(function(entry) {
@@ -1308,7 +1206,6 @@
             threshold: 0.08,
             rootMargin: '0px 0px -40px 0px'
           });
-
           revealItems.forEach(function(el, index) {
             el.style.transitionDelay = Math.min(index * 0.08, 0.3) + 's';
             observer.observe(el);
@@ -1316,42 +1213,41 @@
         } else {
           revealItems.forEach(function(el) { el.classList.add('revealed'); });
         }
-
         // 3. Work Filters Functionality
         var filterButtons = document.querySelectorAll('.filter-btn');
         var projectCards = document.querySelectorAll('#work-feed .project-card');
         var btnMoreWork = document.getElementById('btn-more-work');
         var btnMoreText = document.getElementById('btn-more-text');
-
         var gridModal = document.getElementById('grid-modal');
         var gridModalTitle = document.getElementById('grid-modal-title');
         var gridModalClose = document.getElementById('grid-modal-close');
         var modalFilterVideo = document.getElementById('modal-filter-video');
         var modalFilterThumb = document.getElementById('modal-filter-thumb');
         var modalGridContainer = document.getElementById('modal-grid-container');
-
         var currentFilter = 'video';
         var workFeed = document.getElementById('work-feed');
-        var feedScrollLeft = document.getElementById('feed-scroll-left');
-        var feedScrollRight = document.getElementById('feed-scroll-right');
-
-        if (feedScrollLeft && workFeed) {
-          feedScrollLeft.addEventListener('click', function() {
-            var scrollAmt = workFeed.clientWidth >= 768 ? (workFeed.clientWidth / 2 + 12) : workFeed.clientWidth;
-            workFeed.scrollBy({ left: -scrollAmt, behavior: 'smooth' });
-          });
+        // Mouse wheel horizontal scrolling when hovering over cards
+        if (workFeed) {
+          workFeed.addEventListener("wheel", function(e) {
+            if (e.deltaY !== 0) {
+              var maxScroll = workFeed.scrollWidth - workFeed.clientWidth;
+              if (maxScroll > 0) {
+                var canScrollForward = e.deltaY > 0 && workFeed.scrollLeft < maxScroll - 1;
+                var canScrollBackward = e.deltaY < 0 && workFeed.scrollLeft > 1;
+                if (canScrollForward || canScrollBackward) {
+                  e.preventDefault();
+                  workFeed.scrollBy({
+                    left: e.deltaY * 1.5,
+                    behavior: "auto"
+                  });
+                }
+              }
+            }
+          }, { passive: false });
         }
-        if (feedScrollRight && workFeed) {
-          feedScrollRight.addEventListener('click', function() {
-            var scrollAmt = workFeed.clientWidth >= 768 ? (workFeed.clientWidth / 2 + 12) : workFeed.clientWidth;
-            workFeed.scrollBy({ left: scrollAmt, behavior: 'smooth' });
-          });
-        }
-
         function applyFilter(filter) {
           currentFilter = filter;
           if (workFeed) { workFeed.scrollLeft = 0; }
-          currentFilter = filter;
           filterButtons.forEach(function(b) {
             if (b.getAttribute('data-filter') === filter) {
               b.classList.add('bg-accent-yellow', 'text-black', 'font-bold');
@@ -1368,15 +1264,12 @@
             btnMoreText.textContent = (filter === 'video') ? 'More Video Edits' : 'More Thumbnails';
           }
         }
-
         filterButtons.forEach(function(btn) {
           btn.addEventListener('click', function() {
             applyFilter(btn.getAttribute('data-filter'));
           });
         });
-
         applyFilter('video');
-
         // 4. Modal Lightbox
         var dialog = document.getElementById('project-dialog');
         var dialogClose = document.getElementById('dialog-close');
@@ -1388,14 +1281,12 @@
         var dialogIframe = document.getElementById('dialog-iframe');
         var dialogImg = document.getElementById('dialog-img');
         var dialogExtLink = document.getElementById('dialog-external-link');
-
         function extractYouTubeId(url) {
           if (!url) return null;
           var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
           var match = url.match(regExp);
           return (match && match[2].length === 11) ? match[2] : null;
         }
-
         function openProjectDetails(card) {
           var type = card.getAttribute('data-type');
           var title = card.getAttribute('data-title');
@@ -1405,13 +1296,11 @@
           var tools = card.getAttribute('data-tools');
           var image = card.getAttribute('data-image');
           var videoUrl = card.getAttribute('data-video-url');
-
           if (dialogKicker) dialogKicker.textContent = category || 'PROJECT';
           if (dialogTitle) dialogTitle.textContent = title || '';
           if (dialogDesc) dialogDesc.textContent = desc || '';
           if (dialogRole) dialogRole.textContent = role ? 'Role: ' + role : '';
           if (dialogTools) dialogTools.textContent = tools ? 'Tools: ' + tools : '';
-
           if (type === 'video' && videoUrl) {
             var videoId = extractYouTubeId(videoUrl);
             if (dialogIframe) {
@@ -1435,25 +1324,20 @@
               if (span2) span2.textContent = 'Open Full Artwork';
             }
           }
-
           if (dialog && typeof dialog.showModal === 'function') {
             dialog.showModal();
           }
         }
-
         projectCards.forEach(function(card) {
           card.addEventListener('click', function() { openProjectDetails(card); });
         });
-
         function closeDialog() {
           if (dialogIframe) dialogIframe.src = '';
           if (dialog) dialog.close();
         }
-
         if (dialogClose) {
           dialogClose.addEventListener('click', closeDialog);
         }
-
         if (dialog) {
           dialog.addEventListener('click', function(e) {
             var rect = dialog.getBoundingClientRect();
@@ -1462,7 +1346,6 @@
             }
           });
         }
-
         // 5. Grid Showcase Modal
         function populateModalGrid(filter) {
           if (!modalGridContainer) return;
@@ -1486,7 +1369,6 @@
             }
           });
         }
-
         if (btnMoreWork) {
           btnMoreWork.addEventListener('click', function() {
             populateModalGrid(currentFilter);
@@ -1504,7 +1386,6 @@
             }
           });
         }
-
       } catch (err) {
         console.error('Portfolio script error:', err);
         var items = document.querySelectorAll('.reveal-item');
@@ -1513,12 +1394,6 @@
     })();
   </script>
   <!-- END: Interactive Motion & Scroll Observers -->
-
 </body>
 </html>
-
-
-
-
-
 
