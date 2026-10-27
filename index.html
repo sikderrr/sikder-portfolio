@@ -169,6 +169,54 @@
       pointer-events: auto;
       background: rgba(0, 0, 0, 0.72);
     }
+    /* Keep the existing navigation and headings readable on narrow screens. */
+    @media (max-width: 640px) {
+      header > div {
+        padding-inline: 1rem;
+      }
+      header nav {
+        gap: clamp(0.3rem, 1.6vw, 0.65rem);
+        font-size: clamp(0.58rem, 2.9vw, 0.75rem);
+      }
+      header nav > :not([hidden]) ~ :not([hidden]) {
+        margin-left: 0 !important;
+      }
+      #project-dialog {
+        max-width: 94vw;
+      }
+      #grid-modal {
+        width: 94vw;
+      }
+      #grid-modal .grid-modal-header {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 1rem;
+      }
+      #grid-modal .grid-modal-title-group,
+      #grid-modal .grid-modal-actions {
+        width: 100%;
+      }
+      #grid-modal .grid-modal-actions {
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+    }
+    @media (max-width: 420px) {
+      #hero h1 {
+        font-size: clamp(2rem, 10.5vw, 3rem);
+      }
+      #about h3 {
+        font-size: clamp(1.25rem, 6vw, 1.5rem);
+      }
+      #contact h2 {
+        font-size: clamp(1.5rem, 7vw, 2.25rem);
+      }
+    }
+    @media (max-width: 400px) {
+      .software-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
     /* Lightbox Modal Backdrop */
     dialog::backdrop {
       background: rgba(0, 0, 0, 0.85);
@@ -1006,7 +1054,7 @@
           <div class="pt-2">
             <span class="text-xs font-mono text-gray-400 block mb-3 uppercase tracking-wider font-semibold">PRIMARY CREATIVE SUITE</span>
             <div class="flex flex-wrap items-center gap-2.5 select-none">
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
+              <div class="software-grid grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
                 <!-- Premiere Pro -->
                 <div class="btn-motion flex items-center gap-3 p-3 rounded-xl bg-[#16181d] border border-[#9999FF]/40 shadow-[0_0_12px_rgba(153,153,255,0.25)] hover:border-[#9999FF] hover:shadow-[0_0_18px_rgba(153,153,255,0.45)] transition-all group cursor-pointer">
                   <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#000080] to-[#00005b] border border-[#9999FF]/50 flex items-center justify-center text-[#9999FF] font-black text-base shrink-0 shadow-[0_0_12px_rgba(153,153,255,0.5)] transition-transform">Pr</div>
@@ -1170,8 +1218,8 @@
   <!-- END: Project Lightbox Dialog Modal -->
   <!-- BEGIN: All Work Grid Modal -->
   <dialog class="rounded-2xl bg-[#111317] border border-white/15 text-white max-w-5xl w-[94vw] max-h-[90vh] p-0 shadow-2xl overflow-hidden backdrop:bg-black/85" id="grid-modal">
-    <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#16181d] shrink-0">
-      <div class="flex items-center gap-3">
+    <div class="grid-modal-header flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#16181d] shrink-0">
+      <div class="grid-modal-title-group flex items-center gap-3">
         <span class="w-2.5 h-2.5 rounded-full bg-accent-yellow animate-pulse"></span>
         <div>
           <h3 class="text-lg md:text-xl font-extrabold text-white tracking-tight" id="grid-modal-title">All Videos</h3>
@@ -1180,7 +1228,7 @@
       </div>
       
       <!-- Filter Switcher Inside Modal -->
-      <div class="flex items-center gap-3">
+      <div class="grid-modal-actions flex items-center gap-3">
         <div class="flex items-center p-1 rounded-full bg-[#0d0e11] border border-white/10 shrink-0 select-none">
           <button id="modal-filter-video" class="px-3.5 py-1.5 rounded-full bg-accent-yellow text-black font-bold text-xs tracking-wide transition shadow-sm">
             Videos (3)
