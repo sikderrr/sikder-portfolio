@@ -754,23 +754,33 @@
           <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Selected work</h2>
         </div>
         
-        <!-- Filter Buttons: Video edits, Thumbnails -->
-        <div class="flex items-center p-1 rounded-full bg-[#111317] border border-white/10 shrink-0 select-none" data-purpose="work-filters" id="work-filters">
-          <button class="filter-btn btn-motion px-5 py-2 rounded-full bg-accent-yellow text-black font-bold text-xs tracking-wide transition shadow-sm hover:bg-accent-yellowHover" data-filter="video">
-            Video edits (3)
-          </button>
-          <button class="filter-btn btn-motion px-5 py-2 rounded-full text-gray-400 font-medium text-xs tracking-wide hover:text-white transition" data-filter="thumb">
-            Thumbnails (5)
-          </button>
+        <!-- Filter Buttons & Horizontal Scroll Navigation -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center p-1 rounded-full bg-[#111317] border border-white/10 shrink-0 select-none" data-purpose="work-filters" id="work-filters">
+            <button class="filter-btn btn-motion px-5 py-2 rounded-full bg-accent-yellow text-black font-bold text-xs tracking-wide transition shadow-sm hover:bg-accent-yellowHover" data-filter="video">
+              Video edits (3)
+            </button>
+            <button class="filter-btn btn-motion px-5 py-2 rounded-full text-gray-400 font-medium text-xs tracking-wide hover:text-white transition" data-filter="thumb">
+              Thumbnails (5)
+            </button>
+          </div>
+          <div class="flex items-center gap-1.5 p-1 rounded-full bg-[#111317] border border-white/10 shrink-0">
+            <button id="feed-scroll-left" class="p-2 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition" aria-label="Scroll left" title="Scroll left">
+              <svg class="w-4 h-4 fill-none stroke-currentColor stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button id="feed-scroll-right" class="p-2 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition" aria-label="Scroll right" title="Scroll right">
+              <svg class="w-4 h-4 fill-none stroke-currentColor stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Vertical Scroll Stream: Items stack vertically for clean downward scroll -->
-      <div class="flex flex-col gap-6 max-w-2xl mx-auto w-full overflow-y-auto pr-2 scroll-smooth" id="work-feed">
+      <!-- Horizontal Left-to-Right Stream: 2 cards visible on desktop, 1 on mobile -->
+      <div class="flex flex-row gap-6 w-full overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-1" id="work-feed">
         <!-- 3 YouTube Channel Videos -->
 
         <!-- Card: Voyager 1: Beyond Everything -->
-        <article class="project-card group cursor-pointer w-full shrink-0" data-type="video" data-video-url="https://www.youtube.com/watch?v=mZSs4lW9-n8" data-title="Voyager 1: Beyond Everything" data-category="DOCUMENTARY · SPACE SCIENCE" data-desc="An interstellar documentary exploring humanity's farthest artificial emissary. Crafted with rhythmic timeline pacing, space telemetry HUDs, archival space restoration, and custom typography." data-role="Lead Video Editor, Motion Graphics Artist & Narrative Sequencing" data-tools="Premiere Pro, After Effects, Photoshop" data-image="assets/design/voyager-thumbnail-2.webp">
+        <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="video" data-video-url="https://www.youtube.com/watch?v=mZSs4lW9-n8" data-title="Voyager 1: Beyond Everything" data-category="DOCUMENTARY · SPACE SCIENCE" data-desc="An interstellar documentary exploring humanity's farthest artificial emissary. Crafted with rhythmic timeline pacing, space telemetry HUDs, archival space restoration, and custom typography." data-role="Lead Video Editor, Motion Graphics Artist & Narrative Sequencing" data-tools="Premiere Pro, After Effects, Photoshop" data-image="assets/design/voyager-thumbnail-2.webp">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
             <img src="assets/design/voyager-thumbnail-2.webp" alt="Voyager 1: Beyond Everything" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500" loading="lazy">
             <div class="absolute inset-0 bg-gradient-to-br from-[#171a22]/70 to-[#0d0e11]/80 opacity-60 transition-opacity duration-300"></div>
@@ -794,7 +804,7 @@
         </article>
 
         <!-- Card: Uttar Pradesh: Governance & Reality -->
-        <article class="project-card group cursor-pointer w-full shrink-0" data-type="video" data-video-url="https://www.youtube.com/watch?v=Ukf5jY53J3Y" data-title="Uttar Pradesh: Governance & Reality" data-category="INVESTIGATIVE JOURNALISM" data-desc="A fast-paced, investigative documentary exploring administration, infrastructure development, and policy realities in Uttar Pradesh with cinematic tension and sharp editorial cutting." data-role="Timeline Assembly, Editorial Pacing & Archival Curation" data-tools="Premiere Pro, After Effects, Photoshop" data-image="assets/design/uttar-pradesh-thumbnail.webp">
+        <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="video" data-video-url="https://www.youtube.com/watch?v=Ukf5jY53J3Y" data-title="Uttar Pradesh: Governance & Reality" data-category="INVESTIGATIVE JOURNALISM" data-desc="A fast-paced, investigative documentary exploring administration, infrastructure development, and policy realities in Uttar Pradesh with cinematic tension and sharp editorial cutting." data-role="Timeline Assembly, Editorial Pacing & Archival Curation" data-tools="Premiere Pro, After Effects, Photoshop" data-image="assets/design/uttar-pradesh-thumbnail.webp">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
             <img src="assets/design/uttar-pradesh-thumbnail.webp" alt="Uttar Pradesh: Governance & Reality" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500" loading="lazy">
             <div class="absolute inset-0 bg-gradient-to-br from-[#171a22]/70 to-[#0d0e11]/80 opacity-60 transition-opacity duration-300"></div>
@@ -818,7 +828,7 @@
         </article>
 
         <!-- Card: India Needs Jobs: Economic Dilemma -->
-        <article class="project-card group cursor-pointer w-full shrink-0" data-type="video" data-video-url="https://www.youtube.com/watch?v=wc0twYCiIvw" data-title="India Needs Jobs: Economic Dilemma" data-category="DATA MOTION DOCUMENTARY" data-desc="A data-backed analytical documentary breaking down national employment data, demographic challenges, and economic systems with custom animated charts and dynamic text callouts." data-role="Video Editing, Data Visualization & Motion Infographics" data-tools="Premiere Pro, After Effects, Photoshop" data-image="assets/design/india-needs-jobs-thumbnail.webp">
+        <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="video" data-video-url="https://www.youtube.com/watch?v=wc0twYCiIvw" data-title="India Needs Jobs: Economic Dilemma" data-category="DATA MOTION DOCUMENTARY" data-desc="A data-backed analytical documentary breaking down national employment data, demographic challenges, and economic systems with custom animated charts and dynamic text callouts." data-role="Video Editing, Data Visualization & Motion Infographics" data-tools="Premiere Pro, After Effects, Photoshop" data-image="assets/design/india-needs-jobs-thumbnail.webp">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
             <img src="assets/design/india-needs-jobs-thumbnail.webp" alt="India Needs Jobs: Economic Dilemma" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500" loading="lazy">
             <div class="absolute inset-0 bg-gradient-to-br from-[#171a22]/70 to-[#0d0e11]/80 opacity-60 transition-opacity duration-300"></div>
@@ -844,7 +854,7 @@
         <!-- 5 High-CTR Thumbnails -->
 
         <!-- Card: No Jobs -->
-        <article class="project-card group cursor-pointer w-full shrink-0" data-type="thumb" data-title="No Jobs" data-category="YOUTUBE THUMBNAIL" data-desc="High-impact thumbnail addressing India's job crisis with bold red typography and emotional portraiture for maximum click-through." data-role="Thumbnail Design & Visual Composition" data-tools="Photoshop" data-image="assets/thumbnails/thumb_no_jobs.jpg">
+        <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="thumb" data-title="No Jobs" data-category="YOUTUBE THUMBNAIL" data-desc="High-impact thumbnail addressing India's job crisis with bold red typography and emotional portraiture for maximum click-through." data-role="Thumbnail Design & Visual Composition" data-tools="Photoshop" data-image="assets/thumbnails/thumb_no_jobs.jpg">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
             <img src="assets/thumbnails/thumb_no_jobs.jpg" alt="No Jobs" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="relative z-10 flex flex-col items-center justify-center gap-2">
@@ -867,7 +877,7 @@
         </article>
 
         <!-- Card: Unemployment Crisis -->
-        <article class="project-card group cursor-pointer w-full shrink-0" data-type="thumb" data-title="Unemployment Crisis" data-category="YOUTUBE THUMBNAIL" data-desc="Political commentary thumbnail featuring bold red distressed typography with curtain-reveal composition for dramatic editorial impact." data-role="Thumbnail Design & Portrait Composite" data-tools="Photoshop" data-image="assets/thumbnails/thumb_unemployment_crisis.jpg">
+        <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="thumb" data-title="Unemployment Crisis" data-category="YOUTUBE THUMBNAIL" data-desc="Political commentary thumbnail featuring bold red distressed typography with curtain-reveal composition for dramatic editorial impact." data-role="Thumbnail Design & Portrait Composite" data-tools="Photoshop" data-image="assets/thumbnails/thumb_unemployment_crisis.jpg">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
             <img src="assets/thumbnails/thumb_unemployment_crisis.jpg" alt="Unemployment Crisis" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="relative z-10 flex flex-col items-center justify-center gap-2">
@@ -890,7 +900,7 @@
         </article>
 
         <!-- Card: Reality of Yogi -->
-        <article class="project-card group cursor-pointer w-full shrink-0" data-type="thumb" data-title="Reality of Yogi" data-category="YOUTUBE THUMBNAIL" data-desc="Documentary portrait with high micro-contrast and provocative editorial framing, designed for maximum engagement on political content." data-role="Portrait Composite & Typography" data-tools="Photoshop" data-image="assets/thumbnails/thumb_reality_of_yogi.jpg">
+        <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="thumb" data-title="Reality of Yogi" data-category="YOUTUBE THUMBNAIL" data-desc="Documentary portrait with high micro-contrast and provocative editorial framing, designed for maximum engagement on political content." data-role="Portrait Composite & Typography" data-tools="Photoshop" data-image="assets/thumbnails/thumb_reality_of_yogi.jpg">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
             <img src="assets/thumbnails/thumb_reality_of_yogi.jpg" alt="Reality of Yogi" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="relative z-10 flex flex-col items-center justify-center gap-2">
@@ -913,7 +923,7 @@
         </article>
 
         <!-- Card: Farthest Human Object -->
-        <article class="project-card group cursor-pointer w-full shrink-0" data-type="thumb" data-title="Farthest Human Object" data-category="YOUTUBE THUMBNAIL" data-desc="Space documentary thumbnail with hyper-focused lighting on spacecraft, cinematic dust, and bold distressed typography for high CTR." data-role="Visual Composition & Matte Painting" data-tools="Photoshop" data-image="assets/thumbnails/thumb_farthest_human_object.jpg">
+        <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="thumb" data-title="Farthest Human Object" data-category="YOUTUBE THUMBNAIL" data-desc="Space documentary thumbnail with hyper-focused lighting on spacecraft, cinematic dust, and bold distressed typography for high CTR." data-role="Visual Composition & Matte Painting" data-tools="Photoshop" data-image="assets/thumbnails/thumb_farthest_human_object.jpg">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
             <img src="assets/thumbnails/thumb_farthest_human_object.jpg" alt="Farthest Human Object" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="relative z-10 flex flex-col items-center justify-center gap-2">
@@ -936,7 +946,7 @@
         </article>
 
         <!-- Card: Beyond Everything -->
-        <article class="project-card group cursor-pointer w-full shrink-0" data-type="thumb" data-title="Beyond Everything" data-category="YOUTUBE THUMBNAIL" data-desc="Deep existential space artwork featuring cinematic cosmic dust and typographic hierarchy calibrated for high click-through rate." data-role="Visual Composition & Layout Design" data-tools="Photoshop" data-image="assets/thumbnails/thumb_beyond_everything.jpg">
+        <article class="project-card group cursor-pointer w-full min-w-full md:w-[calc(50%-12px)] md:min-w-[calc(50%-12px)] md:max-w-[calc(50%-12px)] shrink-0 snap-start" data-type="thumb" data-title="Beyond Everything" data-category="YOUTUBE THUMBNAIL" data-desc="Deep existential space artwork featuring cinematic cosmic dust and typographic hierarchy calibrated for high click-through rate." data-role="Visual Composition & Layout Design" data-tools="Photoshop" data-image="assets/thumbnails/thumb_beyond_everything.jpg">
           <div class="relative aspect-video rounded-2xl bg-[#121418] overflow-hidden border border-white/10 shadow-xl flex items-center justify-center">
             <img src="assets/thumbnails/thumb_beyond_everything.jpg" alt="Beyond Everything" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="relative z-10 flex flex-col items-center justify-center gap-2">
@@ -1321,8 +1331,26 @@
         var modalGridContainer = document.getElementById('modal-grid-container');
 
         var currentFilter = 'video';
+        var workFeed = document.getElementById('work-feed');
+        var feedScrollLeft = document.getElementById('feed-scroll-left');
+        var feedScrollRight = document.getElementById('feed-scroll-right');
+
+        if (feedScrollLeft && workFeed) {
+          feedScrollLeft.addEventListener('click', function() {
+            var scrollAmt = workFeed.clientWidth >= 768 ? (workFeed.clientWidth / 2 + 12) : workFeed.clientWidth;
+            workFeed.scrollBy({ left: -scrollAmt, behavior: 'smooth' });
+          });
+        }
+        if (feedScrollRight && workFeed) {
+          feedScrollRight.addEventListener('click', function() {
+            var scrollAmt = workFeed.clientWidth >= 768 ? (workFeed.clientWidth / 2 + 12) : workFeed.clientWidth;
+            workFeed.scrollBy({ left: scrollAmt, behavior: 'smooth' });
+          });
+        }
 
         function applyFilter(filter) {
+          currentFilter = filter;
+          if (workFeed) { workFeed.scrollLeft = 0; }
           currentFilter = filter;
           filterButtons.forEach(function(b) {
             if (b.getAttribute('data-filter') === filter) {
@@ -1452,7 +1480,7 @@
             if (card.getAttribute('data-type') === filter) {
               var clone = card.cloneNode(true);
               clone.style.display = '';
-              clone.classList.remove('w-full');
+              clone.className = 'project-card group cursor-pointer w-full';
               clone.addEventListener('click', function() { openProjectDetails(clone); });
               modalGridContainer.appendChild(clone);
             }
@@ -1488,6 +1516,8 @@
 
 </body>
 </html>
+
+
 
 
 
