@@ -143,6 +143,32 @@
     #work-feed::-webkit-scrollbar {
       display: none;
     }
+    /* Thumbnail entries are artwork first: no badges, overlays, or captions. */
+    .project-card[data-type="thumb"] > div:first-child > .relative.z-10,
+    .project-card[data-type="thumb"] > div:first-child > span,
+    .project-card[data-type="thumb"] > div:nth-child(2) {
+      display: none;
+    }
+    #project-dialog.thumbnail-lightbox {
+      width: min(94vw, 1280px);
+      max-width: none;
+    }
+    #project-dialog.thumbnail-lightbox .project-dialog-header {
+      position: absolute;
+      inset: 0 0 auto auto;
+      z-index: 2;
+      border: 0;
+      background: transparent;
+      pointer-events: none;
+    }
+    #project-dialog.thumbnail-lightbox .project-dialog-heading,
+    #project-dialog.thumbnail-lightbox .project-dialog-details {
+      display: none;
+    }
+    #project-dialog.thumbnail-lightbox #dialog-close {
+      pointer-events: auto;
+      background: rgba(0, 0, 0, 0.72);
+    }
     /* Lightbox Modal Backdrop */
     dialog::backdrop {
       background: rgba(0, 0, 0, 0.85);
@@ -1110,8 +1136,8 @@
   <!-- END: MainFooter -->
   <!-- BEGIN: Project Lightbox Dialog Modal -->
   <dialog class="rounded-2xl bg-[#111317] border border-white/15 text-white max-w-3xl w-full p-0 shadow-2xl overflow-hidden backdrop:bg-black/80" id="project-dialog">
-    <div class="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-[#16181d]">
-      <div class="flex items-center gap-2">
+    <div class="project-dialog-header flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-[#16181d]">
+      <div class="project-dialog-heading flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-accent-yellow animate-pulse"></span>
         <span class="text-xs font-mono font-bold tracking-wider text-accent-yellow uppercase" id="dialog-kicker">PROJECT</span>
       </div>
@@ -1125,7 +1151,7 @@
       <img class="w-full h-full object-contain" id="dialog-img" src="" alt="Project Artwork" hidden>
     </div>
     <!-- Details Info Bar -->
-    <div class="p-6 space-y-3 bg-[#111317]">
+    <div class="project-dialog-details p-6 space-y-3 bg-[#111317]">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <h3 class="text-xl font-extrabold text-white tracking-tight" id="dialog-title">Project Title</h3>
         <a class="btn-motion inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-accent-yellow text-black font-bold text-xs hover:bg-accent-yellowHover transition shadow" id="dialog-external-link" href="#" target="_blank" rel="noopener noreferrer">
@@ -1297,6 +1323,7 @@
         }
         function openProjectDetails(card) {
           var type = card.getAttribute('data-type');
+          if (dialog) dialog.classList.toggle('thumbnail-lightbox', type === 'thumb');
           var title = card.getAttribute('data-title');
           var category = card.getAttribute('data-category');
           var desc = card.getAttribute('data-desc');
