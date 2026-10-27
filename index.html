@@ -135,6 +135,14 @@
     .btn-motion:active {
       transform: translateY(0);
     }
+    /* Selected-work carousel: keep the interaction clean and borderless. */
+    #work-feed {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    #work-feed::-webkit-scrollbar {
+      display: none;
+    }
     /* Lightbox Modal Backdrop */
     dialog::backdrop {
       background: rgba(0, 0, 0, 0.85);
@@ -1023,10 +1031,10 @@
               </p>
             </div>
             <div class="pt-3 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <span class="text-xs font-semibold text-white block">Official Resume / Curriculum Vitae</span>
-                <span class="text-[11px] text-gray-400">PDF document · Updated 2026</span>
-              </div>
+              <a href="assets/resume/Sikder_Rakibul_Islam_Resume.pdf" download="Sikder_Rakibul_Islam_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-motion inline-flex w-fit items-center gap-2 rounded-full border border-accent-yellow/40 bg-[#16181d] px-4 py-2 text-xs font-bold text-accent-yellow transition hover:border-accent-yellow hover:bg-accent-yellow hover:text-black">
+                Download Resume
+                <svg class="h-3.5 w-3.5 fill-none stroke-currentColor stroke-2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0 4-4m-4 4-4-4m-5 7v2a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-2"></path></svg>
+              </a>
             </div>
           </div>
           <!-- Service Breakdown Cards -->
@@ -1232,12 +1240,12 @@
             if (e.deltaY !== 0) {
               var maxScroll = workFeed.scrollWidth - workFeed.clientWidth;
               if (maxScroll > 0) {
-                var canScrollForward = e.deltaY > 0 && workFeed.scrollLeft < maxScroll - 1;
-                var canScrollBackward = e.deltaY < 0 && workFeed.scrollLeft > 1;
+                var canScrollForward = e.deltaY < 0 && workFeed.scrollLeft < maxScroll - 1;
+                var canScrollBackward = e.deltaY > 0 && workFeed.scrollLeft > 1;
                 if (canScrollForward || canScrollBackward) {
                   e.preventDefault();
                   workFeed.scrollBy({
-                    left: e.deltaY * 1.5,
+                    left: -e.deltaY * 1.5,
                     behavior: "auto"
                   });
                 }
