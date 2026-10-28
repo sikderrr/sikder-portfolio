@@ -171,10 +171,10 @@
     }
     /* Keep the existing navigation and headings readable on narrow screens. */
     @media (max-width: 640px) {
-      header > div {
+      header > div.max-w-6xl {
         padding-inline: 1rem;
       }
-      header nav {
+      header nav.text-sm {
         gap: clamp(0.3rem, 1.6vw, 0.65rem);
         font-size: clamp(0.58rem, 2.9vw, 0.75rem);
       }
@@ -213,7 +213,7 @@
       }
     }
     @media (max-width: 400px) {
-      .software-grid {
+      .software-grid.grid {
         grid-template-columns: minmax(0, 1fr);
       }
     }
