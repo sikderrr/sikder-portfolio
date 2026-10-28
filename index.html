@@ -143,6 +143,41 @@
     #work-feed::-webkit-scrollbar {
       display: none;
     }
+    .work-carousel-shell {
+      position: relative;
+    }
+    .work-carousel-shell::after {
+      content: "›";
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      right: 0;
+      display: flex;
+      width: 4.5rem;
+      height: 3.5rem;
+      align-items: center;
+      justify-content: center;
+      color: rgba(243, 244, 246, 0.72);
+      font-size: 2.75rem;
+      font-weight: 300;
+      line-height: 1;
+      background: linear-gradient(90deg, transparent, rgba(11, 12, 14, 0.82) 72%);
+      backdrop-filter: blur(2px);
+      pointer-events: none;
+      transform: translateY(-50%);
+      transition: opacity 240ms ease;
+    }
+    .work-carousel-shell.is-at-end::after {
+      opacity: 0;
+    }
+    #work-feed {
+      padding-right: 3.5rem;
+    }
+    @media (min-width: 768px) {
+      #work-feed {
+        padding-right: 4.5rem;
+      }
+    }
     /* Thumbnail entries are artwork first: no badges, overlays, or captions. */
     .project-card[data-type="thumb"] > div:first-child > .relative.z-10,
     .project-card[data-type="thumb"] > div:first-child > span,
@@ -253,6 +288,9 @@
       .btn-motion {
         transform: none !important;
         transition: none !important;
+      }
+      .work-carousel-shell::after {
+        transition: none;
       }
     }
   </style>
@@ -802,7 +840,7 @@
         </div>
         
         <!-- Filter Buttons: Video edits, Thumbnails -->
-          <div class="flex items-center p-1 rounded-full bg-[#111317] border border-white/10 shrink-0 select-none" data-purpose="work-filters" id="work-filters">
+          <div class="flex items-center p-1 rounded-full bg-[#111317] shrink-0 select-none" data-purpose="work-filters" id="work-filters">
             <button class="filter-btn btn-motion px-5 py-2 rounded-full bg-accent-yellow text-black font-bold text-xs tracking-wide transition shadow-sm hover:bg-accent-yellowHover" data-filter="video">
               Video edits (3)
             </button>
@@ -811,7 +849,8 @@
             </button>
           </div>
       </div>
-      <!-- Horizontal Left-to-Right Stream: 2 cards visible on desktop, 1 on mobile -->
+      <!-- Horizontal project stream: swipe, trackpad, or scroll to explore. -->
+      <div class="work-carousel-shell" id="work-carousel-shell">
       <div class="flex flex-row gap-6 w-full overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-1" id="work-feed">
         <!-- 3 YouTube Channel Videos -->
         <!-- Card: Voyager 1: Beyond Everything -->
@@ -994,6 +1033,7 @@
             </span>
           </div>
         </article>
+      </div>
       </div>
       <!-- Action: Open Complete Grid Gallery -->
       <div class="mt-14 flex flex-col items-center gap-3">
@@ -1323,24 +1363,32 @@
         var modalGridContainer = document.getElementById('modal-grid-container');
         var currentFilter = 'video';
         var workFeed = document.getElementById('work-feed');
+        var workCarouselShell = document.getElementById('work-carousel-shell');
+        function updateWorkCarouselCue() {
+          if (!workFeed || !workCarouselShell) return;
+          var maxScroll = workFeed.scrollWidth - workFeed.clientWidth;
+          workCarouselShell.classList.toggle('is-at-end', maxScroll <= 1 || workFeed.scrollLeft >= maxScroll - 2);
+        }
         // Mouse wheel horizontal scrolling when hovering over cards
         if (workFeed) {
           workFeed.addEventListener("wheel", function(e) {
             if (e.deltaY !== 0) {
               var maxScroll = workFeed.scrollWidth - workFeed.clientWidth;
               if (maxScroll > 0) {
-                var canScrollForward = e.deltaY < 0 && workFeed.scrollLeft < maxScroll - 1;
-                var canScrollBackward = e.deltaY > 0 && workFeed.scrollLeft > 1;
+                var canScrollForward = e.deltaY > 0 && workFeed.scrollLeft < maxScroll - 1;
+                var canScrollBackward = e.deltaY < 0 && workFeed.scrollLeft > 1;
                 if (canScrollForward || canScrollBackward) {
                   e.preventDefault();
                   workFeed.scrollBy({
-                    left: -e.deltaY * 1.5,
+                    left: e.deltaY * 1.5,
                     behavior: "auto"
                   });
                 }
               }
             }
           }, { passive: false });
+          workFeed.addEventListener('scroll', updateWorkCarouselCue, { passive: true });
+          window.addEventListener('resize', updateWorkCarouselCue, { passive: true });
         }
         function applyFilter(filter) {
           currentFilter = filter;
@@ -1360,6 +1408,7 @@
           if (btnMoreText) {
             btnMoreText.textContent = (filter === 'video') ? 'More Video Edits' : 'More Thumbnails';
           }
+          updateWorkCarouselCue();
         }
         filterButtons.forEach(function(btn) {
           btn.addEventListener('click', function() {
