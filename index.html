@@ -182,10 +182,11 @@
         padding-right: 4.5rem;
       }
     }
-    /* Thumbnail entries are artwork first: no badges, overlays, or captions. */
+    /* Thumbnail artwork stays clean; show only its title beneath the image. */
     .project-card[data-type="thumb"] > div:first-child > .relative.z-10,
     .project-card[data-type="thumb"] > div:first-child > span,
-    .project-card[data-type="thumb"] > div:nth-child(2) {
+    .project-card[data-type="thumb"] > div:nth-child(2) > div > span,
+    .project-card[data-type="thumb"] > div:nth-child(2) > span {
       display: none;
     }
     #project-dialog.thumbnail-lightbox {
