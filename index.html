@@ -137,8 +137,12 @@
     }
     /* Selected-work carousel: keep the interaction clean and borderless. */
     #work-feed {
+      direction: rtl;
       -ms-overflow-style: none;
       scrollbar-width: none;
+    }
+    #work-feed > .project-card {
+      direction: ltr;
     }
     #work-feed::-webkit-scrollbar {
       display: none;
@@ -151,11 +155,11 @@
       position: relative;
     }
     .work-carousel-shell::after {
-      content: "›";
+      content: "‹";
       position: absolute;
       z-index: 2;
       top: 50%;
-      right: 0;
+      left: 0;
       display: flex;
       width: 4.5rem;
       height: 3.5rem;
@@ -165,7 +169,7 @@
       font-size: 2.75rem;
       font-weight: 300;
       line-height: 1;
-      background: linear-gradient(90deg, transparent, rgba(11, 12, 14, 0.82) 72%);
+      background: linear-gradient(270deg, transparent, rgba(11, 12, 14, 0.82) 72%);
       backdrop-filter: blur(2px);
       pointer-events: none;
       transform: translateY(-50%);
@@ -175,11 +179,11 @@
       opacity: 0;
     }
     #work-feed {
-      padding-right: 3.5rem;
+      padding-left: 3.5rem;
     }
     @media (min-width: 768px) {
       #work-feed {
-        padding-right: 4.5rem;
+        padding-left: 4.5rem;
       }
     }
     /* Thumbnail artwork stays clean; show only its title beneath the image. */
@@ -1372,7 +1376,7 @@
         function updateWorkCarouselCue() {
           if (!workFeed || !workCarouselShell) return;
           var maxScroll = workFeed.scrollWidth - workFeed.clientWidth;
-          workCarouselShell.classList.toggle('is-at-end', maxScroll <= 1 || workFeed.scrollLeft >= maxScroll - 2);
+          workCarouselShell.classList.toggle('is-at-end', maxScroll <= 1 || workFeed.scrollLeft <= -maxScroll + 2);
         }
         // Mouse wheel horizontal scrolling when hovering over cards
         if (workFeed) {
@@ -1380,12 +1384,12 @@
             if (e.deltaY !== 0) {
               var maxScroll = workFeed.scrollWidth - workFeed.clientWidth;
               if (maxScroll > 0) {
-                var canScrollForward = e.deltaY > 0 && workFeed.scrollLeft < maxScroll - 1;
-                var canScrollBackward = e.deltaY < 0 && workFeed.scrollLeft > 1;
+                var canScrollForward = e.deltaY > 0 && workFeed.scrollLeft > -maxScroll + 1;
+                var canScrollBackward = e.deltaY < 0 && workFeed.scrollLeft < -1;
                 if (canScrollForward || canScrollBackward) {
                   e.preventDefault();
                   workFeed.scrollBy({
-                    left: e.deltaY * 1.5,
+                    left: -e.deltaY * 1.5,
                     behavior: "auto"
                   });
                 }
