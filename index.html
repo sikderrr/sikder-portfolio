@@ -11,6 +11,19 @@
   <meta name="description" content="Portfolio of Sikder Rakibul Islam — Video Editor and High-CTR Thumbnail Designer. Turning raw footage into high-retention stories.">
   <meta property="og:title" content="SIKDER. — Video Editor &amp; Thumbnail Designer">
   <meta property="og:description" content="Portfolio of Sikder Rakibul Islam — Video Editor and High-CTR Thumbnail Designer. Turning raw footage into high-retention stories.">
+  <script>
+    window.addEventListener('pageshow', function() {
+      var navigation = performance.getEntriesByType('navigation')[0];
+      if (!navigation || navigation.type !== 'reload') return;
+      var root = document.documentElement;
+      var scrollBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, 0);
+      requestAnimationFrame(function() {
+        root.style.scrollBehavior = scrollBehavior;
+      });
+    });
+  </script>
   <!-- Tailwind CSS CDN with forms & container queries plugins -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   
